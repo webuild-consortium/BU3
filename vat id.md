@@ -191,7 +191,7 @@ avoid natural-language ambiguities.*
 ### 2.2 Administrative Unit 
 #### 2.2.1 Mandatory attributes
 | Data Identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
-|--------------------------------|--------------------------------------------|----------------------------------------|------------------|--------------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | VAT_ID                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
 | Administrative_Unit_Name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
 | Validity_Period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
@@ -202,7 +202,7 @@ avoid natural-language ambiguities.*
 
 #### 2.2.2 Optional attributes
 | **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | Administrative_Unit_Type       | Type of Administrative Unit                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
 | Administrative_Unit_Address    | Address of the Administrative Unit          | Official address of the unit           | Address Object           | ...  |
 | Validity_Area_Limitation      | Limitations on Validity Area                | Geographical scope for validity        | array            | ...|
@@ -214,51 +214,53 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 #### 2.3.2 Optional attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| economicOperator.legal_identifier| [legalIdentifier](https://iri.suomi.fi/terminology/webuild/legalidentifier) |The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | String | SEBOLREG.123456789 |
+|--------|----------|---------------------------------------------------------------|------------|--------------|
+| economicOperator.legal_identifier| [legalIdentifier](https://iri.suomi.fi/terminology/webuild/legalidentifier) |The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | tstr | SEBOLREG.123456789 |
 |economicOperator.legal_name|[legalName](https://iri.suomi.fi/terminology/webuild/legalname) | the name under which the legal entity is legally registered|tstr| ACME |
-| economicOperator.family_name          | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. |string| Doe|
-| economicOperator.given_name           | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates.                                                                                                          |string|John|
+| economicOperator.family_name          | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. |tstr| Doe|
+| economicOperator.given_name           | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates.                                                                                                          |tstr|John|
 | economicOperator.birth_date           | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. |Date|27-04-1968|
-| economicOperator.birth_place          | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. |sting|Amsterdam|
-|economicOperator.Tin| tin |tax reference number 
+| economicOperator.birth_place          | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. |tstr|Amsterdam|
+|economicOperator.Tin| tin |tax reference number |tstr||
+|economicOperator.personalAdministrativeNumber|[personalAdministrativeNumber](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber)|A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use|tstr|123456782|
 
 
 ### 2.4 Validity Period
 #### 2.4.1 Mandatory attributes
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | validityPeriod.startDate| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
 
 ### 2.4.2 Optional attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | validityPeriod.endDate | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-1-24|
 
 ### 2.5 Address
 #### Optional attributes
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | string | PO Box 123 |
-| thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | string | Main Street 10 |
-| location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | string | Floor 3, Unit B |
-| post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | string | 12345 |
-| post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | string | Amsterdam |
-| admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | string | North Holland |
-| admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | string | Amsterdam Municipality
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
+| thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
+| location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
+| post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | tstr | 12345 |
+| post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
+| admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
+| admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
 ### 2.6 Economic Activity attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | Economic_ Activity_Type_Nomenclature| tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature.| tstr | nace |
 |Economic_ Activity_Type_ID | tbd | The ID that under which the Administrative unit is registered.|tstr | C26.5.2 |
 |Economic_ Activity_Type_Description |tbd| The human readable text that describes the economic ativity in a specific language|array|
 
-### 2.4 Mandatory metadata 
+### 2.7 Metadata
+#### 2.7.1 Mandatory metadata 
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
-|------------------------|--------------------------|--------------|--------------|--------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | issuer.authentic_source_country   | issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |date | 05 | 
 | issuer.VAT_ID_authentic_source   | authenticSource | Name of the administrative authority that issued the VAT ID. | tstr| |
 | issuer.country   |issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |tstr |     | 
@@ -267,20 +269,14 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | issuer.attestation_issuing_date| issuingDate| The date the attestation was issued|date| 2025-12-5|
 
 
-### 2.5 Optional metadata
+#### 2.7.2 Optional metadata
 
-| **Data Identifier**  | **Definition**                                                                                                                                                                                                                                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| location_status      | The location of validity status information on the VAT ID used for revocation/suspension checks.                                                                                                                                                                                                            |
-| trust_anchor         | This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the VAT ID can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |
+| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| issuer.location_status      | locationStatus| The location of validity status information on the VAT ID used for revocation/suspension checks.|tstr||
+| trust_anchor         | trustAnchor| This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the VAT ID can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |tstr||
 
 
-
-### 2.7 Conditional metadata
-
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
 
 ### 2.8 Code lists
 
@@ -292,7 +288,7 @@ from the attestation description or other use-case documentation and refined her
 meaning, the source vocabulary or reference, and any extensibility rule or governance note.*
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
-|----------------|--------------------|-------------|--------------------------|---------------------------|
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | *Provide a field name* | *List the allowed values* | *Explain what each value means* | *Reference the source* | *State whether extensions are allowed* |
 
 > Example
