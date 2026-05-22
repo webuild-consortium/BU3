@@ -240,13 +240,13 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 #### Optional attributes
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |------------------------|--------------------------|--------------|--------------|--------------|
-| po_box | EU Business Wallet — registeredAddress.poBox | P.O. box number or identifier within the address; optional | string | PO Box 123 |
-| thoroughfare | EU Business Wallet — registeredAddress.thoroughfare | Street name and house number or other thoroughfare designation; optional | string | Main Street 10 |
-| location_designator | EU Business Wallet — core.location.locationDesignator | Internal location designation within a building (e.g., floor, unit); optional | string | Floor 3, Unit B |
-| post_code | EU Business Wallet — registeredAddress.postCode | Postal or ZIP code; optional | string | 12345 |
-| post_name | EU Business Wallet — registeredAddress.postName | Town or locality name; optional | string | Amsterdam |
-| admin_unit_L1 | EU Business Wallet — registeredAddress.adminUnitL1 | First-level administrative division (e.g., province, state); optional | string | North Holland |
-| admin_unit_L2 | EU Business Wallet — registeredAddress.adminUnitL2 | Second-level administrative division (e.g., district, municipality); optional | string | Amsterdam Municipality
+| po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | string | PO Box 123 |
+| thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | string | Main Street 10 |
+| location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | string | Floor 3, Unit B |
+| post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | string | 12345 |
+| post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | string | Amsterdam |
+| admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | string | North Holland |
+| admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | string | Amsterdam Municipality
 ### 2.6 Economic Activity attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
