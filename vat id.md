@@ -193,28 +193,30 @@ avoid natural-language ambiguities.*
 | Data Identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------------------------------|--------------------------------------------|----------------------------------------|------------------|--------------------|
 | VAT_ID                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
-| Administrative_Unit_Name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | City Council        |
+| Administrative_Unit_Name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
 | Validity_Period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
-| Economic_Activity         | Type of Economic Activity                   | Type of economic activity conducted     | String           | Manufacturing       |
-| Economic_Operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ABC GmbH            |
-| Issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | German Tax Office   |
+| Economic_Operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
+| Issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
 
 
 
 #### 2.2.2 Optional attributes
 | **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-| Administrative_Unit_Type       | Type of Administrative Unit                 | Type (e.g., Government, Local Authority)| String           | Government          |
-| Administrative_Unit_Address    | Address of the Administrative Unit          | Official address of the unit           | String           | 123 Main St, City  |
-| Validity_Area_Limitation      | Limitations on Validity Area                | Geographical scope for validity        | array            | Germany             |
+|------------------------|--------------------------|--------------|--------------|--------------|
+| Administrative_Unit_Type       | Type of Administrative Unit                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
+| Administrative_Unit_Address    | Address of the Administrative Unit          | Official address of the unit           | Address Object           | ...  |
+| Validity_Area_Limitation      | Limitations on Validity Area                | Geographical scope for validity        | array            | ...|
+
+### 2.3 Economic Operator 
+#### 2.3.1 Mandatory attributes
+There must be a reference from the Administrative Unit to the Economic Operator. However the the Economic Operator can either be a Legal Person or a Natural Person. The economic operator object must be filled to one of the two, not to both. 
+
+#### 2.3.2 Optional attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |------------------------|--------------------------|--------------|--------------|--------------|
-| EUID| EU Identifier|  The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | String | SEBOLREG.123456789 |
-|Economic_Operator_Name|legal name | ethe name under which the legal entity is legally registered|String| ACME |
-
-
-| **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|----------------------|------------------------|-----------------|--------------|-------------------|
+| legal_identifier| [legalIdentifier](https://iri.suomi.fi/terminology/webuild/legalidentifier) |The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | String | SEBOLREG.123456789 |
+|legal name|[legalName](https://iri.suomi.fi/terminology/webuild/legalname) | the name under which the legal entity is legally registered|tstr| ACME |
 | family_name          | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. |string| Doe|
 | given_name           | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates.                                                                                                          |string|John|
 | birth_date           | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. |Date|27-04-1968|
