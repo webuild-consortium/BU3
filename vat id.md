@@ -248,13 +248,13 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | address.post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
 | address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
 | address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
-### 2.6 Economic Activity attributes
+### 2.6 Economic Activity Type attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | Economic_Activity_Type.Nomenclature| tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature.| tstr | nace |
-| Economic_ Activity_Type_ID | tbd | The ID that under which the Administrative unit is registered.|tstr | C26.5.2 |
-| Economic_ Activity_Type_Description |tbd| The human readable text that describes the economic ativity in a specific language|array|
+| Economic_Activity_Type.ID | tbd | The ID that under which the Administrative unit is registered.|tstr | C26.5.2 |
+| Economic_Activity_Type.Description |tbd| The human readable text that describes the economic ativity in a specific language|array|
 
 ### 2.7 Metadata
 #### 2.7.1 Mandatory metadata 
@@ -262,7 +262,7 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | issuer.authentic_source_country   | issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |date | 05 | 
-| issuer.VAT_IDAuthenticSource   | authenticSource | Name of the administrative authority that issued the VAT ID. | tstr| |
+| issuer.VAT_ID_AuthenticSource   | authenticSource | Name of the administrative authority that issued the VAT ID. | tstr| |
 | issuer.country   |issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |tstr |     | 
 | issuer.issuing_authority   | issuerAuthority| Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation. |tstr|  |
 | issuer.attestation_legal_category  | issuerLegalCategory| The type of attestation category. (Pub-EAA/QEAA)      |tstr| PUB-EAA  |
