@@ -313,7 +313,13 @@ business-rule specification where available.*
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| Unique description Economic Operator | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables MUST be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" MUST be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
+| EO 1 | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables MUST be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" MUST be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
+| VP 1 | If 'validity_Period.end_Date' is not NULL, 'validity_Period.end_Date' MUST be higher than 'validity_Period.start_Date'| Validity periods may not be negative | The VAT-ID attestation may not be issued, because there shouldn't be a negative period in the register|
+| VP 2 | If any 'validity_Period' overlaps with another validity period the attestation MUST NOT be issued| Validity periods may not overlap because this should not happen and might create problems for relying parties. This rule also takes care of the issue of multiple validity periods without an enddate||
+| VP 3 | If 'validity_Period.end_Date' is more than 5 years in the past, the validity period SHOULD be omited. | Old validity periods are not relevant to relying parties, the limit of 5 years should be used as a rule of thumb ||
+| VP 4 | If there is more than one 'validity_Period' the issuer MAY omit older validity_Periods| Issuers have the freedom to omit older validity periods, when they find they are not relevant ||
+| EA 1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' and 'Economic_Activity_Type.Nomenclature ="NACE") Then 'Economic_Activity_Type.Nomenclature MUST be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID SHOULD be used. | Issuers should implement a tranlation table to create mostly NACE codes|
+
 
 # 3 Attestation encoding
 
