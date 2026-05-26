@@ -299,13 +299,8 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEÁOR, SBI, ÖNACE, PKD, CAE, CAEN, SKD, OKEČ, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [See 8.1](###8.1)| *State whether extensions are allowed* |
+| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Link to Alternative NACE Codes](#81-list-of-alternative-nace-codes)| List must be used or refer to NACE closest alternative |
 
-> Example
->
-> | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
-> |----------------|--------------------|-------------|--------------------------|---------------------------|
-> | `signatory_rule` | `sole`, `joint` | Indicates whether the representative may bind the organisation alone or only together with one or more additional representatives | EUCC attestation description / WE BUILD company representation model | Additional values SHOULD only be introduced if they are defined consistently across issuer and verifier implementations |
 
 ### 2.9 Integrity rules
 
@@ -318,13 +313,7 @@ business-rule specification where available.*
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| *Provide a rule identifier* | *State the rule precisely* | *Explain the rationale* | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
-
-> Example
->
-> | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
-> |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-> | `IR-01` | If `legal_representative.natural_person` is present, `full_name` and `date_of_birth` SHALL be present. If `legal_representative.legal_person` is present, `name`, `id`, and `legal_form_type` SHALL be present. | Prevents incomplete representation statements and ensures that a relying party can determine whether the representative is a natural person or a legal person and validate the representation data accordingly. | Issuer business rules, schema validation, and verifier business validation. | Issuer SHALL reject incomplete representative data; verifier SHALL treat the representation information as invalid or insufficient for the transaction. |
+| Unique description Economic Operator | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables MUST be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" MUST be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
 
 # 3 Attestation encoding
 
