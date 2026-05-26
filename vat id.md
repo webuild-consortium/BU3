@@ -299,7 +299,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEÁOR, SBI, ÖNACE, PKD, CAE, CAEN, SKD, OKEČ, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | *Reference the source* | *State whether extensions are allowed* |
+| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEÁOR, SBI, ÖNACE, PKD, CAE, CAEN, SKD, OKEČ, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [See 8.1](###8.1)| *State whether extensions are allowed* |
 
 > Example
 >
