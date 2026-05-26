@@ -222,7 +222,7 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | economic_Operator.birth_date| [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. |Date|27-04-1968|
 | economic_Operator.birth_place| [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. |tstr|Amsterdam|
 |economic_Operator.Tin| tin |tax reference number |tstr||
-|economic_Operator.personal_Administrative_Number|[personalAdministrativeNumber](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber)|A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use|tstr|123456782|
+|economic_Operator. personal_Administrative_Number|[personalAdministrative Number](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber)|A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use|tstr|123456782|
 
 
 ### 2.4 Validity Period
@@ -238,7 +238,9 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | validity_Period.end_Date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-1-24|
 
 ### 2.5 Address
-#### Optional attributes
+#### 2.5.1 Mandatory attributes
+No mandatory attributes
+#### 2.5.2 Optional attributes
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | address.po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
@@ -248,16 +250,24 @@ There must be a reference from the Administrative Unit to the Economic Operator.
 | address.post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
 | address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
 | address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
+
 ### 2.6 Economic Activity Type attributes
+#### 2.6.1 Mandatory attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | Economic_Activity_Type.Nomenclature| tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature.| tstr | nace |
 | Economic_Activity_Type.ID | tbd | The ID that under which the Administrative unit is registered.|tstr | C26.5.2 |
-| Economic_Activity_Type.Description |tbd| The human readable text that describes the economic ativity in a specific language|array|
+| Economic_Activity_Type.Description |Economic Activity Description| The human readable text that describes the economic ativity in a specific language|array|
+### 2.8 Description attributes
+#### 2.8.1 Mandatory attributes
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+|Description.Language|Languae| The language used for the description using ISO 639-1| tstr | nl|
+|Description.Text|	The Description in plain text readable for the end user | tstr | Manufacture of bearings, gears, gearing and driving elements|
 
-### 2.7 Metadata
-#### 2.7.1 Mandatory metadata 
+### 2.9 Metadata
+#### 2.9.1 Mandatory metadata 
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -289,7 +299,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| *Provide a field name* | *List the allowed values* | *Explain what each value means* | *Reference the source* | *State whether extensions are allowed* |
+| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEÁOR, SBI, ÖNACE, PKD, CAE, CAEN, SKD, OKEČ, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | *Reference the source* | *State whether extensions are allowed* |
 
 > Example
 >
@@ -593,3 +603,45 @@ general EUDI framework, ARF, and relevant regulations*
 | [Topic 12] | ARF Annex 2 - Topic 12 - Attestation Rulebooks, Available: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks>|
 | [Topic 20] | ARF Annex 2 - Strong User authentication for electronic payments, Available: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments>|
 | [W3C VCDM v2.0] | Sporny, M. *et al,* Verifiable Credentials Data Model v2.0, W3C Recommendation.  |
+
+
+### 8.1 List of Alternative NACE Codes
+
+Generated by DUCK.AI using ChatGPT 5.1 mini
+
+| Country | National implementation / name |
+|---|---|
+| Belgium | NACE-BEL |
+| Bulgaria | NACE (Bulgarian implementation, Rev.2) |
+| Czech Republic | CZ‑NACE |
+| Denmark | DB07 / Danish adaptations (mapped to NACE) |
+| Germany | WZ 2008 (Klassifikation der Wirtschaftszweige) |
+| Estonia | NACE (Estonian implementation) |
+| Ireland | NACE (CSO adapted list) |
+| Greece | KAD (Classification of Economic Activities) |
+| Spain | CNAE |
+| France | NAF |
+| Croatia | NKD |
+| Italy | ATECO (ISTAT) |
+| Cyprus | NACE (Cyprus Statistical Service) |
+| Latvia | NACE (Latvian implementation) |
+| Lithuania | NACE (Lithuanian implementation) |
+| Luxembourg | NACE (STATEC) |
+| Hungary | TEÁOR (TEÁOR 08) |
+| Malta | NACE (NSO) |
+| Netherlands | SBI (Standard Industrial Classification) |
+| Austria | ÖNACE |
+| Poland | PKD |
+| Portugal | CAE |
+| Romania | CAEN |
+| Slovenia | SKD |
+| Slovakia | SK NACE / OKEČ |
+| Finland | TOL |
+| Sweden | SNI |
+| United Kingdom* | UK SIC (historical mappings to NACE) |
+| Norway | NACE‑mapped national classification (Statistics Norway) |
+| Iceland | NACE/ISIC mappings (Statistics Iceland) |
+| Liechtenstein | NACE‑mapped classification |
+| Switzerland | NOGA |
+
+*The UK is no longer an EU member; included due to extensive historical mappings.
