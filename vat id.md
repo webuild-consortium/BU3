@@ -147,25 +147,35 @@ of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for n
 
 This document defines the attribute "VAT-ID" which SHALL have
 the value "QEAA" or "PuB-EAA".*
+````
+Administrative unit
+├─ Administrative_Unit_Name                [1]       (Name of the Administrative Unit)
+├─ Validity_Period                         [1..n]       (Period(s) for which the VAT-ID is valid)
+│   ├─ start_Date                          [1]       (start date of the validity period of the VAT-ID)
+│   └─ end_Date                            [0]       (end date of the validity period of the VAT-ID)
+├─ Validity_Area_Limitation                [0..n]
+├─ Adminitrative_Unit_Type                 [0]       (Type of Organisation in free text)
+├─ Administrative_Unit_Address             [0]       (The postal address registered for the Administrative unit)
+│   ├─ po_box                              [0]  
+│   ├─ thoroughfare                        [0]  
+│   ├─ location_designator                 [0]  
+│   ├─ post_code                           [0]  
+│   ├─ post_name                           [0]  
+│   ├─ admin_unit_L1                       [0]  
+│   └─ admin_unit_L2                       [0]  
+├─Economic_Activity_Type                   [0..n]       (reference to the economic operator)
+│   ├─ Economic_Activity_Type_Nomenclature [1]       (nomenclature used to describe the economic activity)
+│   ├─ Economic_Activity_Type_ID           [1]       (id used in the nomenclature)
+│   └─  Economic_Activity_Type_Description [0..n]
+│      ├─ Language                         [1]  
+│      └─ Description                      [1]
+└─ Issuer                                  [1]   
+    ├─ Issuing_country                     [1]
+    ├─ Issuing_organisation                [1]        (the organisation that issues the VAT-ID, this may differ from the Attestation issuing organisation
+    ├─ Issuing_date                        [1]
+    └─ Attestation_issuing_Organisation   [1]
 
-*For complex attestations, authors SHOULD include or reference a logical model, diagram, or similar
-representation that explains the main entities, relationships, and attribute groupings. Such models
-may often be reused from an existing attestation description or use-case documentation.*
-
-> Example
->
-> The attestation description for Use Case X already contains a domain model showing the holder,
-> issuer, project, permit, and validity period. That model may be copied here and adjusted so that
-> the terminology exactly matches the rulebook.
-
-*In the following subsections 2.2 - 2.7 define in an encoding independent manner all
-mandatory, optional, and conditional attributes and metadata. In each subsection
-provide a table of the following form. When applicable, use Sections 2.8 and 2.9 to document
-code lists and integrity rules that are needed to interpret these attributes consistently:*
-
-*Where available, authors SHOULD include a stable semantic term reference (for example a URI,
-IRI, or controlled identifier from an agreed semantics catalogue) for each attribute or metadata item.*
-
+````
 
 
 
@@ -188,12 +198,13 @@ avoid natural-language ambiguities.*
 | **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | Administrative_Unit_Type       | Type of Administrative Unit                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
-| Administrative_Unit_Address    | Address of the Administrative Unit          | Official address of the unit           | Address Object           | ...  |
-| Validity_Area_Limitation      | Limitations on Validity Area                | Geographical scope for validity        | array            | ...|
+| Administrative_Unit_Address    | Address of the Administrative Unit          | The address where the company is located based on the information from the authentic source of the VAT-ID.
+This address may differ from the address in the business register.           | Address Object           | ...  |
+| Validity_Area_Limitation      | Limitations on Validity Area                | Country in which the VAT_ID may be used. Omit if there are no restrictions    | array of tstr            | ...|
 
 ### 2.3 Economic Operator 
 #### 2.3.1 Mandatory attributes
-There must be a reference from the Administrative Unit to the Economic Operator. However the the Economic Operator can either be a Legal Person or a Natural Person. The economic operator object must be filled to one of the two, not to both. 
+There SHALL be a reference from the Administrative Unit to the Economic Operator. However the the Economic Operator can either be a Legal Person or a Natural Person. The economic operator object SHALL be filled to one of the two, not to both. 
 
 #### 2.3.2 Optional attributes
 
@@ -283,7 +294,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Link to Alternative NACE Codes](#81-list-of-alternative-nace-codes)| List must be used or refer to NACE closest alternative |
+| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Link to Alternative NACE Codes](#81-list-of-alternative-nace-codes)| List SHOULDS be used or refer to NACE closest alternative |
 
 
 ### 2.9 Integrity rules
@@ -297,12 +308,12 @@ business-rule specification where available.*
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| EO 1 | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables MUST be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" MUST be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
-| VP 1 | If 'validity_Period.end_Date' is not NULL, 'validity_Period.end_Date' MUST be higher than 'validity_Period.start_Date'| Validity periods may not be negative | The VAT-ID attestation may not be issued, because there shouldn't be a negative period in the register|
-| VP 2 | If any 'validity_Period' overlaps with another validity period the attestation MUST NOT be issued| Validity periods may not overlap because this should not happen and might create problems for relying parties. This rule also takes care of the issue of multiple validity periods without an enddate||
+| EO 1 | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables SHALL be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" SHALL be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
+| VP 1 | If 'validity_Period.end_Date' is not NULL, 'validity_Period.end_Date' SHALL be higher than 'validity_Period.start_Date'| Validity periods may not be negative | The VAT-ID attestation may not be issued, because there shouldn't be a negative period in the register|
+| VP 2 | If any 'validity_Period' overlaps with another validity period the attestation SHALL NOT be issued| Validity periods may not overlap because this should not happen and might create problems for relying parties. This rule also takes care of the issue of multiple validity periods without an enddate||
 | VP 3 | If 'validity_Period.end_Date' is more than 5 years in the past, the validity period SHOULD be omited. | Old validity periods are not relevant to relying parties, the limit of 5 years should be used as a rule of thumb ||
 | VP 4 | If there is more than one 'validity_Period' the issuer MAY omit older validity_Periods| Issuers have the freedom to omit older validity periods, when they find they are not relevant ||
-| EA 1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' and 'Economic_Activity_Type.Nomenclature ="NACE") Then 'Economic_Activity_Type.Nomenclature MUST be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID SHOULD be used. | Issuers should implement a tranlation table to create mostly NACE codes|
+| EA 1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' and 'Economic_Activity_Type.Nomenclature ="NACE") Then 'Economic_Activity_Type.Nomenclature SHOULD be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID SHOULD be used. | Issuers should implement a tranlation table to create mostly NACE codes|
 
 
 # 3 Attestation encoding
