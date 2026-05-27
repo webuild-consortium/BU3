@@ -308,7 +308,7 @@ business-rule specification where available.*
 | VP 2 | If any 'validity_Period' overlaps with another validity period the attestation SHALL NOT be issued| Validity periods may not overlap because this should not happen and might create problems for relying parties. This rule also takes care of the issue of multiple validity periods without an enddate||
 | VP 3 | If 'validity_Period.end_Date' is more than 5 years in the past, the validity period SHOULD be omited. | Old validity periods are not relevant to relying parties, the limit of 5 years should be used as a rule of thumb ||
 | VP 4 | If there is more than one 'validity_Period' the issuer MAY omit older validity_Periods| Issuers have the freedom to omit older validity periods, when they find they are not relevant ||
-| EA 1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' and 'Economic_Activity_Type.Nomenclature ="NACE") Then 'Economic_Activity_Type.Nomenclature SHOULD be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID SHOULD be used. | Issuers should implement a tranlation table to create mostly NACE codes|
+| EA 1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature == "NACE") Then 'Economic_Activity_Type.Nomenclature SHOULD be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID and TYPE SHOULD be used. | Issuers SHOULD implement a tranlation table to create mostly NACE codes|
 
 
 # 3 Attestation encoding
