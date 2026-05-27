@@ -1,23 +1,14 @@
-| Version | Date | Description |
-|---------|------------|------------|
-| 0.9 | 02-04-2026 | Copy created from the EUDI attestation rulebook template as the basis for the WE BUILD template. |
+# WE BUILD Attestation Rulebook of type VAT ID
 
-# WE BUILD Attestation Rulebook Template for attestations of type VAT ID
-
-*This WE BUILD v1 template is derived from the EUDI attestation rulebook template and keeps its
-main chapter structure while adding practical author guidance and reusable placeholders.*
-
-*Provide information about the author(s) of this Rulebook in the following form:*
 
 * Author(s):
-    * Sierd Westerfield, Tax Administration Netherlands
+    * [Sierd Westerfield](mailto:s.westerfield@belastingdienst.nl), Tax Administration Netherlands
 
 
-*Provide versioning information about the Rulebook in the following form:*
 
 | Version | Date | Description |
 |---------|------------|------------|
-| 0.7 | 30-04-2026 | First Version |
+| 0.7 | 30-04-2026 | Copy from Open Social Rulebook specification |
 | [VERSION NUMBER] | [PUBLICATION DATE] | [DESCRIPTION OR LINK TO THE CHANGELOG] |
 
 *Provide a contact email address and/or a link to an issue tracking system that can be used for
