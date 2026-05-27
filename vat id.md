@@ -150,10 +150,10 @@ the value "QEAA" or "PuB-EAA".*
 ````
 Administrative unit
 ├─ Administrative_Unit_Name                [1]       (Name of the Administrative Unit)
-├─ Validity_Period                         [1..n]       (Period(s) for which the VAT-ID is valid)
+├─ Validity_Period                         [1..n]    (Period(s) for which the VAT-ID is valid)
 │   ├─ start_Date                          [1]       (start date of the validity period of the VAT-ID)
 │   └─ end_Date                            [0]       (end date of the validity period of the VAT-ID)
-├─ Validity_Area_Limitation                [0..n]
+├─ Validity_Area_Limitation                [0..n]    (array of countries in which the VAT-ID may be used)
 ├─ Adminitrative_Unit_Type                 [0]       (Type of Organisation in free text)
 ├─ Administrative_Unit_Address             [0]       (The postal address registered for the Administrative unit)
 │   ├─ po_box                              [0]  
@@ -163,7 +163,7 @@ Administrative unit
 │   ├─ post_name                           [0]  
 │   ├─ admin_unit_L1                       [0]  
 │   └─ admin_unit_L2                       [0]  
-├─Economic_Activity_Type                   [0..n]       (reference to the economic operator)
+├─Economic_Activity_Type                   [0..n]    (reference to the economic operator)
 │   ├─ Economic_Activity_Type_Nomenclature [1]       (nomenclature used to describe the economic activity)
 │   ├─ Economic_Activity_Type_ID           [1]       (id used in the nomenclature)
 │   └─  Economic_Activity_Type_Description [0..n]
@@ -171,16 +171,12 @@ Administrative unit
 │      └─ Description                      [1]
 └─ Issuer                                  [1]   
     ├─ Issuing_country                     [1]
-    ├─ Issuing_organisation                [1]        (the organisation that issues the VAT-ID, this may differ from the Attestation issuing organisation
-    ├─ Issuing_date                        [1]
-    └─ Attestation_issuing_Organisation   [1]
+    ├─ Issuing_organisation                [1]        (the organisation that issues the VAT-ID, this may differ from the Attestation issuing organisation)
+    ├─ Issuing_date                        [1]        (date on which the attestation is issued)
+    └─ Attestation_issuing_Organisation    [1]
 
 ````
 
-
-
-*NOTE Data identifiers should be unambiguous, machine-readable where possible, and
-avoid natural-language ambiguities.*
 
 ### 2.2 Administrative Unit 
 #### 2.2.1 Mandatory attributes
@@ -197,14 +193,13 @@ avoid natural-language ambiguities.*
 #### 2.2.2 Optional attributes
 | **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Administrative_Unit_Type       | Type of Administrative Unit                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
-| Administrative_Unit_Address    | Address of the Administrative Unit          | The address where the company is located based on the information from the authentic source of the VAT-ID.
-This address may differ from the address in the business register.           | Address Object           | ...  |
-| Validity_Area_Limitation      | Limitations on Validity Area                | Country in which the VAT_ID may be used. Omit if there are no restrictions    | array of tstr            | ...|
+| Administrative_Unit_Type       | ...                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
+| Administrative_Unit_Address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
+| Validity_Area_Limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
 #### 2.3.1 Mandatory attributes
-There SHALL be a reference from the Administrative Unit to the Economic Operator. However the the Economic Operator can either be a Legal Person or a Natural Person. The economic operator object SHALL be filled to one of the two, not to both. 
+There SHALL be a reference from the Administrative Unit to the Economic Operator. However the the Economic Operator can either be a [Legal Person](https://iri.suomi.fi/terminology/webuild/concept-109) or a [Natural Person](https://iri.suomi.fi/terminology/webuild/concept-6005). The economic operator object SHALL be filled to one of the two, not to both. 
 
 #### 2.3.2 Optional attributes
 
@@ -294,7 +289,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Link to Alternative NACE Codes](#81-list-of-alternative-nace-codes)| List SHOULDS be used or refer to NACE closest alternative |
+| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes)| List SHOULD be used or refer to NACE closest alternative |
 
 
 ### 2.9 Integrity rules
@@ -595,7 +590,7 @@ general EUDI framework, ARF, and relevant regulations*
 | [W3C VCDM v2.0] | Sporny, M. *et al,* Verifiable Credentials Data Model v2.0, W3C Recommendation.  |
 
 
-### 8.1 List of Alternative NACE Codes
+### 8.1 List of Alternative Nomenclatures for Activity types
 
 Generated by DUCK.AI using ChatGPT 5.1 mini
 
