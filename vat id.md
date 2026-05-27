@@ -134,35 +134,19 @@ of the [European Digital Identity Regulation] SHALL be included. This location S
 indicate at least the URL at which a machine-readable version of the qualified
 certificate that signed the PuB-EAA can be found or looked up. (see ARB_20 in [Topic 12])
 
-**Requirements for non-qualified EAA**
-
-* An attribute indicating that the attestation is an EAA should be included (see ARB_12 in [Topic 12]).
-See also section 2.1.
-* One or more attributes or metadata representing the set of data meant in Annex
-V point b) of the [European Digital Identity Regulation] SHALL be included (see ARB_15 in [Topic 12]).
-* One or more attributes representing the set of data meant in Annex V point c) of the
-[European Digital Identity Regulation] SHOULD be included (see ARB_17 in [Topic 12])
-* One or more attributes representing the set of data meant in Annex V point e) of
-the [European Digital Identity Regulation] SHOULD be defined (see ARB_19 in [Topic 12]).
-* One or more attributes or metadata representing the location at which a machine-readable
-version of the trust anchor to be used for verifying the EAA can be found or
-looked up SHOULD be defined. What this location indicates precisely is dependent
-on the nature of the mechanism used for distributing trust anchors, detailed in section
-5 (see ARB_21 in [Topic 12])
 
 ### 2.1 Introduction
 
-*In this section, briefly introduce the overall design and purpose of the specific attestation type
-defined by this Rulebook, including key decisions regarding its attributes and
-legal categorization.*
+The VAT-ID attestation is an attestation provided by an authentic source such as a TAX-Administration. The attestation proves the VAT-ID of the company or administrative unit within the company and the validity period of that VAT-ID. The VAT-ID attestation only contains information directly related to the VAT-ID. 
+The VAT-ID attestation can be used by a company to prove that the company really is the company with that number. The receiver of the attestation can trust the content and there is no need for checking the VAT-ID at VIES (VAT Information Exchange System)1 or request a (paper) VAT-ID Certificate. 
 
 *According to Annex V point a) and  Annex VII point a) of the [European Digital Identity Regulation]
 an indication, at least in a form suitable for automated processing, that the attestation
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-This document defines the attribute "attestation_legal_category" which SHALL have
-the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*
+This document defines the attribute "VAT-ID" which SHALL have
+the value "QEAA" or "PuB-EAA".*
 
 *For complex attestations, authors SHOULD include or reference a logical model, diagram, or similar
 representation that explains the main entities, relationships, and attribute groupings. Such models
