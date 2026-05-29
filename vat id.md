@@ -183,8 +183,9 @@ Administrative unit
 #### 2.2.2 Optional attributes
 | **data identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
+| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| String | ...          |
 | administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
+| economic_activity_type       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
 | validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
@@ -420,6 +421,7 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | address.post_name |address.post_name | String | .. |MUST|
 | address.admin_unit_L1 | address.admin_unit_L1 | String | .. |MUST|
 | address.admin_unit_L2 | address.admin_unit_L2 | String | .. |MUST|
+| economic_activity_type |economic_activity_type |Array[economic_activity_type]|..|MUST|
 | economic_activity_type.nomenclature |economic_activity_type[m].nomenclature |String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
 | economic_activity_type.id | economic_activity_type[m].id
 | economic_activity_type.description || economic_activity_type[m].description |Array[description]|..|MUST| 
@@ -431,9 +433,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | issuer.issuing_authority | issuer.issuing_authority |String | ..| MUST NOT|
 | issuer.attestation_legal_category | issuer.attestation_legal_category |String | ..| MUST NOT| 
 | issuer.attestation_issuing_date | issuer.attestation_issuing_date | String (ISO 8601 YYYY-MM-DD) | ..| MUST NOT| 
-
-
-
+| issuer.location_status      | issuer.location_status |String(URI)|..|MUST NOT|
+| trust_anchor         | trustAnchor| String(URI) |..|MUST NOT|
 
 **Notes:**
 
