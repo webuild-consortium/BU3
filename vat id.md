@@ -202,7 +202,7 @@ There SHALL be a reference from the Administrative Unit to the Economic Operator
 | economic_operator.birth_date | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 27-04-1968 |
 | economic_operator.birth_place | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
 | economic_operator.tin | tin | tax reference number | tstr |  |
-| economic_operator.personal_administrative_number | [personalAdministrative Number](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber) | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use | tstr | 123456782 |
+| economic_operator. personal_administrative_number | [personalAdministrative Number](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber) | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use | tstr | 123456782 |
 
 ### 2.4 Validity Period
 #### 2.4.1 Mandatory attributes
@@ -280,7 +280,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 | **field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| economic_activity_type.nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA | Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes) | List SHOULD be used or refer to NACE closest alternative |
+| economic_activity_type.nomenclature | NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA | Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes) | List SHOULD be used or refer to NACE closest alternative |
 
 ### 2.11 Integrity rules
 
@@ -389,49 +389,66 @@ Finally, illustrative examples SHALL be included.
 
 ### 3.2 SD-JWT VC-based encoding
 
-*If the attestation type supports the format specified in "SD-JWT-based Verifiable
-Credentials (SD-JWT VC)", then in this section the SD-JWT VC-compliant encoding
-of attributes and metadata SHALL be defined. It SHALL be ensured that the attestations
-comply with the 'SD-JWT VCs' profile specified in [HAIP] (see ARB_01b in [Topic 12]).*
+The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosure of  attributes.
 
-*It is noted that a Schema Provider MAY specify in the Attestation
-Rulebook that that type of attestation must be issued in the [SD-JWT VC]-compliant
-format, provided the [SD-JWT VC] specification has been approved by an EU standardisation
-body or by the European Digital Identity Cooperation Group established pursuant to
-Article 46e(1) of the [European Digital Identity Regulation] (see ARB_03 in [Topic 12]).*
-
-*In this section, a Verifiable Credential Type (`vct`) SHALL be defined,
-which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).*
-
-[RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
-
-*Additionally, when specifying new attributes, existing conventions
-for attribute identifier values and attribute syntaxes SHOULD
-be considered (see ARB_07 in [Topic 12]).*
-
-*Rulebook authors SHALL ensure that each claim name is either
-
-* included in the IANA registry for JWT claims,
-* is a Public Name as defined in [RFC 7519], or
-* or is a Private Name specific to the attestation type. (see ARB_06b in [Topic 12]).*
-
-*For all claims (i.e., all top-level properties, all nested properties, and all array entries),
-the Rulebook SHALL specify whether an Attestation Provider MUST, MAY, or MUST NOT make that
-claim selectively disclosable (see ARB_30 in [Topic 12]).*
-
-*Rulebook authors SHOULD consider defining a Type Metadata Document for the attestation type
-specified in the Rulebook, as defined in Chapter 6 of [SD-JWT VC]. If such a document is defined,
-it SHOULD contain the Claim Selective Disclosure Metadata (defined in Section 9.3 of [SD-JWT VC])
-for each of the claims, in order to specify if that claim is selectively disclosable (see ARB_31
-in [Topic 12]).*
-
-*IANA-registered claims should be presented in table that
-includes their data identifier, attribute identifier,
-encoding format, and reference or note. For example,*
+**Verifiable Credential Type (`vct`):** `uri:eu.eudi.vat.1`
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
 |-------------------- |--------------------------|---------------------|--------------------|---------------|
-| family_name | family_name | string | Section 5.1 of [OIDC] | MUST |
+| vat_id                        |vat_id | VAT Identification Number                     | String           |          | MUST NOT|
+| administrative_unit_name      |administrative_unit_name   | String           |           | MUSTNOT|
+| validity_period               |validity_period               |Array [validity period] | |MUST|
+| economic_operator             | economic_operator              |object| ..| MUST NOT|
+| issuer                        | issuer                        | Object           | ..   |MUST NOT|
+| administrative_unit_type       | administrative_unit_type                 | Object | ...      | MUST   |
+| administrative_unit_address    | administrative_unit_address           |  Object           | ...  | MUST|
+| validity_area_limitation      | validity_area_limitation               | Array String(ISO 3166-1 alpha-3)| ..| MUST NOT|
+| economic_operator.legal_identifier | economic_operator.legal_identifier  | String | ..| MUST |
+| economic_operator.legal_name |economic_operator.legal_name | String | ..|  MUST |
+| economic_operator.family_name |  economic_operator.family_name | String | .. | MUST|
+| economic_operator.given_name | economic_operator.given_name| String | .. |MUST|
+| economic_operator.birth_date | economic_operator.birth_date | String (ISO 8601 YYYY-MM-DD)| ..| MUST|
+| economic_operator.birth_place | economic_operator.birth_place | String | .. | MUST|
+| economic_operator.tin | economic_operator.tin | String | .. |MUST|
+| economic_operator. personal_administrative_number |  economic_operator. personal_administrative_number |String | .. |MUST|
+| validity_period.start_date| validity_period[n].start_date|String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| validity_period.end_date  | validity_period[n].end_date ||String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| address.po_box | address.po_box |  String | .. |MUST|
+| address.thoroughfare |address.thoroughfare | String | .. |MUST|
+| address.location_designator | address.location_designator |  String | .. |MUST|
+| address.post_code |address.post_code | String | .. |MUST|
+| address.post_name |address.post_name | String | .. |MUST|
+| address.admin_unit_L1 | address.admin_unit_L1 | String | .. |MUST|
+| address.admin_unit_L2 | address.admin_unit_L2 | String | .. |MUST|
+| economic_activity_type.nomenclature |economic_activity_type[m].nomenclature |String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
+| economic_activity_type.id | economic_activity_type[m].id
+| economic_activity_type.description || economic_activity_type[m].description |Array[description]|..|MUST| 
+| description.language |  economic_activity_type[m].description[l].language | String (SO 639-1)|..|MUST NOT|
+| description.text | economic_activity_type[m].description[l].text| String | ..| MUST NOT|
+| issuer.authentic_source_country | issuer.authentic_source_country |String (3166-2)|..| MUST NOT 
+| issuer.vat_id_authenticsource | issuer.vat_id_authenticsource | String | ..| MUST NOT|
+| issuer.country | issuer.country |String | ..| MUST NOT| 
+| issuer.issuing_authority | issuer.issuing_authority |String | ..| MUST NOT|
+| issuer.attestation_legal_category | issuer.attestation_legal_category |String | ..| MUST NOT| 
+| issuer.attestation_issuing_date | issuer.attestation_issuing_date | String (ISO 8601 YYYY-MM-DD) | ..| MUST NOT| 
+
+
+
+
+**Notes:**
+
+- **MUST**: The claim SHALL be selectively disclosable — the holder MAY choose to disclose or
+  withhold this claim when presenting the credential to a Relying Party.
+- **MUST NOT**: The claim SHALL NOT be selectively disclosable — it is always present in plain
+  text in the JWT header/payload and cannot be withheld by the holder, as it is required for
+  credential verification and trust establishment.
+- `validity_period` entries are indexed as `[n]` where `n` starts at 0; at least one
+  validity period MUST be present.
+- `OwnerLegalPerson` entries are indexed as `[m]` where `m` starts at 0; zero or more legal
+  person owners MAY be present.
+- `Evidence` entries are indexed as `[n]` where `n` starts at 0; at least one evidence entry
+  SHALL be present.
+- `iat`, `exp`, and `iss` follow RFC 7519 standard JWT claim naming conventions.
 
 *A similar table should be used for Public Names and for Private Names specific
 to the attestation type defined in this document. For
