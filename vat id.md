@@ -171,13 +171,13 @@ Administrative unit
 
 ### 2.2 Administrative Unit 
 #### 2.2.1 Mandatory attributes
-| Data Identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
+| data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| VAT_ID                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
-| Administrative_Unit_Name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
-| Validity_Period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
-| Economic_Operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
-| Issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
+| vat_id                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
+| administrative_unit_name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
+| validity_period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
+| economic_operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
+| issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
 
 
 
