@@ -138,36 +138,35 @@ of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for n
 
 This document defines the attribute "VAT-ID" which SHALL have
 the value "QEAA" or "PuB-EAA".*
+
 ````
 Administrative unit
-├─ Administrative_Unit_Name                [1]       (Name of the Administrative Unit)
-├─ Validity_Period                         [1..n]    (Period(s) for which the VAT-ID is valid)
-│   ├─ start_Date                          [1]       (start date of the validity period of the VAT-ID)
-│   └─ end_Date                            [0]       (end date of the validity period of the VAT-ID)
-├─ Validity_Area_Limitation                [0..n]    (array of countries in which the VAT-ID may be used)
-├─ Adminitrative_Unit_Type                 [0]       (Type of Organisation in free text)
-├─ Administrative_Unit_Address             [0]       (The postal address registered for the Administrative unit)
+├─ administrative_unit_name                [1]       (name of the administrative unit)
+├─ validity_period                         [1..n]    (period(s) for which the vat-id is valid)
+│   ├─ start_date                          [1]       (start date of the validity period of the vat-id)
+│   └─ end_date                            [0]       (end date of the validity period of the vat-id)
+├─ validity_area_limitation                [0..n]    (array of countries in which the vat-id may be used)
+├─ adminitrative_unit_type                 [0]       (type of organisation in free text)
+├─ administrative_unit_address             [0]       (the postal address registered for the administrative unit)
 │   ├─ po_box                              [0]  
 │   ├─ thoroughfare                        [0]  
 │   ├─ location_designator                 [0]  
 │   ├─ post_code                           [0]  
 │   ├─ post_name                           [0]  
-│   ├─ admin_unit_L1                       [0]  
-│   └─ admin_unit_L2                       [0]  
-├─Economic_Activity_Type                   [0..n]    (reference to the economic operator)
-│   ├─ Economic_Activity_Type_Nomenclature [1]       (nomenclature used to describe the economic activity)
-│   ├─ Economic_Activity_Type_ID           [1]       (id used in the nomenclature)
-│   └─  Economic_Activity_Type_Description [0..n]
-│      ├─ Language                         [1]  
-│      └─ Description                      [1]
-└─ Issuer                                  [1]   
-    ├─ Issuing_country                     [1]
-    ├─ Issuing_organisation                [1]        (the organisation that issues the VAT-ID, this may differ from the Attestation issuing organisation)
-    ├─ Issuing_date                        [1]        (date on which the attestation is issued)
-    └─ Attestation_issuing_Organisation    [1]
-
+│   ├─ admin_unit_l1                       [0]  
+│   └─ admin_unit_l2                       [0]  
+├─ economic_activity_type                   [0..n]    (reference to the economic operator)
+│   ├─ economic_activity_type_nomenclature [1]       (nomenclature used to describe the economic activity)
+│   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
+│   └─ economic_activity_type_description  [0..n]
+│      ├─ language                         [1]  
+│      └─ description                      [1]
+└─ issuer                                  [1]   
+    ├─ issuing_country                     [1]
+    ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
+    ├─ issuing_date                        [1]        (date on which the attestation is issued)
+    └─ attestation_issuing_organisation    [1]
 ````
-
 
 ### 2.2 Administrative Unit 
 #### 2.2.1 Mandatory attributes
@@ -182,11 +181,11 @@ Administrative unit
 
 
 #### 2.2.2 Optional attributes
-| **Data Identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+| **data identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Administrative_Unit_Type       | ...                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
-| Administrative_Unit_Address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
-| Validity_Area_Limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
+| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| Economic Activity Type Object | ...          |
+| administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
+| validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
 #### 2.3.1 Mandatory attributes
@@ -194,29 +193,28 @@ There SHALL be a reference from the Administrative Unit to the Economic Operator
 
 #### 2.3.2 Optional attributes
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|---------------------------------------------------------------|------------|--------------|
-| economic_Operator.legal_identifier| [legalIdentifier](https://iri.suomi.fi/terminology/webuild/legalidentifier) |The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | tstr | SEBOLREG.123456789 |
-|economic_Operator.legal_name|[legalName](https://iri.suomi.fi/terminology/webuild/legalname) | the name under which the legal entity is legally registered|tstr| ACME |
-| economic_Operator.family_name| [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. |tstr| Doe|
-| economic_Operator.given_name| [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates.|tstr|John|
-| economic_Operator.birth_date| [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. |Date|27-04-1968|
-| economic_Operator.birth_place| [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. |tstr|Amsterdam|
-|economic_Operator.Tin| tin |tax reference number |tstr||
-|economic_Operator. personal_Administrative_Number|[personalAdministrative Number](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber)|A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use|tstr|123456782|
-
+| economic_operator.legal_identifier | [legalIdentifier](https://iri.suomi.fi/terminology/webuild/legalidentifier) |The relevant unique identifier attributed in accordance with Article 9 of EWB (WEBUILD specific EUID where available, otherwise a similar constructed, unique per issuer identifier. <Countrycode ISO 3166-1 alpha-2>. eks. SE +  BOLREG + 123456789 -> SEBOLREG.123456789 | tstr | SEBOLREG.123456789 |
+| economic_operator.legal_name | [legalName](https://iri.suomi.fi/terminology/webuild/legalname) | the name under which the legal entity is legally registered | tstr | ACME |
+| economic_operator.family_name | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
+| economic_operator.given_name | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
+| economic_operator.birth_date | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 27-04-1968 |
+| economic_operator.birth_place | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
+| economic_operator.tin | tin | tax reference number | tstr |  |
+| economic_operator.personal_administrative_number | [personalAdministrative Number](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#personalAdministrativeNumber) | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. The personal Administrative Number may only be used if the local law allows for unrestricted use | tstr | 123456782 |
 
 ### 2.4 Validity Period
 #### 2.4.1 Mandatory attributes
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| validity_Period.start_Date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
+| validity_period.start_date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
 
 ### 2.4.2 Optional attributes
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| validity_Period.end_Date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-1-24|
+| validity_period.end_date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-1-24|
 
 ### 2.5 Address
 #### 2.5.1 Mandatory attributes
@@ -235,32 +233,34 @@ No mandatory attributes
 ### 2.6 Economic Activity Type attributes
 #### 2.6.1 Mandatory attributes
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature| tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature.| tstr | nace |
-| Economic_Activity_Type.ID | tbd | The ID that under which the Administrative unit is registered.|tstr | C26.5.2 |
-| Economic_Activity_Type.Description |Economic Activity Description| The human readable text that describes the economic ativity in a specific language|array|
+| economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
+| economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
+| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
+
+
 ### 2.8 Description attributes
 #### 2.8.1 Mandatory attributes
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-|Description.Language|Languae| The language used for the description using ISO 639-1| tstr | nl|
-|Description.Text|	The Description in plain text readable for the end user | tstr | Manufacture of bearings, gears, gearing and driving elements|
+| description.language | Language | The language used for the description using ISO 639-1 | tstr | nl |
+| description.text | ..| The Description in plain text readable for the end user | tstr | Manufacture of bearings, gears, gearing and driving elements |
 
 ### 2.9 Metadata
 #### 2.9.1 Mandatory metadata 
 
-| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| issuer.authentic_source_country   | issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |date | 05 | 
-| issuer.VAT_ID_AuthenticSource   | authenticSource | Name of the administrative authority that issued the VAT ID. | tstr| |
-| issuer.country   |issuing_country  | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. |tstr |     | 
-| issuer.issuing_authority   | issuerAuthority| Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation. |tstr|  |
-| issuer.attestation_legal_category  | issuerLegalCategory| The type of attestation category. (Pub-EAA/QEAA)      |tstr| PUB-EAA  |
-| issuer.attestation_issuing_date| issuingDate| The date the attestation was issued|date| 2025-12-5|
+| issuer.authentic_source_country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. | date | 05 |
+| issuer.vat_id_authenticsource | authenticSource | Name of the administrative authority that issued the VAT ID. | tstr |  |
+| issuer.country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. | tstr |  |
+| issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation. | tstr |  |
+| issuer.attestation_legal_category | issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
+| issuer.attestation_issuing_date | issuingDate | The date the attestation was issued | date | 2025-12-5 |
 
 
-#### 2.7.2 Optional metadata
+#### 2.9.2 Optional metadata
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -269,7 +269,7 @@ No mandatory attributes
 
 
 
-### 2.8 Code lists
+### 2.10 Code lists
 
 *Use this section for controlled vocabularies, enumerations, value sets, or external catalogues
 that are necessary to interpret one or more attributes or metadata items. Definitions may be reused
@@ -278,12 +278,11 @@ from the attestation description or other use-case documentation and refined her
 *For each code list, authors SHOULD state the field to which it applies, the allowed values, their
 meaning, the source vocabulary or reference, and any extensibility rule or governance note.*
 
-| **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
+| **field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| Economic_Activity_Type.Nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA| Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes)| List SHOULD be used or refer to NACE closest alternative |
+| economic_activity_type.nomenclature | NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA | Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes) | List SHOULD be used or refer to NACE closest alternative |
 
-
-### 2.9 Integrity rules
+### 2.11 Integrity rules
 
 *Use this section to define integrity or consistency rules that are not fully captured by the
 encoding format or schema alone, such as cross-field dependencies, temporal consistency checks,
