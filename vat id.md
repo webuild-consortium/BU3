@@ -258,7 +258,8 @@ No mandatory attributes
 | issuer.country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. | tstr |  |
 | issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation. | tstr |  |
 | issuer.attestation_legal_category | issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
-| issuer.attestation_issuing_date | issuingDate | The date the attestation was issued | date | 2025-12-5 |
+| issuer.attestation_issuing_date | iat | The date the attestation was issued | Number (Unix timestamp) | |
+| issuer.attestation_expiry_date | exp | The date the attestation was issued | Number (Unix timestamp) | |
 
 
 #### 2.9.2 Optional metadata
@@ -306,87 +307,8 @@ business-rule specification where available.*
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-*If the attestation type supports the the format specified in ISO/IEC 18013-5,
-then in this section the  ISO/IEC 18013-5-compliant encoding of attributes and metadata
-should be defined.*
+Currently there is no usecase defined where proximity use of the VAT-ID attestation. For now there will be no ISO/IEC 18013-5-compliant encoding.
 
-*It is noted that (see ARB_02 in [Topic 12]) the Schema Provider SHALL analyse whether it must
-be possible for a User to present that type of attestation when the Wallet Unit
-and the Relying Party are in proximity and attestations are presented without
-using the internet. If so,the attestations must be issued in the ISO/IEC 18013-5-compliant
-mdoc format.*
-
-*Furthermore, in this section a document type SHALL be defined, which SHALL be
-unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).*
-
-[RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
-
-*Provide a list of available encoding formats and their specifications (e.g., encoding, maximum lengths,
-date formats, etc). For example:*
-
-* tstr, uint, bstr, bool and tdate are CDDL representation types defined in
-  [RFC 8610].
-    * Regarding type tstr: this document confirms that, as specified in [RFC
-    8949], a tstr SHALL be encoded in UTF-8 and SHALL support the full Unicode
-    range.
-    * All attributes having encoding type tstr SHALL have a maximum length of
-    150 characters.
-    * This document specifies full-date as full-date = #6.1004(tstr), where tag
-    1004 is specified in [RFC 8943].
-    * In accordance with [RFC 8949], section 3.4.1, a tdate attribute SHALL
-    contain a date-time string as specified in [RFC 3339]. In accordance with
-    [RFC 8943], a full-date attribute SHALL contain a full-date string as
-    specified in [RFC 3339].
-    * The following requirements apply to the representation of dates in
-    attributes, unless otherwise indicated:
-        * Fractions of seconds SHALL NOT be used;
-        * A local offset from UTC SHALL NOT be used; the time-offset defined in
-        [RFC 3339] SHALL be to "Z".
-    * [RFC 8949], section 4.2, describes four rules for canonical CBOR. Three of
-    those rules SHALL be implemented for all CBOR structures, as
-    follows:
-        * integers (major types 0 and 1) SHALL be as small as possible;
-        * the expression of the length in a bstr, tstr, array or map SHALL be as
-        short as possible;
-        * indefinite-length items SHALL be made into definite-length items.
-
-*This section should include a table the data identifier specified in
-Chapter 2,  the corresponding attribute identifier to be used in
-presentation requests and responses according to [ISO/IEC 18013-5] and the encoding
-of each attribute.*
-
-*Additionally, the following rules should be followed:*
-
-* When specifying new attributes, existing conventions
-for attribute identifier values and attribute syntaxes SHOULD
-be considered (see ARB_07 in [Topic 12]).
-* Each attribute SHALL be defined within an attribute namespace.
-    * An attribute namespace
-SHALL fully define the identifier, the syntax, and the semantics of each attribute
-within that namespace.
-    * An attribute namespace SHALL have an identifier that is
-unique within the scope of the EUDI Wallet ecosystem, and each attribute
-identifier SHALL be unique within that namespace (see ARB_06a in [Topic 12])
-    * A domestic namespace MAY defined
-to specify attributes that are specific to this Rulebook and are not included in
-the applicable EU-wide or sectoral namespace (see ARB_10 in [Topic 12]).
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Namespace**|
-|------------------------|--------------|------------------|------------------|
-| family_name | family_name | tstr | com.example.att.1|
-
-*The corresponding entry for the "attestation_legal_category" attribute defined
-in Section 2.1 SHALL be:*
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
-|------------------------|--------------|------------------|------------------|
-| attestation_legal_category | attestation_legal_category | tstr |com.example.att.1|
-
-Finally, illustrative examples SHALL be included.
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF FULL OR PARTIAL mDOC OF THE ATTESTATION]
-
-[RULEBOOK AUTHOR TO PROVIDE THE ATTRIBUTES AND THEIR VALUES INCLUDED IN THE EXAMPLE]
 
 ### 3.2 SD-JWT VC-based encoding
 
@@ -394,47 +316,50 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 
 **Verifiable Credential Type (`vct`):** `uri:eu.eudi.vat.1`
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
-|-------------------- |--------------------------|---------------------|--------------------|---------------|
-| vat_id                        |vat_id | VAT Identification Number                     | String           |          | MUST NOT|
-| administrative_unit_name      |administrative_unit_name   | String           |           | MUSTNOT|
-| validity_period               |validity_period               |Array [validity period] | |MUST|
-| economic_operator             | economic_operator              |object| ..| MUST NOT|
-| issuer                        | issuer                        | Object           | ..   |MUST NOT|
-| administrative_unit_type       | administrative_unit_type                 | Object | ...      | MUST   |
-| administrative_unit_address    | administrative_unit_address           |  Object           | ...  | MUST|
-| validity_area_limitation      | validity_area_limitation               | Array String(ISO 3166-1 alpha-3)| ..| MUST NOT|
-| economic_operator.legal_identifier | economic_operator.legal_identifier  | String | ..| MUST |
-| economic_operator.legal_name |economic_operator.legal_name | String | ..|  MUST |
-| economic_operator.family_name |  economic_operator.family_name | String | .. | MUST|
-| economic_operator.given_name | economic_operator.given_name| String | .. |MUST|
-| economic_operator.birth_date | economic_operator.birth_date | String (ISO 8601 YYYY-MM-DD)| ..| MUST|
-| economic_operator.birth_place | economic_operator.birth_place | String | .. | MUST|
-| economic_operator.tin | economic_operator.tin | String | .. |MUST|
-| economic_operator. personal_administrative_number |  economic_operator. personal_administrative_number |String | .. |MUST|
-| validity_period.start_date| validity_period[n].start_date|String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
-| validity_period.end_date  | validity_period[n].end_date ||String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
-| address.po_box | address.po_box |  String | .. |MUST|
-| address.thoroughfare |address.thoroughfare | String | .. |MUST|
-| address.location_designator | address.location_designator |  String | .. |MUST|
-| address.post_code |address.post_code | String | .. |MUST|
-| address.post_name |address.post_name | String | .. |MUST|
-| address.admin_unit_L1 | address.admin_unit_L1 | String | .. |MUST|
-| address.admin_unit_L2 | address.admin_unit_L2 | String | .. |MUST|
-| economic_activity_type |economic_activity_type |Array[economic_activity_type]|..|MUST|
-| economic_activity_type.nomenclature |economic_activity_type[m].nomenclature |String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
-| economic_activity_type.id | economic_activity_type[m].id
-| economic_activity_type.description || economic_activity_type[m].description |Array[description]|..|MUST| 
-| description.language |  economic_activity_type[m].description[l].language | String (SO 639-1)|..|MUST NOT|
-| description.text | economic_activity_type[m].description[l].text| String | ..| MUST NOT|
-| issuer.authentic_source_country | issuer.authentic_source_country |String (3166-2)|..| MUST NOT 
-| issuer.vat_id_authenticsource | issuer.vat_id_authenticsource | String | ..| MUST NOT|
-| issuer.country | issuer.country |String | ..| MUST NOT| 
-| issuer.issuing_authority | issuer.issuing_authority |String | ..| MUST NOT|
-| issuer.attestation_legal_category | issuer.attestation_legal_category |String | ..| MUST NOT| 
-| issuer.attestation_issuing_date | issuer.attestation_issuing_date | String (ISO 8601 YYYY-MM-DD) | ..| MUST NOT| 
-| issuer.location_status      | issuer.location_status |String(URI)|..|MUST NOT|
-| trust_anchor         | trustAnchor| String(URI) |..|MUST NOT|
+#### 3.2.1 Attribute Encoding Table
+
+| **Data Identifier**                | **Attribute identifier**             | **Encoding format**    |**Reference/Notes** |**Disclosable**|
+|----------------------------------- |--------------------------------------|------------------------|--------------------|---------------|
+| vat_id                             |vat_id | VAT Identification Number    | String                 |                    | MUST NOT|
+| administrative_unit_name           |administrative_unit_name              | String                 |                    | MUSTNOT|
+| validity_period                    |validity_period                       | Array [validity period]|                    |MUST|
+| economic_operator                  | economic_operator                    | object                 | ..                 | MUST NOT|
+| issuer                             | issuer                               | Object                 | ..   |MUST NOT|
+| administrative_unit_type           | administrative_unit_type             | Object                 | ...      | MUST   |
+| administrative_unit_address        | administrative_unit_address          | Object                 | ...  | MUST|
+| validity_area_limitation           | validity_area_limitation             | Array String(ISO 3166-1 alpha-3)| ..| MUST NOT|
+| economic_operator.legal_identifier | economic_operator.legal_identifier   | String                 | ..| MUST |
+| economic_operator.legal_name       | economic_operator.legal_name         | String                 | ..|  MUST |
+| economic_operator.family_name      | economic_operator.family_name        | String                 | .. | MUST|
+| economic_operator.given_name       | economic_operator.given_name         | String                 | .. |MUST|
+| economic_operator.birth_date       | economic_operator.birth_date         | String (ISO 8601 YYYY-MM-DD)| ..| MUST|
+| economic_operator.birth_place      | economic_operator.birth_place        | String                 | .. | MUST|
+| economic_operator.tin              | economic_operator.tin                | String                 | .. |MUST|
+| economic_operator. personal_administrative_number                         | economic_operator. personal_administrative_number |String | .. |MUST|
+| validity_period.start_date         | validity_period[n].start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| validity_period.end_date           | validity_period[n].end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| address.po_box                     | address.po_box                       | String                 | .. |MUST|
+| address.thoroughfare               | address.thoroughfare                 | String                 | .. |MUST|
+| address.location_designator        | address.location_designator          | String | .. |MUST|
+| address.post_code                  | address.post_code                    | String | .. |MUST|
+| address.post_name                  | address.post_name                    | String | .. |MUST|
+| address.admin_unit_L1              | address.admin_unit_L1                | String | .. |MUST|
+| address.admin_unit_L2              | address.admin_unit_L2                | String | .. |MUST|
+| economic_activity_type             | economic_activity_type[m]            | Array[economic_activity_type]|..|MUST|
+| economic_activity_type.nomenclature| economic_activity_type[m].nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
+| economic_activity_type.id          | economic_activity_type[m].id         | String | .. |MUST|
+| economic_activity_type.description | economic_activity_type[m].description[l] |Array[description]|..|MUST| 
+| description.language               | economic_activity_type[m].description[l].language | String (SO 639-1)|..|MUST NOT|
+| description.text                   | economic_activity_type[m].description[l].text| String | ..| MUST NOT|
+| issuer.authentic_source_country    | issuer.authentic_source_country      |String (3166-2)|..| MUST NOT 
+| issuer.vat_id_authenticsource      | issuer.vat_id_authenticsource        | String | ..| MUST NOT|
+| issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
+| issuer.issuing_authority           | issuer.issuing_authority             | String | ..| MUST NOT|
+| issuer.attestation_legal_category  | issuer.attestation_legal_category    |String | ..| MUST NOT| 
+| issuer.location_status             | issuer.location_status               |String(URI)|..|MUST NOT|
+| trust_anchor                       | trustAnchor                          | String(URI) |..|MUST NOT|
+| issuer.issuance_date               | `iat`                                | Number (Unix timestamp)      | The date and time when the attestation was issued (ISO 8601); RFC 7519 / Section 2.5  | MUST NOT        |
+| issuer.expiry_date                   | `exp`                                | Number (Unix timestamp)      | The date and time when the attestation expires (ISO 8601); RFC 7519 / Section 2.5    | MUST NOT        |
 
 **Notes:**
 
@@ -445,35 +370,38 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
   credential verification and trust establishment.
 - `validity_period` entries are indexed as `[n]` where `n` starts at 0; at least one
   validity period MUST be present.
-- `OwnerLegalPerson` entries are indexed as `[m]` where `m` starts at 0; zero or more legal
-  person owners MAY be present.
-- `Evidence` entries are indexed as `[n]` where `n` starts at 0; at least one evidence entry
-  SHALL be present.
-- `iat`, `exp`, and `iss` follow RFC 7519 standard JWT claim naming conventions.
+- `economic_activity_type` entries are indexed as `[m]` where `m` starts at 0; the economic_activity SHOULD be present 
+- `description` entries are indexed as `l` starts at 0; at least one description SHOULD be present.
+- `iat` and `exp` follow RFC 7519 standard JWT claim naming conventions.
 
-*A similar table should be used for Public Names and for Private Names specific
-to the attestation type defined in this document. For
-example:*
+#### 3.2.2 Status Claim
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
-|---------------------|--------------------------|---------------------|-----------|---------------|
-| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
+For SD-JWT VC-compliant Ownership attestations, the attestation MUST include a `status`
+claim if the technical validity period is greater than 24 hours. This claim enables Relying
+Parties to determine if a credential has been revoked via a status list mechanism, as specified
+in SD-JWT VC.
 
-*The corresponding entry for the "attestation_legal_category" attribute defined
-in Section 2.1 SHALL be:*
+The `status` claim SHALL be a JSON object with the following members:
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
-|---------------------|--------------------------|---------------------|-----------|---------------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
+- `type` (string): SHALL be `"status-list"`.
+- `status_list_credential` (string, URI): The URI of the Status List Credential document that
+  contains the status bitstring.
+- `status_list_index` (integer, >= 0): The zero-based index into the status list bitstring that
+  corresponds to this credential.
+- `status_purpose` (string): SHALL be `"revocation"` for this attestation.
 
-Finally, illustrative examples SHALL be included.
+Example:
 
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE JWT CLAIM SET USED BY THE PROVIDER]
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE ISSUED SD-JWT (IN base64 ENCODING)]
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF A HUMAN READABLE VERSION OF THE SD-JWT PAYLOAD
-AND A DESCRIPTION OF THE DISCLOSURES INCLUDED IN THE EXAMPLE]
+```json
+{
+  "status": {
+ "type": "status-list",
+ "status_list_credential": "https://issuer.example.com/status/ownership/2025",
+ "status_list_index": 456,
+ "status_purpose": "revocation"
+  }
+}
+```
 
 ### 3.3 W3C Verifiable Credentials Data Model-based encoding
 
