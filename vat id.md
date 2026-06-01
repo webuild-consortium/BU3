@@ -340,15 +340,15 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | validity_period.end_date           | validity_period[n].end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
 | address.po_box                     | address.po_box                       | String                 | .. |MUST|
 | address.thoroughfare               | address.thoroughfare                 | String                 | .. |MUST|
-| address.location_designator        | address.location_designator          | String | .. |MUST|
-| address.post_code                  | address.post_code                    | String | .. |MUST|
-| address.post_name                  | address.post_name                    | String | .. |MUST|
-| address.admin_unit_L1              | address.admin_unit_L1                | String | .. |MUST|
-| address.admin_unit_L2              | address.admin_unit_L2                | String | .. |MUST|
-| economic_activity_type             | economic_activity_type[m]            | Array[economic_activity_type]|..|MUST|
+| address.location_designator        | address.location_designator          | String                 | .. |MUST|
+| address.post_code                  | address.post_code                    | String                 | .. |MUST|
+| address.post_name                  | address.post_name                    | String                 | .. |MUST|
+| address.admin_unit_L1              | address.admin_unit_L1                | String                 | .. |MUST|
+| address.admin_unit_L2              | address.admin_unit_L2                | String                 | .. |MUST|
+| economic_activity_type             | economic_activity_type[m]            | Array [economic_activity_type]|..|MUST|
 | economic_activity_type.nomenclature| economic_activity_type[m].nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
 | economic_activity_type.id          | economic_activity_type[m].id         | String | .. |MUST|
-| economic_activity_type.description | economic_activity_type[m].description[l] |Array[description]|..|MUST| 
+| economic_activity_type.description | economic_activity_type[m].description[l] |Array [description]|..|MUST| 
 | description.language               | economic_activity_type[m].description[l].language | String (SO 639-1)|..|MUST NOT|
 | description.text                   | economic_activity_type[m].description[l].text| String | ..| MUST NOT|
 | issuer.authentic_source_country    | issuer.authentic_source_country      |String (3166-2)|..| MUST NOT 
@@ -356,8 +356,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
 | issuer.issuing_authority           | issuer.issuing_authority             | String | ..| MUST NOT|
 | issuer.attestation_legal_category  | issuer.attestation_legal_category    |String | ..| MUST NOT| 
-| issuer.location_status             | issuer.location_status               |String(URI)|..|MUST NOT|
-| trust_anchor                       | trustAnchor                          | String(URI) |..|MUST NOT|
+| issuer.location_status             | issuer.location_status               |String (URI)|..|MUST NOT|
+| trust_anchor                       | trustAnchor                          | String (URI) |..|MUST NOT|
 | issuer.issuance_date               | `iat`                                | Number (Unix timestamp)      | The date and time when the attestation was issued (ISO 8601); RFC 7519 / Section 2.5  | MUST NOT        |
 | issuer.expiry_date                   | `exp`                                | Number (Unix timestamp)      | The date and time when the attestation expires (ISO 8601); RFC 7519 / Section 2.5    | MUST NOT        |
 
@@ -428,25 +428,28 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 
 ## 4 Attestation usage
 
-*Briefly describe the primary use cases or scenarios for which this attestation
-type is intended*
+### 4.1 Usecases
+The VAT_ID attestion aims to be used in two general usecases, but it could be used elsewhere. The first usecae is where the relying party requires proof that the Economic Operator has a valid VAT-ID. In the 'paper' world, the relying party would request a 'Certificate of the VAT-ID' relyably issued by the relevant Tax Authority. The Economic Operator requests the Certificate, and it will be sent to the registered address of the Economic Operator. The Certificate is printed on paper of the Tax Authority and or contains stamps, signature or other ways to proof its validity. 
 
-*Additionally, in this section it SHOULD  be specified whether a Relying Party receiving the attestation
-must request and verify a PID (see ARB_27 in [Topic 12]). Also beyond PID verification,
-it SHOULD be defined what other key obligations does a Relying Party have when processing
-this attestation type (e.g., signature verification, freshness checks)*
+The second usecase is where a seller needs proof, in case of intra-communitairy business, that the buyer will pay tax in his own country and that it can sell services or goods without TAX. In the current world the seller needs to check with VIES and keep proof in its administration. The VAT-ID attestation will provide the proof, and a check with VIES is not necessary anymore. 
 
-*Furthermore, provide potential presentation requirements, e.g., are there specific
-requirements for how this attestation must be presented (e.g., online, offline, specific protocols)?"*
+### 4.2 Verification needs
+The VAT-ID provides proof that the Economic Operator, registered in the attestation, is the owner of the VAT-ID. It does not prove that the party that presents the attestation also is the owner of the attestation. The VAT-ID attestion can also be issued to an Agent or Intermediary party, if they have the right mandate to receive the attestation. However the mandate may be revoked by the owner, but the VAT-ID attestation will (likely) not be revoked. Therefore the attestation itself (even if holderbinding is active) is not proof that the presenter actually holds, or may present the attestation. 
 
-*Specify whether an attestation of this type SHALL or SHOULD be device-bound or non-device-bound, see ARB_34 in [Topic 12]*
+The relying party SHOULD:
+- Check the status of revocation and expiary date of the attestation.
+- Check the validy period in the attestation.
 
-*If an attestation of this type is device-bound, specify if it SHALL, SHOULD or MAY be cryptographically bound to another type of attestation on the same Wallet Unit. If needed (based on this decision), include the attribute `cryptographically_bound_to` defined in ARB_28 as an optional, recommended, or mandatory attribure in [Section 2.5](#26-optional-metadata). If present in an Attestation Rulebook, the identifier for this attribute SHALL be "cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be a `tstr` or `string` (as applicable) containing an attestation type or vct (see ARB_05). Finally, specify the value of the `tstr` or `string`.* 
+- Check if the Economic Operator in the Attestation is:
+   - equal to the owner of the EBW (via EBWOID, PID, or other means) OR
+   - has a mandate with the right scope and actors
+      -    proof that the Agent in the mandate is the owner of the EBW.
+      -    the mandate is not revoked
+      -    the mandate is currenty valid     
 
-*EXAMPLE   In case an attestation type of this type must be bound to a PID, the value of the `tstr` or `string` must be set to "eu.europa.ec.eudi.pid.1" or "urn:eudi:pid:1". Note that it does not matter whether the attestation type or the vct value is used.*
+If the relying party does not verify, he MUST accept the risks involved. 
 
-*Finally, in this section information about potential transactional data
-SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
+The attestation SHALL non-device-bound. The relying party SHOULD check the ownership of the VAT-ID using the method described above. Device binding might create a false sence of trustworthyness. Because the VAT-ID can be issued to an itermediary organisation, using a mandate, presenting the VAT-ID is no proof of owenership. The VAT-ID attestation will not be revoked by the issuer, when the mandate is revoked. 
 
 ## 5 Trust anchors
 
@@ -470,33 +473,11 @@ and the QTSP may use an intermediate signing certificate. All other things
 being equal, the verification of a PuB-EAA will therefore involve one or more
 extra certificates, compared to the verification of a PID or QEAA.
 
-*For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
-how the attributes or metadata representing the location at which a machine-readable
-version of the trust anchor to be used for verifying the attestation can be found,
-specified in section 2, are used. This includes a detailed description about how
-a Relying Party can obtain the trust anchors, as well as a detailed description about
-how this trust anchor can be used for verifying that the provider is authorized
-to issue the attestation. Additionally, for non-qualified EAA Providers this section
-MAY include a description of mechanisms that can be used by a Wallet Unit for
-verifying that the provider is authorized to issue this type of attestation (see
-ISSU_34 in [Topic 10])*
 
 ## 6 Revocation
+The VAT-ID Attestation SHOULD preferably be issued as a longlived attestation. In order to make sure the attestation reflects the current situation, the issuer MUST have revocation in place. An issuer must revoke the attestation following an event that would render any part of the content invalid.
 
-(Refer to [Topic 7] of the ARF for a list of High-Level Requirements related to Revocation)
-
-*In this section information about the revocation mechanism used SHALL be defined.*
-
-*For PID, QEAA, or PuB-EAA it SHALL  be defined whether  only short-lived attestations
-will be used, having a validity period of 24 hours or less, such that revocation
-will never be necessary, or that the attestations are revocable.*
-
-*For revocable attestations it SHALL be defined which of the following methods must be implemented:*
-
-* Use an Attestation Status List mechanism included in a Technical Specification
-that will be specified by the Commission.
-* Use an Attestation Revocation List mechanism included in a Technical Specification
-that will be specified by the Commission.
+When the attestation is issued by a QTSP outside the Authentic Source it should receive information from the authentic source in case attributes of the attestation change at the source. If the QTSP cannot receive this information, the attestation MUST be shortlived. 
 
 ## 7 Compliance
 
