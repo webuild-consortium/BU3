@@ -1,0 +1,303 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "uri:eu.eudi.vat.1",
+  "title": "VAT ID Attestation Schema",
+  "description": "JSON Schema for WE BUILD VAT ID Attestation (SD-JWT VC format)",
+  "type": "object",
+  "required": [
+    "vat_id",
+    "administrative_unit_name",
+    "validity_period",
+    "economic_operator",
+    "issuer"
+  ],
+  "properties": {
+    "vat_id": {
+      "type": "string",
+      "description": "Unique identifier for VAT purposes",
+      "example": "DE123456789"
+    },
+    "administrative_unit_name": {
+      "type": "string",
+      "description": "Name of the administrative unit responsible for VAT",
+      "example": "Siemens"
+    },
+    "administrative_unit_type": {
+      "type": "string",
+      "description": "Type of organisation (e.g., Government, Local Authority, Private Company)",
+      "example": "Private Company"
+    },
+    "validity_period": {
+      "type": "array",
+      "description": "Array of validity period(s) during which the VAT ID is valid",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["start_date"],
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Start date of validity period (ISO 8601 YYYY-MM-DD)",
+            "example": "2011-12-24"
+          },
+          "end_date": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "End date of validity period (ISO 8601 YYYY-MM-DD), optional",
+            "example": "2026-12-31"
+          }
+        }
+      }
+    },
+    "validity_area_limitation": {
+      "type": "array",
+      "description": "Array of countries where VAT ID may be used (ISO 3166-1 alpha-2 codes)",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$",
+        "example": "DE"
+      }
+    },
+    "administrative_unit_address": {
+      "$ref": "#/definitions/address"
+    },
+    "economic_operator": {
+      "$ref": "#/definitions/economic_operator"
+    },
+    "economic_activity_type": {
+      "type": "array",
+      "description": "Array of economic activities in which the operator engages",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/economic_activity_type"
+      }
+    },
+    "issuer": {
+      "$ref": "#/definitions/issuer"
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Issuance date as Unix timestamp (RFC 7519)",
+      "example": 1704067200
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Expiry date as Unix timestamp (RFC 7519)",
+      "example": 1735603200
+    }
+  },
+  "definitions": {
+    "address": {
+      "type": "object",
+      "description": "Postal address of the administrative unit",
+      "properties": {
+        "po_box": {
+          "type": "string",
+          "description": "P.O. box number or identifier"
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street name and house number"
+        },
+        "location_designator": {
+          "type": "string",
+          "description": "Internal location designation (e.g., floor, unit)"
+        },
+        "post_code": {
+          "type": "string",
+          "description": "Postal or ZIP code",
+          "example": "12345"
+        },
+        "post_name": {
+          "type": "string",
+          "description": "Town or locality name",
+          "example": "Amsterdam"
+        },
+        "admin_unit_L1": {
+          "type": "string",
+          "description": "First-level administrative division (e.g., province, state)"
+        },
+        "admin_unit_L2": {
+          "type": "string",
+          "description": "Second-level administrative division (e.g., district, municipality)"
+        }
+      }
+    },
+    "economic_operator": {
+      "type": "object",
+      "description": "The entity responsible for economic operations (Legal Person or Natural Person)",
+      "properties": {
+        "legal_identifier": {
+          "type": "string",
+          "description": "Unique identifier attributed in accordance with Article 9 of EWB"
+        },
+        "legal_name": {
+          "type": "string",
+          "description": "Name under which the legal entity is legally registered",
+          "example": "ACME Corporation"
+        },
+        "family_name": {
+          "type": "string",
+          "description": "Current last name(s) or surname(s) of a natural person"
+        },
+        "given_name": {
+          "type": "string",
+          "description": "Current first name(s), including middle name(s) where applicable"
+        },
+        "birth_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Day, month, and year of birth (ISO 8601 YYYY-MM-DD)"
+        },
+        "birth_place": {
+          "type": "string",
+          "description": "Country (alpha-2 code per ISO 3166-1) or state/region of birth"
+        },
+        "tin": {
+          "type": "string",
+          "description": "Tax reference number"
+        },
+        "personal_administrative_number": {
+          "type": "string",
+          "description": "A national personal administrative number or equivalent"
+        }
+      }
+    },
+    "economic_activity_type": {
+      "type": "object",
+      "required": ["nomenclature", "id"],
+      "properties": {
+        "nomenclature": {
+          "type": "string",
+          "description": "Nomenclature used to describe economic activity",
+          "enum": [
+            "NACE",
+            "NACE-BEL",
+            "CZ-NACE",
+            "DB07",
+            "WZ",
+            "KAD",
+            "CNAE",
+            "NAF",
+            "NKD",
+            "ATECO",
+            "TEAOR",
+            "SBI",
+            "ÖNACE",
+            "PKD",
+            "CAE",
+            "CAEN",
+            "SKD",
+            "OKEČ",
+            "TOL",
+            "SNI",
+            "UK SIC",
+            "NOGA"
+          ],
+          "example": "NACE"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID under which the administrative unit is registered in the nomenclature",
+          "example": "C26.5.2"
+        },
+        "description": {
+          "type": "array",
+          "description": "Human-readable descriptions of the economic activity in multiple languages",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/description"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "object",
+      "required": ["language", "text"],
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language code (ISO 639-1)",
+          "pattern": "^[a-z]{2}$",
+          "example": "nl"
+        },
+        "text": {
+          "type": "string",
+          "description": "Description in plain text readable for the end user",
+          "example": "Manufacture of bearings, gears, gearing and driving elements"
+        }
+      }
+    },
+    "issuer": {
+      "type": "object",
+      "required": [
+        "authentic_source_country",
+        "vat_id_authenticsource",
+        "country",
+        "issuing_authority",
+        "attestation_legal_category"
+      ],
+      "properties": {
+        "authentic_source_country": {
+          "type": "string",
+          "description": "Alpha-2 country code (ISO 3166-1) of the VAT ID provider",
+          "pattern": "^[A-Z]{2}$",
+          "example": "DE"
+        },
+        "vat_id_authenticsource": {
+          "type": "string",
+          "description": "Name of the administrative authority that issued the VAT ID"
+        },
+        "country": {
+          "type": "string",
+          "description": "Alpha-2 country code (ISO 3166-1) of the attestation issuer",
+          "pattern": "^[A-Z]{2}$",
+          "example": "DE"
+        },
+        "issuing_authority": {
+          "type": "string",
+          "description": "Name of the administrative authority or QTSP that issued the attestation"
+        },
+        "attestation_legal_category": {
+          "type": "string",
+          "description": "Type of attestation category",
+          "enum": ["QEAA", "PuB-EAA"],
+          "example": "PuB-EAA"
+        },
+        "location_status": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI where revocation/suspension status information can be obtained"
+        }
+      }
+    },
+    "status_claim": {
+      "type": "object",
+      "description": "Status claim for revocation checking (required if validity period > 24 hours)",
+      "required": ["type", "status_list_credential", "status_list_index", "status_purpose"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["status-list"],
+          "description": "Type of status mechanism"
+        },
+        "status_list_credential": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the Status List Credential document"
+        },
+        "status_list_index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Zero-based index into the status list bitstring"
+        },
+        "status_purpose": {
+          "type": "string",
+          "enum": ["revocation"],
+          "description": "Purpose of the status list"
+        }
+      }
+    }
+  }
+}
