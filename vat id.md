@@ -152,7 +152,7 @@ Administrative unit
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | vat_id                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
 | administrative_unit_name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
-| validity_period[n]                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
+| validity_period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
 | economic_operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
 | issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
 
@@ -163,7 +163,7 @@ Administrative unit
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| String | ...          |
 | administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
-| economic_activity_type[m]       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
+| economic_activity_type       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
 | validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
@@ -216,7 +216,7 @@ No mandatory attributes
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
 | economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
-| economic_activity_type.description[l] | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
+| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
 
 
 ### 2.8 Description attributes
