@@ -55,8 +55,6 @@ attributes and metadata are encoded in case the attestation complies with [ISO/I
 
 ### 1.3 Key words
 
-*The following are the recommended keywords. Modify if necessary*
-
 This document uses the capitalised key words 'SHALL', 'SHOULD' and 'MAY' as
 specified in [RFC 2119], i.e., to indicate requirements, recommendations and
 options specified in this document.
@@ -69,31 +67,11 @@ statements of fact.
 
 ### 1.4 Terminology
 
-*It is recommended to use the terminology defined in Annex 1 of ARF. For example
-the following text can be used.*
-
 This document uses the terminology specified in Annex 1 of the ARF.
 
 ## 2 Attestation attributes and metadata
 
 ### Chapter overview and requirements
-
-*This chapter is used for defining all attributes that an
-attestation of the defined type may contain. In this section
-the attributes SHALL be defined in an encoding-independent manner (see ARB_06 in [Topic 12]).
-Each attribute can be mandatory, optional, or conditional
-and this SHALL be specified in the corresponding section (see ARB_09 in [Topic 12]).*
-
-*When attributes are defined, referring to attributes that
-already exist in a catalogue of attestation attributes
-SHOULD be considered (see ARB_07 in [Topic 12]).*
-
-*Where use-case documentation or an attestation description already defines attribute meanings,
-logical models, code lists, or integrity constraints, authors SHOULD align terminology with those
-sources and may copy and refine that material for this Rulebook.*
-
-*[Topic 12] of Annex 2 of the ARF defines the following High-Level Requirements with
-respect to the Attestation Rulebooks:*
 
 **Requirements for QEAA**
 
@@ -174,7 +152,7 @@ Administrative unit
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | vat_id                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
 | administrative_unit_name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
-| validity_period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
+| validity_period[n]                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
 | economic_operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
 | issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
 
@@ -185,7 +163,7 @@ Administrative unit
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| String | ...          |
 | administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
-| economic_activity_type       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
+| economic_activity_type[m]       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
 | validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
@@ -238,7 +216,7 @@ No mandatory attributes
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
 | economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
-| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
+| economic_activity_type.description[l] | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
 
 
 ### 2.8 Description attributes
@@ -273,12 +251,6 @@ No mandatory attributes
 
 ### 2.10 Code lists
 
-*Use this section for controlled vocabularies, enumerations, value sets, or external catalogues
-that are necessary to interpret one or more attributes or metadata items. Definitions may be reused
-from the attestation description or other use-case documentation and refined here where needed.*
-
-*For each code list, authors SHOULD state the field to which it applies, the allowed values, their
-meaning, the source vocabulary or reference, and any extensibility rule or governance note.*
 
 | **field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -286,12 +258,6 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 ### 2.11 Integrity rules
 
-*Use this section to define integrity or consistency rules that are not fully captured by the
-encoding format or schema alone, such as cross-field dependencies, temporal consistency checks,
-mutual exclusivity, or conditional combinations of values.*
-
-*Integrity rules may be copied and refined from an attestation description, logical model, or
-business-rule specification where available.*
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
@@ -420,8 +386,10 @@ referenced documents SHALL be approved by an EU standardisation body or by the E
 Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 [European Digital Identity Regulation] (see ARB_04 in [Topic 12]).*
 
-*Finally, illustrative examples SHALL be included.*
+**example **
+````
 
+````
 [RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]
 
 [RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE PROOF TYPE]
