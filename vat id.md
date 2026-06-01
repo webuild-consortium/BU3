@@ -161,7 +161,7 @@ Administrative unit
 #### 2.2.2 Optional attributes
 | **data identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority)| String | ...          |
+| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority, B.V, GmbH)| String | GmbH          |
 | administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
 | economic_activity_type       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
 | validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
