@@ -16,7 +16,7 @@ providing feedback, e.g.:*
 
 **Feedback:**
 
-* <https://example.com/tracker>
+* [mail the author](mailto:s.westerfield@belastingdienst.nl)
 
 ## 1 Introduction
 
@@ -155,7 +155,7 @@ Administrative unit
 │   ├─ post_name                           [0]  
 │   ├─ admin_unit_l1                       [0]  
 │   └─ admin_unit_l2                       [0]  
-├─ economic_activity_type                   [0..n]    (reference to the economic operator)
+├─ economic_activity_type                  [0..n]    (reference to the economic operator)
 │   ├─ economic_activity_type_nomenclature [1]       (nomenclature used to describe the economic activity)
 │   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
 │   └─ economic_activity_type_description  [0..n]
