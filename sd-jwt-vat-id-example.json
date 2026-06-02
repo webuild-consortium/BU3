@@ -77,38 +77,24 @@
         {
           "nomenclature": "NACE",
           "id": "51.1",
-          "description": [
+          "description": 
             {
-              "language": "nl",
-              "text": "Luchtvervoer van passagiers"
-            },
-            {
-              "language": "en",
-              "text": "Passenger air transport"
-            },
-            {
-              "language": "de",
-              "text": "Personenluftverkehr"
+              "nl": "Luchtvervoer van passagiers"
+              "en": "Passenger air transport"
+              "de": "Personenluftverkehr"
             }
-          ]
+          
         },
         {
           "nomenclature": "NACE",
           "id": "51.2",
-          "description": [
+          "description": 
             {
-              "language": "nl",
-              "text": "Luchtvervoer van vracht"
-            },
-            {
-              "language": "en",
-              "text": "Freight air transport"
-            },
-            {
-              "language": "de",
-              "text": "Luftfrachtverkehr"
+              "nl": "Luchtvervoer van vracht"
+              "en": "Freight air transport"
+              "de": "Luftfrachtverkehr"
             }
-          ]
+          
         }
       ],
       "claim_name": "economic_activity_type",
