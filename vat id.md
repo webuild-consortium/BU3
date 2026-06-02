@@ -284,7 +284,7 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | issuer                             | issuer                               | Object                 | ..   |MUST NOT|
 | administrative_unit_type           | administrative_unit_type             | Object                 | ...      | MUST   |
 | administrative_unit_address        | administrative_unit_address          | Object                 | ...  | MUST|
-| validity_area_limitation           | validity_area_limitation             | Array String(ISO 3166-1 alpha-3)| ..| MUST NOT|
+| validity_area_limitation           | validity_area_limitation             | Array String(ISO 3166-1 alpha-2)| ..| MUST NOT|
 | economic_operator.legal_identifier | economic_operator.legal_identifier   | String                 | ..| MUST |
 | economic_operator.legal_name       | economic_operator.legal_name         | String                 | ..|  MUST |
 | economic_operator.family_name      | economic_operator.family_name        | String                 | .. | MUST|
