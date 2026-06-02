@@ -136,9 +136,7 @@ Administrative unit
 ├─ economic_activity_type                  [0..n]    (reference to the economic operator)
 │   ├─ economic_activity_type_nomenclature [1]       (nomenclature used to describe the economic activity)
 │   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
-│   └─ economic_activity_type_description  [0..n]
-│      ├─ language                         [1]  
-│      └─ description                      [1]
+│   └─ economic_activity_type_description  [0..n]    (object using language, value)
 └─ issuer                                  [1]   
     ├─ issuing_country                     [1]
     ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
@@ -216,15 +214,8 @@ No mandatory attributes
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
 | economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
-| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array |  |
+| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array | EN: Manufacture of bearings, gears, gearing and driving elements  |
 
-
-### 2.8 Description attributes
-#### 2.8.1 Mandatory attributes
-| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| description.language | Language | The language used for the description using ISO 639-1 | tstr | nl |
-| description.text | ..| The Description in plain text readable for the end user | tstr | Manufacture of bearings, gears, gearing and driving elements |
 
 ### 2.9 Metadata
 #### 2.9.1 Mandatory metadata 
@@ -314,9 +305,7 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | economic_activity_type             | economic_activity_type[m]            | Array [economic_activity_type]|..|MUST|
 | economic_activity_type.nomenclature| economic_activity_type[m].nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
 | economic_activity_type.id          | economic_activity_type[m].id         | String | .. |MUST|
-| economic_activity_type.description | economic_activity_type[m].description[l] |Array [description]|..|MUST| 
-| description.language               | economic_activity_type[m].description[l].language | String (SO 639-1)|..|MUST NOT|
-| description.text                   | economic_activity_type[m].description[l].text| String | ..| MUST NOT|
+| economic_activity_type.description | economic_activity_type[m].description[l] |object ("langue code" "description")|..|MUST| 
 | issuer.authentic_source_country    | issuer.authentic_source_country      |String (3166-2)|..| MUST NOT 
 | issuer.vat_id_authenticsource      | issuer.vat_id_authenticsource        | String | ..| MUST NOT|
 | issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
@@ -415,38 +404,24 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
     {
       "nomenclature": "NACE",
       "id": "51.1",
-      "description": [
+      "description":
         {
-          "language": "nl",
-          "text": "Luchtvervoer van passagiers"
-        },
-        {
-          "language": "en",
-          "text": "Passenger air transport"
-        },
-        {
-          "language": "de",
-          "text": "Personenluftverkehr"
+            "nl": "Luchtvervoer van passagiers"
+            "en": "Passenger air transport"
+            "de": "Personenluftverkehr"
         }
-      ]
+      
     },
     {
       "nomenclature": "NACE",
       "id": "51.2",
-      "description": [
+      "description": 
         {
-          "language": "nl",
-          "text": "Luchtvervoer van vracht"
-        },
-        {
-          "language": "en",
-          "text": "Freight air transport"
-        },
-        {
-          "language": "de",
-          "text": "Luftfrachtverkehr"
+                "nl": "Luchtvervoer van vracht"
+                "en": "Freight air transport"
+                "de": "Luftfrachtverkehr"
         }
-      ]
+      
     }
   ],
   "issuer": {
