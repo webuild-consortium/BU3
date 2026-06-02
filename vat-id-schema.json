@@ -85,6 +85,9 @@
       "type": "integer",
       "description": "Expiry date as Unix timestamp (RFC 7519)",
       "example": 1735603200
+    },
+    "status": {
+      "$ref": "#/definitions/status_claim"
     }
   },
   "definitions": {
