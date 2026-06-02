@@ -136,7 +136,7 @@ Administrative unit
 ├─ economic_activity_type                  [0..n]    (reference to the economic operator)
 │   ├─ economic_activity_type_nomenclature [1]       (nomenclature used to describe the economic activity)
 │   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
-│   └─ economic_activity_type_description  [0..n]    (object using language, value)
+│   └─ economic_activity_type_description  [0..n]    (object using language:, value)
 └─ issuer                                  [1]   
     ├─ issuing_country                     [1]
     ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
@@ -214,7 +214,7 @@ No mandatory attributes
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
 | economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
-| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language | array | EN: Manufacture of bearings, gears, gearing and driving elements  |
+| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language. The language is described in iso 639-1  | array | EN: Manufacture of bearings, gears, gearing and driving elements  |
 
 
 ### 2.9 Metadata
@@ -305,8 +305,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | economic_activity_type             | economic_activity_type            | Array [economic_activity_type]|..|MUST|
 | economic_activity_type.nomenclature| economic_activity_type.nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
 | economic_activity_type.id          | economic_activity_type.id         | String | .. |MUST|
-| economic_activity_type.description | economic_activity_type.description |object ("langue code": "description")|..|MUST| 
-| issuer.authentic_source_country    | issuer.authentic_source_country      |String (3166-2)|..| MUST NOT 
+| economic_activity_type.description | economic_activity_type.description |object ("langue code iso 639-1": "description")|..|MUST| 
+| issuer.authentic_source_country    | issuer.authentic_source_country      |String (iso 3166-2)|..| MUST NOT 
 | issuer.vat_id_authenticsource      | issuer.vat_id_authenticsource        | String | ..| MUST NOT|
 | issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
 | issuer.issuing_authority           | issuer.issuing_authority             | String | ..| MUST NOT|
