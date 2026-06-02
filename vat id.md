@@ -293,8 +293,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | economic_operator.birth_place      | economic_operator.birth_place        | String                 | .. | MUST|
 | economic_operator.tin              | economic_operator.tin                | String                 | .. |MUST|
 | economic_operator. personal_administrative_number                         | economic_operator. personal_administrative_number |String | .. |MUST|
-| validity_period.start_date         | validity_period[n].start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
-| validity_period.end_date           | validity_period[n].end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| validity_period.start_date         | validity_period.start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| validity_period.end_date           | validity_period.end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
 | address.po_box                     | address.po_box                       | String                 | .. |MUST|
 | address.thoroughfare               | address.thoroughfare                 | String                 | .. |MUST|
 | address.location_designator        | address.location_designator          | String                 | .. |MUST|
@@ -302,10 +302,10 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | address.post_name                  | address.post_name                    | String                 | .. |MUST|
 | address.admin_unit_L1              | address.admin_unit_L1                | String                 | .. |MUST|
 | address.admin_unit_L2              | address.admin_unit_L2                | String                 | .. |MUST|
-| economic_activity_type             | economic_activity_type[m]            | Array [economic_activity_type]|..|MUST|
-| economic_activity_type.nomenclature| economic_activity_type[m].nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
-| economic_activity_type.id          | economic_activity_type[m].id         | String | .. |MUST|
-| economic_activity_type.description | economic_activity_type[m].description[l] |object ("langue code" "description")|..|MUST| 
+| economic_activity_type             | economic_activity_type            | Array [economic_activity_type]|..|MUST|
+| economic_activity_type.nomenclature| economic_activity_type.nomenclature|String one of(NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA)|..|MUST NOT|
+| economic_activity_type.id          | economic_activity_type.id         | String | .. |MUST|
+| economic_activity_type.description | economic_activity_type.description |object ("langue code": "description")|..|MUST| 
 | issuer.authentic_source_country    | issuer.authentic_source_country      |String (3166-2)|..| MUST NOT 
 | issuer.vat_id_authenticsource      | issuer.vat_id_authenticsource        | String | ..| MUST NOT|
 | issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
@@ -323,10 +323,6 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 - **MUST NOT**: The claim SHALL NOT be selectively disclosable — it is always present in plain
   text in the JWT header/payload and cannot be withheld by the holder, as it is required for
   credential verification and trust establishment.
-- `validity_period` entries are indexed as `[n]` where `n` starts at 0; at least one
-  validity period MUST be present.
-- `economic_activity_type` entries are indexed as `[m]` where `m` starts at 0; the economic_activity SHOULD be present 
-- `description` entries are indexed as `l` starts at 0; at least one description SHOULD be present.
 - `iat` and `exp` follow RFC 7519 standard JWT claim naming conventions.
 
 #### 3.2.2 Status Claim
