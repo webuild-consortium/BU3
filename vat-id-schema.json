@@ -26,12 +26,14 @@
 
     "iat": {
       "type": "integer",
-      "description": "Issuance date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable."
+      "description": "Issuance date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable.",
+      "examples": [1704067200]
     },
 
     "exp": {
       "type": "integer",
-      "description": "Expiry date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable."
+      "description": "Expiry date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable.",
+      "examples": [1830902400]
     },
 
     "status": {
@@ -46,12 +48,14 @@
         "status_list_credential": {
           "type": "string",
           "format": "uri",
-          "description": "URI of the Status List Credential document."
+          "description": "URI of the Status List Credential document.",
+          "examples": ["https://www.belastingdienst.nl/status-list/vat-id/2024"]
         },
         "status_list_index": {
           "type": "integer",
           "minimum": 0,
-          "description": "Zero-based index into the status list bitstring."
+          "description": "Zero-based index into the status list bitstring.",
+          "examples": [12547]
         },
         "status_purpose": {
           "type": "string",
@@ -64,25 +68,26 @@
     "trust_anchor": {
       "type": "string",
       "format": "uri",
-      "description": "URL of the machine-readable trust anchor for attestation verification (Annex V/VII point h). MUST NOT be selectively disclosable."
+      "description": "URL of the machine-readable trust anchor for attestation verification (Annex V/VII point h). MUST NOT be selectively disclosable.",
+      "examples": ["https://www.belastingdienst.nl/trust-anchor/vat-id"]
     },
 
     "vat_id": {
       "type": "string",
-      "description": "VAT Identification Number. Example: NL001234567B01. MUST NOT be selectively disclosable.",
-      "examples": ["NL001234567B01", "DE123456789"]
+      "description": "VAT Identification Number. MUST NOT be selectively disclosable.",
+      "examples": ["NL001234567B01"]
     },
 
     "administrative_unit_name": {
       "type": "string",
       "description": "Name of the administrative unit responsible for the VAT-ID. MUST NOT be selectively disclosable.",
-      "examples": ["Siemens AG", "KLM Royal Dutch Airlines"]
+      "examples": ["KLM Royal Dutch Airlines"]
     },
 
     "administrative_unit_type": {
       "type": "string",
       "description": "Type of the administrative unit (e.g. GmbH, B.V., Government). Selectively disclosable (MUST).",
-      "examples": ["GmbH", "B.V.", "N.V.", "Government"]
+      "examples": ["N.V."]
     },
 
     "validity_area_limitation": {
@@ -92,7 +97,7 @@
         "type": "string",
         "pattern": "^[A-Z]{2}$"
       },
-      "examples": [["DE", "NL"]]
+      "examples": [["NL"]]
     },
 
     "validity_period": {
@@ -115,8 +120,8 @@
       "properties": {
         "legal_identifier": {
           "type": "string",
-          "description": "Unique legal identifier (EUID or equivalent). E.g. SEBOLREG.123456789. Selectively disclosable (MUST).",
-          "examples": ["SEBOLREG.123456789", "NLKBO.12345678"]
+          "description": "Unique legal identifier (EUID or equivalent). Selectively disclosable (MUST).",
+          "examples": ["NLKBO.33014286"]
         },
         "legal_name": {
           "type": "string",
@@ -126,28 +131,28 @@
         "family_name": {
           "type": "string",
           "description": "Last name(s) of the natural person. Selectively disclosable (MUST).",
-          "examples": ["Doe"]
+          "examples": ["Van der Berg"]
         },
         "given_name": {
           "type": "string",
           "description": "First name(s) of the natural person. Selectively disclosable (MUST).",
-          "examples": ["John"]
+          "examples": ["Jan"]
         },
         "birth_date": {
           "type": "string",
           "format": "date",
           "description": "Date of birth (ISO 8601 YYYY-MM-DD). Selectively disclosable (MUST).",
-          "examples": ["1968-04-27"]
+          "examples": ["1975-03-14"]
         },
         "birth_place": {
           "type": "string",
           "description": "Place of birth (ISO 3166-1 alpha-2 country code, or city/region). Selectively disclosable (MUST).",
-          "examples": ["Amsterdam", "NL"]
+          "examples": ["Amsterdam"]
         },
         "tin": {
           "type": "string",
           "description": "Tax reference number. Selectively disclosable (MUST).",
-          "examples": ["123456789"]
+          "examples": ["806748516B01"]
         },
         "personal_administrative_number": {
           "type": "string",
@@ -181,7 +186,7 @@
           "type": "string",
           "pattern": "^[A-Z]{2}$",
           "description": "ISO 3166-2 alpha-2 country code of the authentic source of the VAT-ID.",
-          "examples": ["NL", "DE"]
+          "examples": ["NL"]
         },
         "vat_id_authenticsource": {
           "type": "string",
@@ -246,7 +251,7 @@
         "po_box": {
           "type": "string",
           "description": "P.O. box number or identifier.",
-          "examples": ["PO Box 123"]
+          "examples": ["PO Box 7700"]
         },
         "thoroughfare": {
           "type": "string",
@@ -256,7 +261,7 @@
         "location_designator": {
           "type": "string",
           "description": "Internal location (floor, unit, etc.).",
-          "examples": ["Floor 3, Unit B"]
+          "examples": ["Building A, Ground Floor"]
         },
         "post_code": {
           "type": "string",
@@ -271,12 +276,12 @@
         "admin_unit_L1": {
           "type": "string",
           "description": "First-level administrative division (province, state, etc.).",
-          "examples": ["North Holland"]
+          "examples": ["Noord-Holland"]
         },
         "admin_unit_L2": {
           "type": "string",
           "description": "Second-level administrative division (district, municipality, etc.).",
-          "examples": ["Amsterdam Municipality"]
+          "examples": ["Gemeente Amsterdam"]
         }
       },
       "additionalProperties": false
@@ -296,12 +301,12 @@
             "UK SIC", "NOGA"
           ],
           "description": "Nomenclature used. NACE is the default. MUST NOT be selectively disclosable.",
-          "examples": ["NACE", "SBI"]
+          "examples": ["NACE"]
         },
         "id": {
           "type": "string",
           "description": "Activity code within the nomenclature. Selectively disclosable (MUST).",
-          "examples": ["51.1", "C26.5.2"]
+          "examples": ["51.10"]
         },
         "description": {
           "type": "object",
