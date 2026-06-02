@@ -1,8 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "uri:eu.eudi.vat.1",
+  "$id": "https://webuildconsortium.eu/schemas/vat-id-sd-jwt.json",
   "title": "VAT ID Attestation Schema",
   "description": "JSON Schema for WE BUILD VAT ID Attestation (SD-JWT VC format)",
+  "version": "0.1.0",
+  "properties": {
+    "vct": {
+      "type": "string",
+      "description": "Verifiable Credential Type. Base type is 'uri:eu.eudi.vat.1'.",
+      "examples": [
+        "eu.eudi.vat.1"
+      ]
+  },
   "type": "object",
   "required": [
     "vat_id",
