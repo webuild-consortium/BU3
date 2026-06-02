@@ -1,248 +1,174 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://webuildconsortium.eu/schemas/vat-id-sd-jwt.json",
-  "title": "VAT ID Attestation Schema",
-  "description": "JSON Schema for WE BUILD VAT ID Attestation (SD-JWT VC format)",
-  "version": "0.1.0",
-  "properties": {
-    "vct": {
-      "type": "string",
-      "description": "Verifiable Credential Type. Base type is 'uri:eu.eudi.vat.1'.",
-      "examples": [
-        "eu.eudi.vat.1"
-      ]
-  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "uri:eu.eudi.vat.1",
+  "title": "VAT-ID Attestation SD-JWT VC Schema",
+  "description": "SD-JWT VC schema for the WE BUILD VAT-ID attestation, as specified in the VAT-ID Attestation Rulebook v0.7 (Belastingdienst Netherlands).",
   "type": "object",
+
   "required": [
+    "vct",
+    "iat",
+    "exp",
     "vat_id",
     "administrative_unit_name",
     "validity_period",
     "economic_operator",
     "issuer"
   ],
+
   "properties": {
-    "vat_id": {
+
+    "vct": {
       "type": "string",
-      "description": "Unique identifier for VAT purposes",
-      "example": "DE123456789"
+      "const": "uri:eu.eudi.vat.1",
+      "description": "Verifiable Credential Type identifier (SD-JWT VC). MUST NOT be selectively disclosable."
     },
-    "administrative_unit_name": {
-      "type": "string",
-      "description": "Name of the administrative unit responsible for VAT",
-      "example": "Siemens"
-    },
-    "administrative_unit_type": {
-      "type": "string",
-      "description": "Type of organisation (e.g., Government, Local Authority, Private Company)",
-      "example": "Private Company"
-    },
-    "validity_period": {
-      "type": "array",
-      "description": "Array of validity period(s) during which the VAT ID is valid",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": ["start_date"],
-        "properties": {
-          "start_date": {
-            "type": "string",
-            "format": "date",
-            "description": "Start date of validity period (ISO 8601 YYYY-MM-DD)",
-            "example": "2011-12-24"
-          },
-          "end_date": {
-            "type": ["string", "null"],
-            "format": "date",
-            "description": "End date of validity period (ISO 8601 YYYY-MM-DD), optional",
-            "example": "2026-12-31"
-          }
-        }
-      }
-    },
-    "validity_area_limitation": {
-      "type": "array",
-      "description": "Array of countries where VAT ID may be used (ISO 3166-1 alpha-2 codes)",
-      "items": {
-        "type": "string",
-        "pattern": "^[A-Z]{2}$",
-        "example": "DE"
-      }
-    },
-    "administrative_unit_address": {
-      "$ref": "#/definitions/address"
-    },
-    "economic_operator": {
-      "$ref": "#/definitions/economic_operator"
-    },
-    "economic_activity_type": {
-      "type": "array",
-      "description": "Array of economic activities in which the operator engages",
-      "minItems": 0,
-      "items": {
-        "$ref": "#/definitions/economic_activity_type"
-      }
-    },
-    "issuer": {
-      "$ref": "#/definitions/issuer"
-    },
+
     "iat": {
       "type": "integer",
-      "description": "Issuance date as Unix timestamp (RFC 7519)",
-      "example": 1704067200
+      "description": "Issuance date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable."
     },
+
     "exp": {
       "type": "integer",
-      "description": "Expiry date as Unix timestamp (RFC 7519)",
-      "example": 1735603200
+      "description": "Expiry date as Unix timestamp (RFC 7519). MUST NOT be selectively disclosable."
     },
+
     "status": {
-      "$ref": "#/definitions/status_claim"
-    }
-  },
-  "definitions": {
-    "address": {
       "type": "object",
-      "description": "Postal address of the administrative unit",
+      "description": "Status list claim for revocation checking. REQUIRED when technical validity period exceeds 24 hours. MUST NOT be selectively disclosable.",
+      "required": ["type", "status_list_credential", "status_list_index", "status_purpose"],
       "properties": {
-        "po_box": {
+        "type": {
           "type": "string",
-          "description": "P.O. box number or identifier"
+          "const": "status-list"
         },
-        "thoroughfare": {
+        "status_list_credential": {
           "type": "string",
-          "description": "Street name and house number"
+          "format": "uri",
+          "description": "URI of the Status List Credential document."
         },
-        "location_designator": {
-          "type": "string",
-          "description": "Internal location designation (e.g., floor, unit)"
+        "status_list_index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Zero-based index into the status list bitstring."
         },
-        "post_code": {
+        "status_purpose": {
           "type": "string",
-          "description": "Postal or ZIP code",
-          "example": "12345"
-        },
-        "post_name": {
-          "type": "string",
-          "description": "Town or locality name",
-          "example": "Amsterdam"
-        },
-        "admin_unit_L1": {
-          "type": "string",
-          "description": "First-level administrative division (e.g., province, state)"
-        },
-        "admin_unit_L2": {
-          "type": "string",
-          "description": "Second-level administrative division (e.g., district, municipality)"
+          "const": "revocation"
         }
+      },
+      "additionalProperties": false
+    },
+
+    "trust_anchor": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the machine-readable trust anchor for attestation verification (Annex V/VII point h). MUST NOT be selectively disclosable."
+    },
+
+    "vat_id": {
+      "type": "string",
+      "description": "VAT Identification Number. Example: NL001234567B01. MUST NOT be selectively disclosable.",
+      "examples": ["NL001234567B01", "DE123456789"]
+    },
+
+    "administrative_unit_name": {
+      "type": "string",
+      "description": "Name of the administrative unit responsible for the VAT-ID. MUST NOT be selectively disclosable.",
+      "examples": ["Siemens AG", "KLM Royal Dutch Airlines"]
+    },
+
+    "administrative_unit_type": {
+      "type": "string",
+      "description": "Type of the administrative unit (e.g. GmbH, B.V., Government). Selectively disclosable (MUST).",
+      "examples": ["GmbH", "B.V.", "N.V.", "Government"]
+    },
+
+    "validity_area_limitation": {
+      "type": "array",
+      "description": "Countries in which the VAT-ID may be used (ISO 3166-1 alpha-2). Omit if no restrictions. MUST NOT be selectively disclosable.",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      },
+      "examples": [["DE", "NL"]]
+    },
+
+    "validity_period": {
+      "type": "array",
+      "description": "One or more validity periods for the VAT-ID. Selectively disclosable (MUST).",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/validity_period"
       }
     },
+
+    "administrative_unit_address": {
+      "description": "Postal address of the administrative unit. Selectively disclosable (MUST).",
+      "$ref": "#/$defs/address"
+    },
+
     "economic_operator": {
       "type": "object",
-      "description": "The entity responsible for economic operations (Legal Person or Natural Person)",
+      "description": "Reference to the economic operator (legal or natural person). MUST NOT be selectively disclosable at object level. Exactly one of legal_identifier or personal_administrative_number/tin MUST be filled (rule EO1).",
       "properties": {
         "legal_identifier": {
           "type": "string",
-          "description": "Unique identifier attributed in accordance with Article 9 of EWB"
+          "description": "Unique legal identifier (EUID or equivalent). E.g. SEBOLREG.123456789. Selectively disclosable (MUST).",
+          "examples": ["SEBOLREG.123456789", "NLKBO.12345678"]
         },
         "legal_name": {
           "type": "string",
-          "description": "Name under which the legal entity is legally registered",
-          "example": "ACME Corporation"
+          "description": "Legally registered name of the legal entity. Selectively disclosable (MUST).",
+          "examples": ["KLM Royal Dutch Airlines N.V."]
         },
         "family_name": {
           "type": "string",
-          "description": "Current last name(s) or surname(s) of a natural person"
+          "description": "Last name(s) of the natural person. Selectively disclosable (MUST).",
+          "examples": ["Doe"]
         },
         "given_name": {
           "type": "string",
-          "description": "Current first name(s), including middle name(s) where applicable"
+          "description": "First name(s) of the natural person. Selectively disclosable (MUST).",
+          "examples": ["John"]
         },
         "birth_date": {
           "type": "string",
           "format": "date",
-          "description": "Day, month, and year of birth (ISO 8601 YYYY-MM-DD)"
+          "description": "Date of birth (ISO 8601 YYYY-MM-DD). Selectively disclosable (MUST).",
+          "examples": ["1968-04-27"]
         },
         "birth_place": {
           "type": "string",
-          "description": "Country (alpha-2 code per ISO 3166-1) or state/region of birth"
+          "description": "Place of birth (ISO 3166-1 alpha-2 country code, or city/region). Selectively disclosable (MUST).",
+          "examples": ["Amsterdam", "NL"]
         },
         "tin": {
           "type": "string",
-          "description": "Tax reference number"
+          "description": "Tax reference number. Selectively disclosable (MUST).",
+          "examples": ["123456789"]
         },
         "personal_administrative_number": {
           "type": "string",
-          "description": "A national personal administrative number or equivalent"
+          "description": "Unique personal administrative number assigned by the PID provider. Only if permitted by local law. Selectively disclosable (MUST).",
+          "examples": ["123456782"]
         }
-      }
+      },
+      "additionalProperties": false
     },
+
     "economic_activity_type": {
-      "type": "object",
-      "required": ["nomenclature", "id"],
-      "properties": {
-        "nomenclature": {
-          "type": "string",
-          "description": "Nomenclature used to describe economic activity",
-          "enum": [
-            "NACE",
-            "NACE-BEL",
-            "CZ-NACE",
-            "DB07",
-            "WZ",
-            "KAD",
-            "CNAE",
-            "NAF",
-            "NKD",
-            "ATECO",
-            "TEAOR",
-            "SBI",
-            "ÖNACE",
-            "PKD",
-            "CAE",
-            "CAEN",
-            "SKD",
-            "OKEČ",
-            "TOL",
-            "SNI",
-            "UK SIC",
-            "NOGA"
-          ],
-          "example": "NACE"
-        },
-        "id": {
-          "type": "string",
-          "description": "ID under which the administrative unit is registered in the nomenclature",
-          "example": "C26.5.2"
-        },
-        "description": {
-          "type": "array",
-          "description": "Human-readable descriptions of the economic activity in multiple languages",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/description"
-          }
-        }
+      "type": "array",
+      "description": "Economic activity types (NACE or equivalent). Selectively disclosable (MUST).",
+      "items": {
+        "$ref": "#/$defs/economic_activity_type"
       }
     },
-    "description": {
-      "type": "object",
-      "required": ["language", "text"],
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "Language code (ISO 639-1)",
-          "pattern": "^[a-z]{2}$",
-          "example": "nl"
-        },
-        "text": {
-          "type": "string",
-          "description": "Description in plain text readable for the end user",
-          "example": "Manufacture of bearings, gears, gearing and driving elements"
-        }
-      }
-    },
+
     "issuer": {
       "type": "object",
+      "description": "Metadata about the issuing authority. MUST NOT be selectively disclosable.",
       "required": [
         "authentic_source_country",
         "vat_id_authenticsource",
@@ -253,63 +179,144 @@
       "properties": {
         "authentic_source_country": {
           "type": "string",
-          "description": "Alpha-2 country code (ISO 3166-1) of the VAT ID provider",
           "pattern": "^[A-Z]{2}$",
-          "example": "DE"
+          "description": "ISO 3166-2 alpha-2 country code of the authentic source of the VAT-ID.",
+          "examples": ["NL", "DE"]
         },
         "vat_id_authenticsource": {
           "type": "string",
-          "description": "Name of the administrative authority that issued the VAT ID"
+          "description": "Name of the administrative authority that issued the VAT-ID (authentic source).",
+          "examples": ["Ministerie van Financiën - Belastingdienst"]
         },
         "country": {
           "type": "string",
-          "description": "Alpha-2 country code (ISO 3166-1) of the attestation issuer",
           "pattern": "^[A-Z]{2}$",
-          "example": "DE"
+          "description": "ISO 3166-2 alpha-2 country code of the attestation issuer.",
+          "examples": ["NL"]
         },
         "issuing_authority": {
           "type": "string",
-          "description": "Name of the administrative authority or QTSP that issued the attestation"
+          "description": "Name of the authority or QTSP that issued the VAT-ID attestation.",
+          "examples": ["Dutch Tax Administration (Belastingdienst)"]
         },
         "attestation_legal_category": {
           "type": "string",
-          "description": "Type of attestation category",
           "enum": ["QEAA", "PuB-EAA"],
-          "example": "PuB-EAA"
+          "description": "Legal category of the attestation per EU Digital Identity Regulation Annex V/VII point a).",
+          "examples": ["PuB-EAA"]
         },
         "location_status": {
           "type": "string",
           "format": "uri",
-          "description": "URI where revocation/suspension status information can be obtained"
+          "description": "URI for validity/revocation status information of the VAT-ID. Optional.",
+          "examples": ["https://www.belastingdienst.nl/vat-status/NL001234567B01"]
         }
-      }
-    },
-    "status_claim": {
-      "type": "object",
-      "description": "Status claim for revocation checking (required if validity period > 24 hours)",
-      "required": ["type", "status_list_credential", "status_list_index", "status_purpose"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["status-list"],
-          "description": "Type of status mechanism"
-        },
-        "status_list_credential": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI of the Status List Credential document"
-        },
-        "status_list_index": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Zero-based index into the status list bitstring"
-        },
-        "status_purpose": {
-          "type": "string",
-          "enum": ["revocation"],
-          "description": "Purpose of the status list"
-        }
-      }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+
+  "$defs": {
+
+    "validity_period": {
+      "type": "object",
+      "description": "A single validity period for the VAT-ID.",
+      "required": ["start_date"],
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the VAT-ID validity period (ISO 8601 YYYY-MM-DD).",
+          "examples": ["2020-01-15"]
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the VAT-ID validity period (ISO 8601 YYYY-MM-DD). Optional; omit if open-ended.",
+          "examples": ["2027-12-31"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "address": {
+      "type": "object",
+      "description": "Postal address object. All fields are optional.",
+      "properties": {
+        "po_box": {
+          "type": "string",
+          "description": "P.O. box number or identifier.",
+          "examples": ["PO Box 123"]
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street name and house number.",
+          "examples": ["Amsterdamse Ring 2"]
+        },
+        "location_designator": {
+          "type": "string",
+          "description": "Internal location (floor, unit, etc.).",
+          "examples": ["Floor 3, Unit B"]
+        },
+        "post_code": {
+          "type": "string",
+          "description": "Postal or ZIP code.",
+          "examples": ["1101 DA"]
+        },
+        "post_name": {
+          "type": "string",
+          "description": "Town or locality name.",
+          "examples": ["Amsterdam"]
+        },
+        "admin_unit_L1": {
+          "type": "string",
+          "description": "First-level administrative division (province, state, etc.).",
+          "examples": ["North Holland"]
+        },
+        "admin_unit_L2": {
+          "type": "string",
+          "description": "Second-level administrative division (district, municipality, etc.).",
+          "examples": ["Amsterdam Municipality"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "economic_activity_type": {
+      "type": "object",
+      "description": "A single economic activity type entry.",
+      "required": ["nomenclature", "id"],
+      "properties": {
+        "nomenclature": {
+          "type": "string",
+          "enum": [
+            "NACE", "NACE-BEL", "CZ-NACE", "DB07", "WZ", "KAD",
+            "CNAE", "NAF", "NKD", "ATECO", "TEAOR", "SBI", "ONACE",
+            "PKD", "CAE", "CAEN", "SKD", "OKEC", "TOL", "SNI",
+            "UK SIC", "NOGA"
+          ],
+          "description": "Nomenclature used. NACE is the default. MUST NOT be selectively disclosable.",
+          "examples": ["NACE", "SBI"]
+        },
+        "id": {
+          "type": "string",
+          "description": "Activity code within the nomenclature. Selectively disclosable (MUST).",
+          "examples": ["51.1", "C26.5.2"]
+        },
+        "description": {
+          "type": "object",
+          "description": "Human-readable description per language (key = ISO 639-1 language code). Selectively disclosable (MUST).",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [
+            { "nl": "Luchtvervoer van passagiers", "en": "Passenger air transport", "de": "Personenluftverkehr" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "additionalProperties": false
 }
