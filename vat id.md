@@ -122,14 +122,14 @@ Administrative unit
 ├─ vat_id                                  [1]       (name of the administrative unit)
 ├─ administrative_unit_name                [1]       (name of the administrative unit)
 ├─ economic_operator                       [1]       (Reference to the Economic Operator that owns the VAT ID)
-│   ├─ legal_identifier                    [0]       (start date of the validity period of the vat-id)
-│   ├─ legal_name                          [0]       (start date of the validity period of the vat-id)
-│   ├─ family_name                         [0]       (start date of the validity period of the vat-id)
-│   ├─ given_name                          [0]       (start date of the validity period of the vat-id)
-│   ├─ birth_date                          [0]       (start date of the validity period of the vat-id)
-│   ├─ birth_place                         [0]       (start date of the validity period of the vat-id)
-│   ├─ tin                                 [0]       (start date of the validity period of the vat-id)
-│   └─ personal_administrative_number      [0]       (end date of the validity period of the vat-id)
+│   ├─ legal_identifier                    [0]       
+│   ├─ legal_name                          [0]       
+│   ├─ family_name                         [0]       
+│   ├─ given_name                          [0]       
+│   ├─ birth_date                          [0]       
+│   ├─ birth_place                         [0]       
+│   ├─ tin                                 [0]       
+│   └─ personal_administrative_number      [0]       
 ├─ validity_period                         [1..n]    (period(s) for which the vat-id is valid)
 │   ├─ start_date                          [1]       (start date of the validity period of the vat-id)
 │   └─ end_date                            [0]       (end date of the validity period of the vat-id)
