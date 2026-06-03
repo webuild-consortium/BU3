@@ -119,7 +119,17 @@ the value "QEAA" or "PuB-EAA".*
 
 ````
 Administrative unit
+├─ vat_id                                  [1]       (name of the administrative unit)
 ├─ administrative_unit_name                [1]       (name of the administrative unit)
+├─ economic_operator                       [1]       (Reference to the Economic Operator that owns the VAT ID)
+│   ├─ legal_identifier                    [0]       (start date of the validity period of the vat-id)
+│   ├─ legal_name                          [0]       (start date of the validity period of the vat-id)
+│   ├─ family_name                         [0]       (start date of the validity period of the vat-id)
+│   ├─ given_name                          [0]       (start date of the validity period of the vat-id)
+│   ├─ birth_date                          [0]       (start date of the validity period of the vat-id)
+│   ├─ birth_place                         [0]       (start date of the validity period of the vat-id)
+│   ├─ tin                                 [0]       (start date of the validity period of the vat-id)
+│   └─ personal_administrative_number      [0]       (end date of the validity period of the vat-id)
 ├─ validity_period                         [1..n]    (period(s) for which the vat-id is valid)
 │   ├─ start_date                          [1]       (start date of the validity period of the vat-id)
 │   └─ end_date                            [0]       (end date of the validity period of the vat-id)
@@ -160,9 +170,9 @@ Administrative unit
 | **data identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority, B.V, GmbH)| String | GmbH          |
-| administrative_unit_address    | ...          |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
-| economic_activity_type       | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
-| validity_area_limitation      | ...               | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
+| administrative_unit_address    | ...                 |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
+| economic_activity_type         | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
+| validity_area_limitation       | ...                 | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
 
 ### 2.3 Economic Operator 
 #### 2.3.1 Mandatory attributes
