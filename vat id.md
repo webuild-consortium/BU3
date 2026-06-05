@@ -384,69 +384,7 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 **example **
 ````
 {
-  "vat_id": "NL001234567B01",
-  "administrative_unit_name": "KLM Royal Dutch Airlines",
-  "administrative_unit_type": "Private Company",
-  "validity_period": [
-    {
-      "start_date": "2020-01-15",
-      "end_date": "2027-12-31"
-    }
-  ],
  
-  "administrative_unit_address": {
-    "thoroughfare": "Amsterdamse Ring 2",
-    "location_designator": "Building A, Ground Floor",
-    "post_code": "1101 DA",
-    "post_name": "Amsterdam",
-    "admin_unit_L1": "North Holland",
-    "admin_unit_L2": "Amsterdam"
-  },
-  "economic_operator": {
-    "legal_identifier": "NL801234567B01",
-    "legal_name": "KLM Royal Dutch Airlines N.V.",
-  },
-  "economic_activity_type": [
-    {
-      "nomenclature": "NACE",
-      "id": "51.1",
-      "description":
-        {
-            "nl": "Luchtvervoer van passagiers"
-            "en": "Passenger air transport"
-            "de": "Personenluftverkehr"
-        }
-      
-    },
-    {
-      "nomenclature": "NACE",
-      "id": "51.2",
-      "description": 
-        {
-                "nl": "Luchtvervoer van vracht"
-                "en": "Freight air transport"
-                "de": "Luftfrachtverkehr"
-        }
-      
-    }
-  ],
-  "issuer": {
-    "authentic_source_country": "NL",
-    "vat_id_authenticsource": "Ministerie van Financiën - Belastingdienst",
-    "country": "NL",
-    "issuing_authority": "Dutch Tax Administration (Belastingdienst)",
-    "attestation_legal_category": "PuB-EAA",
-    "location_status": "https://www.belastingdienst.nl/vat-status/NL001234567B01"
-  },
-  "iat": 1704067200,
-  "exp": 1830902400,
-  "status": {
-    "type": "status-list",
-    "status_list_credential": "https://www.belastingdienst.nl/status-list/vat-id/2024",
-    "status_list_index": 12547,
-    "status_purpose": "revocation"
-  }
-}
 
 ````
 [RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]
