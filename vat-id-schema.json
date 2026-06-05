@@ -90,14 +90,10 @@
       "examples": ["N.V."]
     },
 
-    "validity_area_limitation": {
-      "type": "array",
-      "description": "Countries in which the VAT-ID may be used (ISO 3166-1 alpha-2). Omit if no restrictions. MUST NOT be selectively disclosable.",
-      "items": {
-        "type": "string",
-        "pattern": "^[A-Z]{2}$"
-      },
-      "examples": [["NL"]]
+    "registered_EU_cross_border_transactions": {
+      "type": "boolean",
+      "description": "Boolean to indicate that the VAT-identification number of the economic operator registered in the European Union for cross border transactions on goods or services",
+      "examples": [true, false]
     },
 
     "validity_period": {
