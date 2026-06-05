@@ -133,7 +133,7 @@ Administrative unit
 ├─ validity_period                         [1..n]    (period(s) for which the vat-id is valid)
 │   ├─ start_date                          [1]       (start date of the validity period of the vat-id)
 │   └─ end_date                            [0]       (end date of the validity period of the vat-id)
-├─ validity_area_limitation                [0..n]    (array of countries in which the vat-id may be used)
+├─ registered_EU_cross_border_transactions [1]       (Boolean that describes if the VAT-ID may be used EU cross border transactions)
 ├─ adminitrative_unit_type                 [0]       (type of organisation in free text)
 ├─ administrative_unit_address             [0]       (the postal address registered for the administrative unit)
 │   ├─ po_box                              [0]  
@@ -169,10 +169,10 @@ Administrative unit
 #### 2.2.2 Optional attributes
 | **data identifier**  | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| administrative_unit_type       | ...                 | Type (e.g., Government, Local Authority, B.V, GmbH)| String | GmbH          |
-| administrative_unit_address    | ...                 |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
-| economic_activity_type         | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
-| validity_area_limitation       | ...                 | Country in which the VAT_ID may be used. Alpha‑2 country code, as specified in ISO 3166‑2. Omit if there are no restrictions    | array of tstr            | DE |
+| administrative_unit_type                | ...                 | Type (e.g., Government, Local Authority, B.V, GmbH)| String | GmbH          |
+| administrative_unit_address             | ...                 |  The address where the company is located based on the information from the authentic source of the VAT-ID. This address may differ from the address in the business register.           | Address Object           | ...  |
+| economic_activity_type                  | ...                 | Type of business this administrative unit is registered| Economic Activity Type Object | ...     |
+| registered_EU_cross_border_transactions | ...                 | Boolean to indicate that the VAT-identification number of the economic operator registered in the European Union for cross border transactions on goods or services   | Boolean            | TRUE |
 
 ### 2.3 Economic Operator 
 #### 2.3.1 Mandatory attributes
@@ -294,7 +294,7 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | issuer                             | issuer                               | Object                 | ..   |MUST NOT|
 | administrative_unit_type           | administrative_unit_type             | Object                 | ...      | MUST   |
 | administrative_unit_address        | administrative_unit_address          | Object                 | ...  | MUST|
-| validity_area_limitation           | validity_area_limitation             | Array String(ISO 3166-1 alpha-2)| ..| MUST NOT|
+| registered_EU_cross_border_transactions| registered_EU_cross_border_transactions         | Boolean                | ..| MUST NOT|
 | economic_operator.legal_identifier | economic_operator.legal_identifier   | String                 | ..| MUST |
 | economic_operator.legal_name       | economic_operator.legal_name         | String                 | ..|  MUST |
 | economic_operator.family_name      | economic_operator.family_name        | String                 | .. | MUST|
