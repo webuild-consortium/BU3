@@ -19,8 +19,8 @@
     "exp": 1830902400,
     "vat_id": "NL001234567B01",
     "administrative_unit_name": "KLM Royal Dutch Airlines",
-    "validity_area_limitation": [
-      "NLD"
+    "registered_EU_cross_border_transactions": [
+      true
     ],
     "economic_operator": {
       "legal_identifier": "NL801234567B01",
@@ -155,9 +155,9 @@
       "reason": "Required for revocation checking",
       "disclosable": false
     },
-    "validity_area_limitation": {
+    "registered_EU_cross_border_transactions": {
       "value": [
-        "NLD"
+        true
       ],
       "reason": "Required for credential verification",
       "disclosable": false
@@ -294,7 +294,7 @@
         "administrative_unit_name",
         "economic_operator",
         "issuer",
-        "validity_area_limitation",
+        "registered_EU_cross_border_transactions",
         "description.language",
         "description.text",
         "issuer.authentic_source_country",
