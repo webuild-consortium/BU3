@@ -415,31 +415,7 @@ The relying party SHOULD:
 If the relying party does not verify, he MUST accept the risks involved. 
 
 The attestation SHALL be non-device-bound. The relying party SHOULD check the ownership of the VAT-ID using the method described above. Device binding might create a false sence of trustworthyness. Because the VAT-ID can be issued to an itermediary organisation, using a mandate, presenting the VAT-ID is no proof of owenership. The VAT-ID attestation will not be revoked by the issuer, when the mandate is revoked. 
-```mermaid
-erDiagram
-	direction RL
-	Agent {
 
-	}
-
-	Economic-Operator {
-
-	}
-
-	VAT-ID {
-
-	}
-
-	Mandate {
-
-	}
-
-	VAT-ID||--||Economic-Operator:"issued for"
-	VAT-ID||--o{Agent:"may be held by"
-	Economic-Operator||--o{Mandate:"issues"
-	Mandate||--||Agent:"grants right to act for"
-	VAT-ID}o--||Mandate:"linked through mandate"
-```
 ## 5 Trust anchors
 
 *Mechanisms for the provision of a trust anchor that SHALL
