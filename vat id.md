@@ -288,8 +288,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | **Data Identifier**                | **Attribute identifier**             | **Encoding format**    |**Reference/Notes** |**Disclosable**|
 |----------------------------------- |--------------------------------------|------------------------|--------------------|---------------|
 | vat_id                             |vat_id | VAT Identification Number    | String                 |                    | MUST NOT|
-| administrative_unit_name           |administrative_unit_name              | String                 |                    | MUSTNOT|
-| validity_period                    |validity_period                       | Array [validity period]|                    |MUST|
+| administrative_unit_name           |administrative_unit_name              | String                 |                    | MUST NOT|
+| validity_period                    |validity_period                       | Array [validity period]|                    |MUST NOT|
 | economic_operator                  | economic_operator                    | object                 | ..                 | MUST NOT|
 | issuer                             | issuer                               | Object                 | ..   |MUST NOT|
 | administrative_unit_type           | administrative_unit_type             | Object                 | ...      | MUST   |
