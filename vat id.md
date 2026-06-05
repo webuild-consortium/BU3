@@ -303,8 +303,8 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 | economic_operator.birth_place      | economic_operator.birth_place        | String                 | .. | MUST|
 | economic_operator.tin              | economic_operator.tin                | String                 | .. |MUST|
 | economic_operator. personal_administrative_number                         | economic_operator. personal_administrative_number |String | .. |MUST|
-| validity_period.start_date         | validity_period.start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
-| validity_period.end_date           | validity_period.end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST| 
+| validity_period.start_date         | validity_period.start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST NOT| 
+| validity_period.end_date           | validity_period.end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST NOT| 
 | address.po_box                     | address.po_box                       | String                 | .. |MUST|
 | address.thoroughfare               | address.thoroughfare                 | String                 | .. |MUST|
 | address.location_designator        | address.location_designator          | String                 | .. |MUST|
