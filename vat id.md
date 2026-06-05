@@ -9,7 +9,7 @@
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.7 | 30-04-2026 | Copy from Open Social Rulebook specification |
-| [VERSION NUMBER] | [PUBLICATION DATE] | [DESCRIPTION OR LINK TO THE CHANGELOG] |
+| 0.8 |05-06-2026 | Changed registration for xborder VAT and description of economic activity|
 
 *Provide a contact email address and/or a link to an issue tracking system that can be used for
 providing feedback, e.g.:*
