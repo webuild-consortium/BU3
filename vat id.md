@@ -268,6 +268,7 @@ No mandatory attributes
 | VP3 | If 'validity_Period.end_Date' < issuer.attestation_issuing_date - 5 years| Old validity periods are not relevant to relying parties, the limit of 5 years should be used as a rule of thumb ||
 | VP4 | If there is more than one 'validity_Period' the issuer MAY omit older validity_Periods| Issuers have the freedom to omit older validity periods, when they find they are not relevant ||
 | EA1 | If ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature <>"NACE")  is equal ('Economic_Activity_Type.ID' AND 'Economic_Activity_Type.Nomenclature == "NACE") Then 'Economic_Activity_Type.Nomenclature SHOULD be "NACE"| The default Nomenclature is NACE, if the ID in the local Nomenclature directly relates to the NACE ID, the NACE ID and TYPE SHOULD be used. | Issuers SHOULD implement a tranlation table to create mostly NACE codes|
+| XB1 | If ('issuing_country' is not in EU Then  'registered_EU_cross_border_transactions' SHOULD be false| Only countries in the EU can take part in the registered_EU_cross_border_transactions|
 
 
 # 3 Attestation encoding
