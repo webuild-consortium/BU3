@@ -40,8 +40,6 @@ The VAT-ID attestation seeks to replace the traditional paper-based proof with a
 
 ### 1.2 Document structure
 
-*Provide a brief overview of the Rulebook's sections and their purpose. The main
-sections of the Rulebook SHOULD be*
 
 * Chapter 2, which describes the attestation attributes and metadata in an
 encoding-independent manner.
@@ -290,13 +288,13 @@ The VAT-ID attestation uses the SD-JWT VC format to allow for selective disclosu
 |----------------------------------- |--------------------------------------|------------------------|--------------------|---------------|
 | vat_id                             |vat_id | VAT Identification Number    | String                 |                    | MUST NOT|
 | administrative_unit_name           |administrative_unit_name              | String                 |                    | MUST NOT|
-| validity_period                    |validity_period                       | Array [validity period]|                    |MUST NOT|
+| validity_period                    |validity_period                       | Array [validity period]|                    | MUST NOT|
 | economic_operator                  | economic_operator                    | object                 | ..                 | MUST NOT|
-| issuer                             | issuer                               | Object                 | ..   |MUST NOT|
-| administrative_unit_type           | administrative_unit_type             | Object                 | ...      | MUST   |
-| administrative_unit_address        | administrative_unit_address          | Object                 | ...  | MUST|
-| registered_EU_cross_border_transactions| registered_EU_cross_border_transactions         | Boolean                | ..| MUST NOT|
-| economic_operator.legal_identifier | economic_operator.legal_identifier   | String                 | ..| MUST |
+| issuer                             | issuer                               | Object                 | ..                 | MUST NOT|
+| administrative_unit_type           | administrative_unit_type             | Object                 | ...                | MUST   |
+| administrative_unit_address        | administrative_unit_address          | Object                 | ...                | MUST|
+| registered_EU_cross_border_transactions| registered_EU_cross_border_transactions         | Boolean | ..                 | MUST NOT|
+| economic_operator.legal_identifier | economic_operator.legal_identifier   | String                 | ..                 | MUST |
 | economic_operator.legal_name       | economic_operator.legal_name         | String                 | ..|  MUST |
 | economic_operator.family_name      | economic_operator.family_name        | String                 | .. | MUST|
 | economic_operator.given_name       | economic_operator.given_name         | String                 | .. |MUST|
@@ -384,8 +382,7 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 
 **example **
 ````
-{
- 
+
 
 ````
 [RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]
@@ -399,7 +396,17 @@ The VAT_ID attestion aims to be used in two general usecases, but it could be us
 
 The second usecase is where a seller needs proof, in case of intra-communitairy business, that the buyer will pay tax in his own country and that it can sell services or goods without TAX. In the current world the seller needs to check with VIES and keep proof in its administration. The VAT-ID attestation will provide the proof, and a check with VIES is not necessary anymore. 
 
-### 4.2 Verification needs
+### 4.2 Issuing requirements
+The VAT-ID attestation may only be issued to the organisation that holds the VAT-ID, or to an Agent (natural or legal person) that can prove that he is allowed to act upon the holder for this service. Although many of the information in the attestation is public information, the attestation itself should be considered private. In order to issue the VAT-ID attestation to the Economic Operator itself the issuing party SHOULD: Verify the identity of the Economic Opereator and issue the VAT-ID attestation to the wallet of that Economic Operator. 
+
+If an agent wishes to receive the attestation of another economic operator, the issuing party SHOULD:
+* Check the identity of the Agent
+    - has a mandate with the right scope and actors
+      -    the mandate is not revoked
+      -    the mandate is currenty valid     
+
+
+### 4.3 Verification needs
 The VAT-ID provides proof that the Economic Operator, registered in the attestation, is the owner of the VAT-ID. It does not prove that the party that presents the attestation also is the owner of the attestation. The VAT-ID attestion can also be issued to an Agent or Intermediary party, if they have the right mandate to receive the attestation. However the mandate may be revoked by the owner, but the VAT-ID attestation will (likely) not be revoked. Therefore the attestation itself (even if holderbinding is active) is not proof that the presenter actually holds, or may present the attestation. 
 
 The relying party SHOULD:
@@ -409,7 +416,6 @@ The relying party SHOULD:
 - Check if the Economic Operator in the Attestation is:
    - equal to the owner of the EBW (via EBWOID, PID, or other means) OR
    - has a mandate with the right scope and actors
-      -    proof that the Agent in the mandate is the owner of the EBW.
       -    the mandate is not revoked
       -    the mandate is currenty valid     
 
