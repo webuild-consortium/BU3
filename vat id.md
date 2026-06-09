@@ -156,11 +156,11 @@ Administrative unit
 #### 2.2.1 Mandatory attributes
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| vat_id                         | VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
-| administrative_unit_name       | Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
-| validity_period                | Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
-| economic_operator              | Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
-| issuer                         | Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
+| vat_id                         | [identifier](https://w3id.org/ebwv#identifier) <br> VAT Identification Number                   | Unique identifier for VAT purposes     | String           | DE123456789        |
+| administrative_unit_name       | [VATRegistrationUnit](https://w3id.org/ebwv#VATRegistrationUnit).name <br> Name of the Administrative Unit             | Name of the unit responsible for VAT    | String           | Siemens        |
+| validity_period                | [validityPeriod](https://w3id.org/ebwv#validityPeriod).PeriodOfTime <br> Period of Validity                          | Duration during which the data is valid| Date Range       | 2026-01-01 to 2026-12-31 |
+| economic_operator              | VATRegistrationUnit.[economicOperator](https://w3id.org/ebwv#economicOperator).EconomicOperator <br> Operator conducting economic activity       | Entity responsible for economic operations | Economic Operator object        | ..|
+| issuer                         | [cred:issuer](https://www.w3.org/2018/credentials/#issuer) <br> Issuing Authority                           | Authority that issues the VAT ID       | Issuer Object           | ..   |
 
 
 
