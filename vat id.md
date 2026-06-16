@@ -145,12 +145,12 @@ Administrative unit
 │   ├─ economic_activity_type_nomenclature [1]       (nomenclature used to describe the economic activity)
 │   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
 │   └─ economic_activity_type_description  [0..n]    (object using language:, value)
-└─ issuer                                  [1]   
+├─ issuer                                  [1]   
 │   ├─ issuing_country                     [1]
 │   ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
 │   ├─ issuing_date                        [1]        (date on which the attestation is issued)
 │   └─ attestation_issuing_organisation    [1]
-├─ display                                 [1]       Items to be displayd on the card in the wallet
+└─ display                                 [1]       Items to be displayd on the card in the wallet
     ├─ title                               [1]       Name of the card displayed in wallet (VAT-ID)
     ├─ organisation_name                   [1]       legal_name of the organisation that owns the VAT-ID
     ├─ subtitle                            [0]       
