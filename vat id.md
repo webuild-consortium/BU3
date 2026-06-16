@@ -286,7 +286,8 @@ No mandatory attributes
       "locale": "nl_NL",
       "label": "BTW-Nummer: "
     }
-  ]```
+  ]
+```
 
 ### 2.10 Code lists
 
