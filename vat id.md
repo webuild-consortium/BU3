@@ -146,10 +146,18 @@ Administrative unit
 │   ├─ economic_activity_type_id           [1]       (id used in the nomenclature)
 │   └─ economic_activity_type_description  [0..n]    (object using language:, value)
 └─ issuer                                  [1]   
-    ├─ issuing_country                     [1]
-    ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
-    ├─ issuing_date                        [1]        (date on which the attestation is issued)
-    └─ attestation_issuing_organisation    [1]
+│   ├─ issuing_country                     [1]
+│   ├─ issuing_organisation                [1]        (the organisation that issues the vat-id, this may differ from the attestation issuing organisation)
+│   ├─ issuing_date                        [1]        (date on which the attestation is issued)
+│   └─ attestation_issuing_organisation    [1]
+├─ display                                 [1]       Items to be displayd on the card in the wallet
+    ├─ title                               [1]       Name of the card displayed in wallet (VAT-ID)
+    ├─ organisation_name                   [1]       legal_name of the organisation that owns the VAT-ID
+    ├─ subtitle                            [0]       
+    ├─ issuer_logo                         [0]       
+    ├─ isuer_name                          [1]       issuing_organisation
+    ├─ background_color                    [0]       
+    └─ text_color                          [0]       
 ````
 
 ### 2.2 Administrative Unit 
@@ -222,24 +230,23 @@ No mandatory attributes
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | tbd | The nomenclature that is used to describe the administrative unit. NACE should be used as default. However some countries have more elaborate nomenclature. | tstr | nace |
 | economic_activity_type.id | tbd | The ID that under which the Administrative unit is registered. | tstr | C26.5.2 |
-| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language. The language is described in iso 639-1  | array | EN: Manufacture of bearings, gears, gearing and driving elements  |
+| economic_activity_type.description | Economic Activity Description | The human readable text that describes the economic ativity in a specific language. The language is described in BCP 47 standard  | array | en-EN: Manufacture of bearings, gears, gearing and driving elements  |
 
-
-### 2.9 Metadata
-#### 2.9.1 Mandatory metadata 
+### 2.7 Metadata
+#### 2.7.1 Mandatory metadata 
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | issuer.authentic_source_country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. | date | 05 |
 | issuer.vat_id_authenticsource | authenticSource | Name of the administrative authority that issued the VAT ID. This is the authentic source for the VAT-ID, which may differ from the issuer of the attestation| tstr |  |
 | issuer.country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the VAT ID. | tstr |  |
-| issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation. | tstr |  |
+| issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the VAT ID attestation, in a specific language using  BCP 47 | tstr |  |
 | issuer.attestation_legal_category | issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
 | issuer.attestation_issuing_date | iat | The date the attestation was issued | Number (Unix timestamp) | |
 | issuer.attestation_expiry_date | exp | The date the attestation was issued | Number (Unix timestamp) | |
 
 
-#### 2.9.2 Optional metadata
+#### 2.7.2 Optional metadata
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -247,6 +254,39 @@ No mandatory attributes
 | trust_anchor         | trustAnchor| This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the VAT ID can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |tstr||
 
 
+
+### 2.9 Display
+#### 2.9.1 Mandatory Display items 
+
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| display.title | title | VAT-ID of the card as shown in the wallet in a specific language using  BCP 47 | String | en-EN: VAT-ID |
+| display.organisation_name| organisation_name | Name of the administrative organisation,SHOULD be the same as economic_operator.organisation_name| tstr |  |
+| display.issuing_authority | issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | nl-NL: Belastingdienst |
+
+
+#### 2.9.2 Optional display items
+
+| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| display.subtitle | subtitle | Additional reference to a part of the organisation if the organisation has multiple administrative units | tstr |  |
+| display.issuer_logo | issuer_logo | Logo of the issuer base64 encoded SVG, PNG or JPG | tstr |  |
+| background_color | background_color | Hex-colour voor de background. **formally not part of the Display object** | tstr | |
+| text_color | text_color |Hex-colour voor de text **formally not part of the Display object**  | tstr | |
+
+```
+  "display": [
+    {
+      "name": "title",
+      "locale": "en-EN",
+      "label": "VAT-ID: "
+    }
+    {
+      "name": "title"
+      "locale": "nl_NL",
+      "label": "BTW-Nummer: "
+    }
+  ]```
 
 ### 2.10 Code lists
 
