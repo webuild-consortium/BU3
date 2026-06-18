@@ -1,6 +1,15 @@
 {
   "vct": "uri:eu.eudi.vat.1",
   "type": "object",
+  "display": {
+    "title":{
+      "type": "string"
+      "description": "VAT-ID of the card as shown in the wallet with the label in a specific language using BCP 47"
+      "locale": "en-EN",
+      "label": VAT-ID: "
+    }
+  }
+  
   "properties": {
     "vat_id": {
       "type": "string",
