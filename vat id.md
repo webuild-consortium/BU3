@@ -438,17 +438,17 @@ The VAT_ID attestion aims to be used in two general usecases, but it could be us
 The second usecase is where a seller needs proof, in case of intra-communitairy business, that the buyer will pay tax in his own country and that it can sell services or goods without TAX. In the current world the seller needs to check with VIES and keep proof in its administration. The VAT-ID attestation will provide the proof, and a check with VIES is not necessary anymore. 
 
 ### 4.2 Issuing requirements
-The VAT-ID attestation may only be issued to the organisation that holds the VAT-ID, or to an Agent (natural or legal person) that can prove that he is allowed to act upon the holder for this service. Although many of the information in the attestation is public information, the attestation itself should be considered private. In order to issue the VAT-ID attestation to the Economic Operator itself the issuing party SHOULD: Verify the identity of the Economic Opereator and issue the VAT-ID attestation to the wallet of that Economic Operator. 
+The VAT-ID attestation may only be issued to the wallet of the organisation that holds the VAT-ID, or to the wallet of an Agent (natural or legal person) that can prove that he is allowed to act upon the holder for this service. Although many of the information in the attestation is public information, the attestation itself should be considered private. In order to issue the VAT-ID attestation to the Economic Operator itself the issuing party SHOULD: Verify the identity of the Economic Opereator and issue the VAT-ID attestation to the wallet of that Economic Operator. 
 
 If an agent wishes to receive the attestation of another economic operator, the issuing party SHOULD:
 * Check the identity of the Agent
-    - has a mandate with the right scope and actors
+    - check if the agent has a mandate with the right scope and actors
       -    the mandate is not revoked
       -    the mandate is currenty valid     
 
 
 ### 4.3 Verification needs
-The VAT-ID provides proof that the Economic Operator, registered in the attestation, is the owner of the VAT-ID. It does not prove that the party that presents the attestation also is the owner of the attestation. The VAT-ID attestion can also be issued to an Agent or Intermediary party, if they have the right mandate to receive the attestation. However the mandate may be revoked by the owner, but the VAT-ID attestation will (likely) not be revoked. Therefore the attestation itself (even if holderbinding is active) is not proof that the presenter actually holds, or may present the attestation. 
+The VAT-ID provides proof that the Economic Operator, registered in the attestation, is the owner of the VAT-ID. It does not prove that the party that presents the attestation also is the owner of the attestation. The VAT-ID attestion can also be issued to an Agent ( Intermediary party), if they have the right mandate to receive the attestation. However the mandate may be revoked by the owner, but the VAT-ID attestation will (likely) not be revoked. Therefore the attestation itself (even if holderbinding is active) is not proof that the presenter actually holds, or may present the attestation. 
 
 The relying party SHOULD:
 - Check the status of revocation and expiary date of the attestation.
@@ -460,7 +460,7 @@ The relying party SHOULD:
       -    the mandate is not revoked
       -    the mandate is currenty valid     
 
-If the relying party does not verify, he MUST accept the risks involved. 
+If the relying party does not perform all verification aspects, he MUST accept the risks involved. 
 
 The attestation SHALL be non-device-bound. The relying party SHOULD check the ownership of the VAT-ID using the method described above. Device binding might create a false sence of trustworthyness. Because the VAT-ID can be issued to an itermediary organisation, using a mandate, presenting the VAT-ID is no proof of owenership. The VAT-ID attestation will not be revoked by the issuer, when the mandate is revoked. 
 
