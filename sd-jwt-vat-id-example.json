@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "title": "SD-JWT VC Example for VAT ID Attestation",
+    "credential_type": "uri:eu.eudi.vat.1",
+    "format": "SD-JWT VC",
+    "issuer": "https://www.belastingdienst.nl"
+  },
+
+  "jose_header": {
+    "alg": "ES256",
+    "typ": "vc+sd-jwt",
+    "kid": "https://www.belastingdienst.nl/keys/vat-issuer-2024-01"
+  },
+
   "payload": {
     "vct": "uri:eu.eudi.vat.1",
     "iss": "https://www.belastingdienst.nl",
@@ -9,10 +22,104 @@
     "administrative_unit_name": "KLM Royal Dutch Airlines",
     "registered_EU_cross_border_transactions": true,
 
+    "validity_period": [
+      {
+        "start_date": "2020-01-15",
+        "end_date": "2027-12-31"
+      }
+    ],
+
     "economic_operator": {
       "legal_identifier": "NL801234567B01",
       "legal_name": "KLM Royal Dutch Airlines N.V."
     },
+
+    "issuer": {
+      "authentic_source_country": "NL",
+      "vat_id_authentic_source": "Ministerie van Financiën - Belastingdienst",
+      "issuing_authority": "Dutch Tax Administration",
+      "attestation_legal_category": "PUB-EAA",
+      "attestation_issuing_date": 1704067200,
+      "attestation_expiry_date": 1830902400,
+      "location_status": "https://www.belastingdienst.nl/vat-status/NL001234567B01",
+      "trust_anchor": "https://www.belastingdienst.nl/trust-anchor/vat-id-2024"
+    },
+
+    "status": {
+      "status_list_credential": "https://www.belastingdienst.nl/status-list/vat-id/2024",
+      "status_list_index": 12547,
+      "status_purpose": "revocation"
+    },
+
+    "_sd": [
+      "hash_admin_type",
+      "hash_admin_address",
+      "hash_activity",
+      "hash_validity"
+    ],
+    "sd_hash": "sha-256"
+  },
+
+  "selectively_disclosable_claims": {
+    "administrative_unit_type": {
+      "salt": "salt1",
+      "value": "N.V.",
+      "claim_name": "administrative_unit_type",
+      "sha256_digest": "hash_admin_type"
+    },
+
+    "administrative_unit_address": {
+      "salt": "salt2",
+      "value": {
+        "thoroughfare": "Amsterdamse Ring 2",
+        "location_designator": "Building A",
+        "post_code": "1101 DA",
+        "post_name": "Amsterdam",
+        "admin_unit_l1": "North Holland",
+        "admin_unit_l2": "Amsterdam"
+      },
+      "claim_name": "administrative_unit_address",
+      "sha256_digest": "hash_admin_address"
+    },
+
+    "economic_activity_type": {
+      "salt": "salt3",
+      "value": [
+        {
+          "nomenclature": "NACE",
+          "id": "51.1",
+          "description": [
+            {
+              "language": "en",
+              "value": "Passenger air transport"
+            },
+            {
+              "language": "nl",
+              "value": "Luchtvervoer van passagiers"
+            }
+          ]
+        }
+      ],
+      "claim_name": "economic_activity_type",
+      "sha256_digest": "hash_activity"
+    },
+
+    "validity_period": {
+      "salt": "salt4",
+      "value": [
+        {
+          "start_date": "2020-01-15",
+          "end_date": "2027-12-31"
+        }
+      ],
+      "claim_name": "validity_period",
+      "sha256_digest": "hash_validity"
+    }
+  },
+
+  "holder_presentation_example": {
+    "vat_id": "NL001234567B01",
+    "administrative_unit_name": "KLM Royal Dutch Airlines",
 
     "validity_period": [
       {
@@ -22,82 +129,13 @@
     ],
 
     "issuer": {
-      "authentic_source_country": "NL",
-      "vat_id_authentic_source": "Ministerie van Financiën - Belastingdienst",
-      "issuing_authority": "Dutch Tax Administration (Belastingdienst)",
-      "attestation_legal_category": "PUB-EAA",
-      "attestation_issuing_date": 1704067200,
-      "location_status": "https://www.belastingdienst.nl/vat-status/NL001234567B01",
-      "trust_anchor": "https://www.belastingdienst.nl/trust-anchor/vat-id-2024"
+      "issuing_authority": "Dutch Tax Administration",
+      "attestation_legal_category": "PUB-EAA"
     },
 
-    "_sd": [
-      "TGf4oirLo_R_vK8t1rK3Yx-lOXKq0Pg1NRUAazf5PvU",
-      "YQ_ZVyS0A2ROe8drLSrx3SEhqiOrVTIvjuqHRGt8S0E",
-      "rT0_kIULYK7Z2Jy3c4m5n6o7p8q9r0s1t2u3v4w5x6y",
-      "4bSuT5vW6xY7zA8bB9cC0dD1e2E3f4F5g6G7h8H9i0I"
-    ],
-    "sd_hash": "sha-256"
-  },
-
-  "selectively_disclosable_claims": {
-    "administrative_unit_type": {
-      "salt": "fTHyO2-Z1a2b3c4d5e6f7g8h",
-      "value": "Private Company",
-      "claim_name": "administrative_unit_type",
-      "sha256_digest": "TGf4oirLo_R_vK8t1rK3Yx-lOXKq0Pg1NRUAazf5PvU"
-    },
-
-    "administrative_unit_address": {
-      "salt": "2xJqR8mN5o3p4q5r6s7t8u9v",
-      "value": {
-        "thoroughfare": "Amsterdamse Ring 2",
-        "location_designator": "Building A, Ground Floor",
-        "post_code": "1101 DA",
-        "post_name": "Amsterdam",
-        "admin_unit_l1": "North Holland",
-        "admin_unit_l2": "Amsterdam"
-      },
-      "claim_name": "administrative_unit_address",
-      "sha256_digest": "YQ_ZVyS0A2ROe8drLSrx3SEhqiOrVTIvjuqHRGt8S0E"
-    },
-
-    "economic_activity_type": {
-      "salt": "9aKpL4cD7eF6gH8iJ9kL0mN1",
-      "value": [
-        {
-          "nomenclature": "NACE",
-          "id": "51.1",
-          "description": [
-            { "language": "nl", "value": "Luchtvervoer van passagiers" },
-            { "language": "en", "value": "Passenger air transport" },
-            { "language": "de", "value": "Personenluftverkehr" }
-          ]
-        },
-        {
-          "nomenclature": "NACE",
-          "id": "51.2",
-          "description": [
-            { "language": "nl", "value": "Luchtvervoer van vracht" },
-            { "language": "en", "value": "Freight air transport" },
-            { "language": "de", "value": "Luftfrachtverkehr" }
-          ]
-        }
-      ],
-      "claim_name": "economic_activity_type",
-      "sha256_digest": "rT0_kIULYK7Z2Jy3c4m5n6o7p8q9r0s1t2u3v4w5x6y"
-    },
-
-    "validity_period": {
-      "salt": "4bSuT5vW6xY7zA8bB9cC0dD1",
-      "value": [
-        {
-          "start_date": "2020-01-15",
-          "end_date": "2027-12-31"
-        }
-      ],
-      "claim_name": "validity_period",
-      "sha256_digest": "4bSuT5vW6xY7zA8bB9cC0dD1e2E3f4F5g6G7h8H9i0I"
+    "status": {
+      "status_list_credential": "https://www.belastingdienst.nl/status-list/vat-id/2024",
+      "status_list_index": 12547
     }
   }
 }
