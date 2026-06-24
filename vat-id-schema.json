@@ -2,27 +2,183 @@
   "vct": "uri:eu.eudi.vat.1",
   "type": "object",
 
-  "properties": {
-    "vat_id": { "type": "string" },
+  "display": {
+    "title": {
+      "type": "string",
+      "description": "VAT-ID of the card as shown in the wallet with the label in a specific language using BCP 47",
+      "locale": "en-EN",
+      "label": "VAT-ID:"
+    }
+  },
 
-    ...
+  "properties": {
+    "vat_id": {
+      "type": "string",
+      "description": "Unique identifier for VAT purposes",
+      "example": "DE123456789",
+      "disclosable": "MUST NOT"
+    },
+
+    "administrative_unit_name": {
+      "type": "string",
+      "description": "Name of the administrative unit",
+      "example": "Siemens",
+      "disclosable": "MUST NOT"
+    },
+
+    "validity_period": {
+      "type": "array",
+      "description": "Period(s) for which the VAT-ID is valid",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2011-12-24"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2021-01-24"
+          }
+        },
+        "required": ["start_date"],
+        "additionalProperties": false
+      },
+      "disclosable": "MUST NOT"
+    },
+
+    "economic_operator": {
+      "type": "object",
+      "description": "Legal OR natural person (not both)",
+      "properties": {
+        "legal_identifier": {
+          "type": "string",
+          "example": "SEBOLREG.123456789",
+          "disclosable": "MUST"
+        },
+        "legal_name": {
+          "type": "string",
+          "example": "ACME",
+          "disclosable": "MUST"
+        },
+        "family_name": {
+          "type": "string",
+          "example": "Doe",
+          "disclosable": "MUST"
+        },
+        "given_name": {
+          "type": "string",
+          "example": "John",
+          "disclosable": "MUST"
+        },
+        "birth_date": {
+          "type": "string",
+          "format": "date",
+          "example": "1968-04-27",
+          "disclosable": "MUST"
+        },
+        "birth_place": {
+          "type": "string"
+        },
+        "tin": {
+          "type": "string"
+        },
+        "personal_administrative_number": {
+          "type": "string"
+        }
+      },
+      "disclosable": "MUST NOT"
+    },
+
+    "registered_EU_cross_border_transactions": {
+      "type": "boolean",
+      "example": true,
+      "disclosable": "MUST NOT"
+    },
+
+    "administrative_unit_type": {
+      "type": "string",
+      "example": "GmbH",
+      "disclosable": "MUST"
+    },
+
+    "administrative_unit_address": {
+      "type": "object",
+      "properties": {
+        "po_box": { "type": "string" },
+        "thoroughfare": { "type": "string" },
+        "location_designator": { "type": "string" },
+        "post_code": { "type": "string" },
+        "post_name": { "type": "string" },
+        "admin_unit_l1": { "type": "string" },
+        "admin_unit_l2": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "disclosable": "MUST"
+    },
+
+    "economic_activity_type": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nomenclature": {
+            "type": "string",
+            "enum": ["NACE","SBI","NAF","ATECO","NOGA"]
+          },
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "language": { "type": "string" },
+                "value": { "type": "string" }
+              },
+              "required": ["language", "value"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["nomenclature", "id"],
+        "additionalProperties": false
+      }
+    },
 
     "issuer": {
       "type": "object",
       "properties": {
-        "authentic_source_country": { "type": "string" },
-        "vat_id_authentic_source": { "type": "string" },
-        "issuing_authority": { "type": "string" },
+        "authentic_source_country": {
+          "type": "string",
+          "example": "NL"
+        },
+        "vat_id_authentic_source": {
+          "type": "string"
+        },
+        "issuing_authority": {
+          "type": "string"
+        },
         "attestation_legal_category": {
           "type": "string",
           "enum": ["QEAA", "PUB-EAA"]
         },
-        "attestation_issuing_date": { "type": "number" },
-        "attestation_expiry_date": { "type": "number" },
+        "attestation_issuing_date": {
+          "type": "number"
+        },
+        "attestation_expiry_date": {
+          "type": "number"
+        },
         "location_status": {
           "type": "string"
         },
-        "trust_anchor": { "type": "string" }
+        "trust_anchor": {
+          "type": "string"
+        }
       },
       "required": [
         "authentic_source_country",
@@ -37,7 +193,6 @@
 
     "status": {
       "type": "object",
-      "description": "Information for revocation or suspension checking of the credential",
       "properties": {
         "status_list_credential": {
           "type": "string"
@@ -70,4 +225,3 @@
 
   "additionalProperties": false
 }
-``
