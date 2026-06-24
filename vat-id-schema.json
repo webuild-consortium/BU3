@@ -1,108 +1,78 @@
 {
-  "vct": "uri:eu.eudi.vat.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/eudi/vat-id-attestation.json",
+
+  "title": "EUDI VAT ID Attestation",
   "type": "object",
 
-  "display": {
-    "title": {
-      "type": "string",
-      "description": "VAT-ID of the card as shown in the wallet with the label in a specific language using BCP 47",
-      "locale": "en-EN",
-      "label": "VAT-ID:"
-    }
-  },
-
   "properties": {
-    "vat_id": {
+    "vct": {
       "type": "string",
-      "description": "Unique identifier for VAT purposes",
-      "example": "DE123456789",
-      "disclosable": "MUST NOT"
+      "const": "uri:eu.eudi.vat.1"
+    },
+
+    "vat_id": {
+      "type": "string"
     },
 
     "administrative_unit_name": {
-      "type": "string",
-      "description": "Name of the administrative unit",
-      "example": "Siemens",
-      "disclosable": "MUST NOT"
+      "type": "string"
     },
 
     "validity_period": {
       "type": "array",
-      "description": "Period(s) for which the VAT-ID is valid",
       "minItems": 1,
       "items": {
         "type": "object",
         "properties": {
           "start_date": {
             "type": "string",
-            "format": "date",
-            "example": "2011-12-24"
+            "format": "date"
           },
           "end_date": {
             "type": "string",
-            "format": "date",
-            "example": "2021-01-24"
+            "format": "date"
           }
         },
         "required": ["start_date"],
         "additionalProperties": false
-      },
-      "disclosable": "MUST NOT"
+      }
     },
 
     "economic_operator": {
       "type": "object",
-      "description": "Legal OR natural person (not both)",
       "properties": {
-        "legal_identifier": {
-          "type": "string",
-          "example": "SEBOLREG.123456789",
-          "disclosable": "MUST"
-        },
-        "legal_name": {
-          "type": "string",
-          "example": "ACME",
-          "disclosable": "MUST"
-        },
-        "family_name": {
-          "type": "string",
-          "example": "Doe",
-          "disclosable": "MUST"
-        },
-        "given_name": {
-          "type": "string",
-          "example": "John",
-          "disclosable": "MUST"
-        },
+        "legal_identifier": { "type": "string" },
+        "legal_name": { "type": "string" },
+        "family_name": { "type": "string" },
+        "given_name": { "type": "string" },
         "birth_date": {
           "type": "string",
-          "format": "date",
-          "example": "1968-04-27",
-          "disclosable": "MUST"
+          "format": "date"
         },
-        "birth_place": {
-          "type": "string"
-        },
-        "tin": {
-          "type": "string"
-        },
-        "personal_administrative_number": {
-          "type": "string"
-        }
+        "birth_place": { "type": "string" },
+        "tin": { "type": "string" },
+        "personal_administrative_number": { "type": "string" }
       },
-      "disclosable": "MUST NOT"
+
+      "oneOf": [
+        {
+          "required": ["legal_identifier", "legal_name"]
+        },
+        {
+          "required": ["family_name", "given_name"]
+        }
+      ],
+
+      "additionalProperties": false
     },
 
     "registered_EU_cross_border_transactions": {
-      "type": "boolean",
-      "example": true,
-      "disclosable": "MUST NOT"
+      "type": "boolean"
     },
 
     "administrative_unit_type": {
-      "type": "string",
-      "example": "GmbH",
-      "disclosable": "MUST"
+      "type": "string"
     },
 
     "administrative_unit_address": {
@@ -116,8 +86,7 @@
         "admin_unit_l1": { "type": "string" },
         "admin_unit_l2": { "type": "string" }
       },
-      "additionalProperties": false,
-      "disclosable": "MUST"
+      "additionalProperties": false
     },
 
     "economic_activity_type": {
@@ -127,7 +96,11 @@
         "properties": {
           "nomenclature": {
             "type": "string",
-            "enum": ["NACE","SBI","NAF","ATECO","NOGA"]
+            "enum": [
+              "NACE","NACE-BEL","CZ-NACE","DB07","WZ","KAD","CNAE",
+              "NAF","NKD","ATECO","TEAOR","SBI","ONACE","PKD",
+              "CAE","CAEN","SKD","OKEC","TOL","SNI","UK SIC","NOGA"
+            ]
           },
           "id": {
             "type": "string"
@@ -155,7 +128,7 @@
       "properties": {
         "authentic_source_country": {
           "type": "string",
-          "example": "NL"
+          "pattern": "^[A-Z]{2}$"
         },
         "vat_id_authentic_source": {
           "type": "string"
@@ -174,10 +147,8 @@
           "type": "number"
         },
         "location_status": {
-          "type": "string"
-        },
-        "trust_anchor": {
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": [
@@ -187,34 +158,60 @@
         "attestation_legal_category",
         "attestation_issuing_date"
       ],
-      "additionalProperties": false,
-      "disclosable": "MUST NOT"
+      "additionalProperties": false
     },
 
     "status": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["status-list"]
+        },
         "status_list_credential": {
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "status_list_index": {
-          "type": "number"
+          "type": "integer",
+          "minimum": 0
         },
         "status_purpose": {
           "type": "string",
-          "enum": ["revocation", "suspension"]
+          "enum": ["revocation"]
         }
       },
       "required": [
+        "type",
         "status_list_credential",
-        "status_list_index"
+        "status_list_index",
+        "status_purpose"
       ],
-      "additionalProperties": false,
-      "disclosable": "MUST NOT"
+      "additionalProperties": false
+    },
+
+    "trust_anchor": {
+      "type": "string",
+      "format": "uri"
+    },
+
+    "display": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "locale": { "type": "string" },
+          "label": { "type": "string" }
+        },
+        "required": ["name", "locale", "label"],
+        "additionalProperties": false
+      }
     }
   },
 
   "required": [
+    "vct",
     "vat_id",
     "administrative_unit_name",
     "validity_period",
@@ -225,3 +222,4 @@
 
   "additionalProperties": false
 }
+``
