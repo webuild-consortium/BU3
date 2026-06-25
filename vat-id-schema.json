@@ -220,6 +220,6 @@
     "registered_EU_cross_border_transactions"
   ],
 
-  "additionalProperties": false
+  "additionalProperties": true
 }
 ``
