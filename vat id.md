@@ -18,6 +18,39 @@ providing feedback, e.g.:*
 
 * [mail the author](mailto:s.westerfield@belastingdienst.nl)
 
+## Table of Contents
+
+- [1 Introduction](#1-introduction)
+  - [1.1 Document scope and purpose](#11-document-scope-and-purpose)
+  - [1.2 Document structure](#12-document-structure)
+  - [1.3 Key words](#13-key-words)
+  - [1.4 Terminology](#14-terminology)
+- [2 Attestation attributes and metadata](#2-attestation-attributes-and-metadata)
+  - [Chapter overview and requirements](#chapter-overview-and-requirements)
+  - [2.1 Introduction](#21-introduction)
+  - [2.2 Administrative Unit](#22-administrative-unit)
+  - [2.3 Economic Operator](#23-economic-operator)
+  - [2.4 Validity Period](#24-validity-period)
+  - [2.5 Address](#25-address)
+  - [2.6 Economic Activity Type attributes](#26-economic-activity-type-attributes)
+  - [2.7 Metadata](#27-metadata)
+  - [2.8 Display](#28-display)
+  - [2.9 Code lists](#29-code-lists)
+  - [2.10 Integrity rules](#210-integrity-rules)
+- [3 Attestation encoding](#3-attestation-encoding)
+  - [3.1 ISO/IEC 18013-5-compliant encoding](#31-isoiec-18013-5-compliant-encoding)
+  - [3.2 SD-JWT VC-based encoding](#32-sd-jwt-vc-based-encoding)
+  - [3.3 W3C Verifiable Credentials Data Model-based encoding](#33-w3c-verifiable-credentials-data-model-based-encoding)
+- [4 Attestation usage](#4-attestation-usage)
+  - [4.1 Usecases](#41-usecases)
+  - [4.2 Issuing requirements](#42-issuing-requirements)
+  - [4.3 Verification needs](#43-verification-needs)
+- [5 Trust anchors](#5-trust-anchors)
+- [6 Revocation](#6-revocation)
+- [7 Compliance](#7-compliance)
+- [8 References](#8-references)
+  - [8.1 List of Alternative Nomenclatures for Activity types](#81-list-of-alternative-nomenclatures-for-activity-types)
+
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
@@ -255,8 +288,8 @@ No mandatory attributes
 
 
 
-### 2.9 Display
-#### 2.9.1 Mandatory Display items 
+### 2.8 Display
+#### 2.8.1 Mandatory Display items 
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -265,7 +298,7 @@ No mandatory attributes
 | display.issuing_authority | issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | nl-NL: Belastingdienst |
 
 
-#### 2.9.2 Optional display items
+#### 2.8.2 Optional display items
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -289,14 +322,14 @@ No mandatory attributes
   ]
 ```
 
-### 2.10 Code lists
+### 2.9 Code lists
 
 
 | **field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | economic_activity_type.nomenclature | NACE, NACE-BEL, CZ‑NACE, DB07, WZ, KAD, CNAE, NAF, NKD, ATECO, TEAOR, SBI, ONACE, PKD, CAE, CAEN, SKD, OKEC, TOL, SNI, UK SIC, NOGA | Each name refers to the local adaptation of the NACE list. | [Overview of alternative nomenclatures](#81-list-of-alternative-nace-codes) | List SHOULD be used or refer to NACE closest alternative |
 
-### 2.11 Integrity rules
+### 2.10 Integrity rules
 
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
