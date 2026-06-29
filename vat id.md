@@ -40,7 +40,6 @@ providing feedback, e.g.:*
 - [3 Attestation encoding](#3-attestation-encoding)
   - [3.1 ISO/IEC 18013-5-compliant encoding](#31-isoiec-18013-5-compliant-encoding)
   - [3.2 SD-JWT VC-based encoding](#32-sd-jwt-vc-based-encoding)
-  - [3.3 W3C Verifiable Credentials Data Model-based encoding](#33-w3c-verifiable-credentials-data-model-based-encoding)
 - [4 Attestation usage](#4-attestation-usage)
   - [4.1 Usecases](#41-usecases)
   - [4.2 Issuing requirements](#42-issuing-requirements)
@@ -436,32 +435,6 @@ Example:
   }
 }
 ```
-
-### 3.3 W3C Verifiable Credentials Data Model-based encoding
-
-*If the attestation type supports the the format specified in W3C Verifiable Credentials
-Data Model, then in this section the  corresponding encoding  of attributes and
-metadata should be defined.*
-
-*It is noted that only a a non-qualified EAA can use this format (see ARB_01a in [Topic 12])*
-
-*Tables similar to the ones specified in section 4 SHALL be defined.*
-
-*This section SHALL reference one or more documents specifying in detail how a
-Relying Party can request attributes from a such an attestation, and how a User
-can selectively disclose attributes from such an attestation. Moreover, these
-referenced documents SHALL be approved by an EU standardisation body or by the European
-Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
-[European Digital Identity Regulation] (see ARB_04 in [Topic 12]).*
-
-**example **
-````
-
-
-````
-[RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE PROOF TYPE]
 
 ## 4 Attestation usage
 
