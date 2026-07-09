@@ -148,15 +148,14 @@ certificate that signed the PuB-EAA can be found or looked up. (see ARB_20 in [T
 
 ### 2.1 Introduction
 
-The etrc attestation is an attestation provided by an authentic source such as a TAX-Administration. The attestation proves the VAT-ID of the company or administrative unit within the company and the validity period of that VAT-ID. The VAT-ID attestation only contains information directly related to the VAT-ID. 
-The VAT-ID attestation can be used by a company to prove that the company really is the company with that number. The receiver of the attestation can trust the content and there is no need for checking the VAT-ID at VIES (VAT Information Exchange System)1 or request a (paper) VAT-ID Certificate. 
-
+The etrc attestation is an attestation provided by an authentic source such as a TAX-Administration. The attestation proves how a taxable person should be taxed in the jurisdiction of the registration and of the RP. It indicates whether the taxable person has unlimiten or limited tax liability in the jurisdiction of the RP. The etrc attestation only contains information directly related to the etrc. 
+ 
 *According to Annex V point a) and  Annex VII point a) of the [European Digital Identity Regulation]
 an indication, at least in a form suitable for automated processing, that the attestation
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-This document defines the attribute "VAT-ID" which SHALL have
+This document defines the attribute "etrc" which SHALL have
 the value "QEAA" or "PuB-EAA".*
 
 
