@@ -157,6 +157,52 @@ of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for n
 This document defines the attribute "etrc" which SHALL have
 the value "QEAA" or "PuB-EAA".*
 
+````
+etrc
+├─ reference number                        [1]       (Number of the document)
+├─ entity                                  [1]       (entity that owns the etrc)
+│   ├─ name                                [1]    
+│   ├─ tax_identification_number           [1]       (tax identification number)
+│   └─ tax_identification_number_type      [1]       
+├─ natural person                          [1]       (person that owns the etrc)
+│   ├─ family_name                         [1]       
+│   ├─ given_name                          [1]       
+│   ├─ date_of_birth                       [1]       
+│   ├─ tax_identification_number           [1]              
+│   └─ tax_identification_number_type      [1]       
+├─ validity_period                         [1]       (period for which the etrc is valid)
+│   ├─ start_date                          [1]       (start date of the validity period of the etrc)
+│   ├─ end_date                            [1]       (end date of the validity period of the etrc)
+│   ├─ validity_period_type                [1]       (calendar or fiscal year)
+│   └─ remark                              [1]       (legal remark)
+├─ issuer                                  [1]          
+│   ├─ issuing_country                     [1]        
+│   ├─ issuing_organisation                [1]        (tax authority)
+│   ├─ issuing_date                        [1]        (date on which the attestation is issued)
+│   └─ attestation_issuing_organisation    [1]
+├─ treaty                                  [1]          
+│   ├─ tax_treaty_name                     [1]        (tax treaty name)
+│   ├─ tax_treaty_reference                [1]        (article of the treaty)
+│   ├─ applicable_member_state             [1]        (jurisdiction of the RP)
+│   └─ remark                              [1]
+├─ address                                 [0]          
+│   ├─ po_box                              [0]        
+│   ├─ thoroughfare                        [0]        
+│   ├─ location_designator                 [0]       
+│   ├─ post_code                           [0]       
+│   ├─ post_name                           [0]       
+│   ├─ admin_unit_L1                       [0]              
+│   └─ admin_unit_L2                       [0]       
+└─ display                                 [1]       Items to be displayd on the card in the wallet
+    ├─ title                               [1]       Name of the card displayed in wallet (etrc)
+    ├─ name                                [1]             
+    ├─ issuer_logo                         [0]       
+    ├─ isuer_name                          [1]       issuing_organisation
+    ├─ background_color                    [0]       
+    └─ text_color                          [0]       
+````
+
+
 
 *In the following subsections 2.2 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
