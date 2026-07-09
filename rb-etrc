@@ -12,11 +12,9 @@ main chapter structure while adding practical author guidance and reusable place
 *Provide information about the author(s) of this Rulebook in the following form:*
 
 * Author(s):
-    * [NAME SURNAME, AFFILIATION]
-    * [NAME SURNAME, AFFILIATION]
-* Previous Authors
-    * [NAME SURNAME, AFFILIATION (versions)]
-    * [NAME SURNAME, AFFILIATION (versions)]
+    * [Pasi Sinervo, Finnish Tax Administration; pasi.sinervo@vero.fi]
+   
+
 
 *Provide versioning information about the Rulebook in the following form:*
 
@@ -28,44 +26,60 @@ main chapter structure while adding practical author guidance and reusable place
 *Provide a contact email address and/or a link to an issue tracking system that can be used for
 providing feedback, e.g.:*
 
-**Feedback:**
+[etrc electronic tax residence certificate attestation]
 
-* <https://example.com/tracker>
+- [1 Introduction](#1-introduction)
+  - [1.1 Document scope and purpose](#11-document-scope-and-purpose)
+  - [1.2 Document structure](#12-document-structure)
+  - [1.3 Key words](#13-key-words)
+  - [1.4 Terminology](#14-terminology)
+- [2 Attestation attributes and metadata](#2-attestation-attributes-and-metadata)
+  - [Chapter overview and requirements](#chapter-overview-and-requirements)
+  - [2.1 Introduction](#21-introduction)
+  - [2.2 Administrative Unit](#22-administrative-unit)
+  - [2.3 Economic Operator](#23-economic-operator)
+  - [2.4 Validity Period](#24-validity-period)
+  - [2.5 Address](#25-address)
+  - [2.6 Economic Activity Type attributes](#26-economic-activity-type-attributes)
+  - [2.7 Metadata](#27-metadata)
+  - [2.8 Display](#28-display)
+  - [2.9 Code lists](#29-code-lists)
+  - [2.10 Integrity rules](#210-integrity-rules)
+- [3 Attestation encoding](#3-attestation-encoding)
+  - [3.1 ISO/IEC 18013-5-compliant encoding](#31-isoiec-18013-5-compliant-encoding)
+  - [3.2 SD-JWT VC-based encoding](#32-sd-jwt-vc-based-encoding)
+- [4 Attestation usage](#4-attestation-usage)
+  - [4.1 Usecases](#41-usecases)
+  - [4.2 Issuing requirements](#42-issuing-requirements)
+  - [4.3 Verification needs](#43-verification-needs)
+- [5 Trust anchors](#5-trust-anchors)
+- [6 Revocation](#6-revocation)
+- [7 Compliance](#7-compliance)
+- [8 References](#8-references)
+  - [8.1 List of Alternative Nomenclatures for Activity types](#81-list-of-alternative-nomenclatures-for-activity-types)
+
+
+
+**Feedback:**
+* [mail the author](pasi.sinervo@vero]
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-*Provide a concise explanation of the purpose of the defined attestation type, explicitly stating
-why it exists and what its primary objective is within the context of the EUDI Wallet ecosystem*
+The electronic tax residence certificate (etrc) attestation is an official document issued by a Tax Administration, that verifies the country in which the taxable person is resident for tax purposes. This attestation serves as a proof of the company’s, administrative unit’s or natural paerson's tax liability towards different jurisdictions on tax issues: unlimited or limited tax liability. It contains only information directly related to the etrc. This model is based on the Council directive 2025/50 on faster and safer relief of excess withholdinh taxes. 
 
-*In addition, authors SHOULD describe the attestation in plain language so that readers can quickly
-understand what it does in practice, who it is for, and in which use case(s) it is expected to be
-used. Content may be reused and refined from an existing attestation description where available.*
+The etrc attestation can be utilized by a company to substantiate its identity and ownership of the provided etrc. The recipient of the attestation can trust its authenticity, eliminating the need for external verification if such a process is available.
 
-*When drafting this section, authors SHOULD cover at least the following points:*
+One of the most important use cases is taxation of the investment revenues from other countries. In order to tax the income correctly the receiver of the income must present the etrc to the payer, the custodian or the tax administration in a refund application. The Council directive 2025/50 seeks to improve this use of the etrc. 
 
-* What real-world fact, entitlement, role, status, or capability the attestation expresses.
-* Which issuers, holders, and relying parties are expected to use it.
-* Which use case or user journey the attestation supports.
-* Which existing attestation description, use-case document, or functional specification can be
-used as a source for copy-paste or refinement.
-* Which terminology should remain aligned with the source attestation description.
+The etrc attestation improves other processes including opening a bank account (We Build PA1 and PA3) and opening an account of a merchant in a platform (BU1).
 
-[RULEBOOK AUTHOR TO DEFINE]
+The etrc attestation seeks to replace the traditional paper-based proof with an attestation. The etrc Attestation is expected to enhance both the efficiency and security of the process. 
 
-> Example
->
-> This attestation enables a relying party to verify, in plain language, that the holder is
-> authorised to act in a specific project role. It is intended for project operators, service
-> providers, and supervisory relying parties in the WE BUILD ecosystem. The functional description
-> and actor terminology can be reused from the corresponding use-case attestation description and
-> refined here into rulebook language.
 
 ### 1.2 Document structure
 
-*Provide a brief overview of the Rulebook's sections and their purpose. The main
-sections of the Rulebook SHOULD be*
 
 * Chapter 2, which describes the attestation attributes and metadata in an
 encoding-independent manner.
