@@ -12,11 +12,7 @@ main chapter structure while adding practical author guidance and reusable place
 *Provide information about the author(s) of this Rulebook in the following form:*
 
 * Author(s):
-    * [NAME SURNAME, AFFILIATION]
-    * [NAME SURNAME, AFFILIATION]
-* Previous Authors
-    * [NAME SURNAME, AFFILIATION (versions)]
-    * [NAME SURNAME, AFFILIATION (versions)]
+    * [Pasi Sinervo Finnish Tax Administration]
 
 *Provide versioning information about the Rulebook in the following form:*
 
@@ -29,38 +25,56 @@ main chapter structure while adding practical author guidance and reusable place
 providing feedback, e.g.:*
 
 **Feedback:**
+* [mail the author](pasi.sinervo@vero.fi)
 
-* <https://example.com/tracker>
+## Table of contents
+
+- [1 Introduction](#1-introduction)
+  - [1.1 Document scope and purpose](#11-document-scope-and-purpose)
+  - [1.2 Document structure](#12-document-structure)
+  - [1.3 Key words](#13-key-words)
+  - [1.4 Terminology](#14-terminology)
+- [2 Attestation attributes and metadata](#2-attestation-attributes-and-metadata)
+  - [Chapter overview and requirements](#chapter-overview-and-requirements)
+  - [2.1 Introduction](#21-introduction)
+  - [2.2 Administrative Unit](#22-administrative-unit)
+  - [2.3 Economic Operator](#23-economic-operator)
+  - [2.4 Validity Period](#24-validity-period)
+  - [2.5 Address](#25-address)
+  - [2.6 Economic Activity Type attributes](#26-economic-activity-type-attributes)
+  - [2.7 Metadata](#27-metadata)
+  - [2.8 Display](#28-display)
+  - [2.9 Code lists](#29-code-lists)
+  - [2.10 Integrity rules](#210-integrity-rules)
+- [3 Attestation encoding](#3-attestation-encoding)
+  - [3.1 ISO/IEC 18013-5-compliant encoding](#31-isoiec-18013-5-compliant-encoding)
+  - [3.2 SD-JWT VC-based encoding](#32-sd-jwt-vc-based-encoding)
+- [4 Attestation usage](#4-attestation-usage)
+  - [4.1 Usecases](#41-usecases)
+  - [4.2 Issuing requirements](#42-issuing-requirements)
+  - [4.3 Verification needs](#43-verification-needs)
+- [5 Trust anchors](#5-trust-anchors)
+- [6 Revocation](#6-revocation)
+- [7 Compliance](#7-compliance)
+- [8 References](#8-references)
+  - [8.1 List of Alternative Nomenclatures for Activity types](#81-list-of-alternative-nomenclatures-for-activity-types)
+
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-*Provide a concise explanation of the purpose of the defined attestation type, explicitly stating
-why it exists and what its primary objective is within the context of the EUDI Wallet ecosystem*
+The electronic tax residence certificate (etrc) attestation is an official document issued by a Tax Administration, that verifies the country in which the taxable person is resident for tax purposes. This attestation serves as a proof of the company’s, administrative unit’s or natural paerson's tax liability towards different jurisdictions on tax issues: unlimited or limited tax liability. It contains only information directly related to the etrc. This model is based on the Council directive 2025/50 on faster and safer relief of excess withholdinh taxes. 
 
-*In addition, authors SHOULD describe the attestation in plain language so that readers can quickly
-understand what it does in practice, who it is for, and in which use case(s) it is expected to be
-used. Content may be reused and refined from an existing attestation description where available.*
+The etrc attestation can be utilized by a company to substantiate its identity and ownership of the provided etrc. The recipient of the attestation can trust its authenticity, eliminating the need for external verification if such a process is available.
 
-*When drafting this section, authors SHOULD cover at least the following points:*
+One of the most important use cases is taxation of the investment revenues from other countries. In order to tax the income correctly the receiver of the income must present the etrc to the payer, the custodian or the tax administration in a refund application. The Council directive 2025/50 seeks to improve this use of the etrc. 
 
-* What real-world fact, entitlement, role, status, or capability the attestation expresses.
-* Which issuers, holders, and relying parties are expected to use it.
-* Which use case or user journey the attestation supports.
-* Which existing attestation description, use-case document, or functional specification can be
-used as a source for copy-paste or refinement.
-* Which terminology should remain aligned with the source attestation description.
+The etrc attestation improves other processes including opening a bank account (We Build PA1 and PA3) and opening an account of a merchant in a platform (BU1).
 
-[RULEBOOK AUTHOR TO DEFINE]
 
-> Example
->
-> This attestation enables a relying party to verify, in plain language, that the holder is
-> authorised to act in a specific project role. It is intended for project operators, service
-> providers, and supervisory relying parties in the WE BUILD ecosystem. The functional description
-> and actor terminology can be reused from the corresponding use-case attestation description and
-> refined here into rulebook language.
+The etrc attestation seeks to replace the traditional paper-based proof with an attestation. The etrc Attestation is expected to enhance both the efficiency and security of the process. 
+
 
 ### 1.2 Document structure
 
@@ -93,31 +107,12 @@ statements of fact.
 
 ### 1.4 Terminology
 
-*It is recommended to use the terminology defined in Annex 1 of ARF. For example
-the following text can be used.*
-
 This document uses the terminology specified in Annex 1 of the ARF.
 
 ## 2 Attestation attributes and metadata
 
 ### Chapter overview and requirements
 
-*This chapter is used for defining all attributes that an
-attestation of the defined type may contain. In this section
-the attributes SHALL be defined in an encoding-independent manner (see ARB_06 in [Topic 12]).
-Each attribute can be mandatory, optional, or conditional
-and this SHALL be specified in the corresponding section (see ARB_09 in [Topic 12]).*
-
-*When attributes are defined, referring to attributes that
-already exist in a catalogue of attestation attributes
-SHOULD be considered (see ARB_07 in [Topic 12]).*
-
-*Where use-case documentation or an attestation description already defines attribute meanings,
-logical models, code lists, or integrity constraints, authors SHOULD align terminology with those
-sources and may copy and refine that material for this Rulebook.*
-
-*[Topic 12] of Annex 2 of the ARF defines the following High-Level Requirements with
-respect to the Attestation Rulebooks:*
 
 **Requirements for QEAA**
 
@@ -149,45 +144,21 @@ of the [European Digital Identity Regulation] SHALL be included. This location S
 indicate at least the URL at which a machine-readable version of the qualified
 certificate that signed the PuB-EAA can be found or looked up. (see ARB_20 in [Topic 12])
 
-**Requirements for non-qualified EAA**
 
-* An attribute indicating that the attestation is an EAA should be included (see ARB_12 in [Topic 12]).
-See also section 2.1.
-* One or more attributes or metadata representing the set of data meant in Annex
-V point b) of the [European Digital Identity Regulation] SHALL be included (see ARB_15 in [Topic 12]).
-* One or more attributes representing the set of data meant in Annex V point c) of the
-[European Digital Identity Regulation] SHOULD be included (see ARB_17 in [Topic 12])
-* One or more attributes representing the set of data meant in Annex V point e) of
-the [European Digital Identity Regulation] SHOULD be defined (see ARB_19 in [Topic 12]).
-* One or more attributes or metadata representing the location at which a machine-readable
-version of the trust anchor to be used for verifying the EAA can be found or
-looked up SHOULD be defined. What this location indicates precisely is dependent
-on the nature of the mechanism used for distributing trust anchors, detailed in section
-5 (see ARB_21 in [Topic 12])
 
 ### 2.1 Introduction
 
-*In this section, briefly introduce the overall design and purpose of the specific attestation type
-defined by this Rulebook, including key decisions regarding its attributes and
-legal categorization.*
+The etrc attestation is an attestation provided by an authentic source such as a TAX-Administration. The attestation proves the VAT-ID of the company or administrative unit within the company and the validity period of that VAT-ID. The VAT-ID attestation only contains information directly related to the VAT-ID. 
+The VAT-ID attestation can be used by a company to prove that the company really is the company with that number. The receiver of the attestation can trust the content and there is no need for checking the VAT-ID at VIES (VAT Information Exchange System)1 or request a (paper) VAT-ID Certificate. 
 
 *According to Annex V point a) and  Annex VII point a) of the [European Digital Identity Regulation]
 an indication, at least in a form suitable for automated processing, that the attestation
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-This document defines the attribute "attestation_legal_category" which SHALL have
-the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*
+This document defines the attribute "VAT-ID" which SHALL have
+the value "QEAA" or "PuB-EAA".*
 
-*For complex attestations, authors SHOULD include or reference a logical model, diagram, or similar
-representation that explains the main entities, relationships, and attribute groupings. Such models
-may often be reused from an existing attestation description or use-case documentation.*
-
-> Example
->
-> The attestation description for Use Case X already contains a domain model showing the holder,
-> issuer, project, permit, and validity period. That model may be copied here and adjusted so that
-> the terminology exactly matches the rulebook.
 
 *In the following subsections 2.2 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
