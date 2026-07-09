@@ -57,7 +57,6 @@ providing feedback, e.g.:*
 - [6 Revocation](#6-revocation)
 - [7 Compliance](#7-compliance)
 - [8 References](#8-references)
-  - [8.1 List of Alternative Nomenclatures for Activity types](#81-list-of-alternative-nomenclatures-for-activity-types)
 
 
 ## 1 Introduction
