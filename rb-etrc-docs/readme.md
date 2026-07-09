@@ -459,25 +459,37 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 
 ## 4 Attestation usage
 
-*Briefly describe the primary use cases or scenarios for which this attestation
-type is intended*
+### 4.1 Usecases
+The etrc attestion aims to be used in two general usecases, but it could be used elsewhere. The first usecae is where the relying party requires proof that the taxable person is resident for tax issues in some country. This helps the RP to determine whether this taxable person has unlimited or limited tax responsibility in the country of RP. In the 'paper' world, the relying party would request a 'Tax Residence or Tax Domicile Certificate' relyably issued by the relevant Tax Authority, and in some cases notarized and shared through Apostille. The taxable person requests the Certificate, and it will be sent to the registered address of the taxable person or downloaded from a portal. The Certificate is printed on paper (or pdf) of the Tax Authority and or contains stamps, signature or other ways to proof its validity. If required, the certificate is notarized before sharing to the RP.
 
-*Additionally, in this section it SHOULD  be specified whether a Relying Party receiving the attestation
-must request and verify a PID (see ARB_27 in [Topic 12]). Also beyond PID verification,
-it SHOULD be defined what other key obligations does a Relying Party have when processing
-this attestation type (e.g., signature verification, freshness checks)*
+The second usecase is where a taxable person wants to open an account in a bank. The bank needs for its' KYC procedure a proof of the taxable person's residency for taxation: use cases We Build PA1 and PA3. 
 
-*Furthermore, provide potential presentation requirements, e.g., are there specific
-requirements for how this attestation must be presented (e.g., online, offline, specific protocols)?"*
+### 4.2 Issuing requirements
+The etrc attestation may only be issued to the wallet of the organisation that holds the etrc, or to the wallet of an Agent (natural or legal person) that can prove that he is allowed to act upon the holder for this service. The attestation should be considered private. In order to issue the etrc attestation to the Economic Operator itself the issuing party SHOULD: Verify the identity of the Economic Opereator and issue the etrc attestation to the wallet of that Economic Operator. 
 
-*Specify whether an attestation of this type SHALL or SHOULD be device-bound or non-device-bound, see ARB_34 in [Topic 12]*
+If an agent wishes to receive the attestation of another economic operator, the issuing party SHOULD:
+* Check the identity of the Agent
+    - check if the agent has a mandate with the right scope and actors
+      -    the mandate is not revoked
+      -    the mandate is currenty valid     
 
-*If an attestation of this type is device-bound, specify if it SHALL, SHOULD or MAY be cryptographically bound to another type of attestation on the same Wallet Unit. If needed (based on this decision), include the attribute `cryptographically_bound_to` defined in ARB_28 as an optional, recommended, or mandatory attribure in [Section 2.5](#26-optional-metadata). If present in an Attestation Rulebook, the identifier for this attribute SHALL be "cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be a `tstr` or `string` (as applicable) containing an attestation type or vct (see ARB_05). Finally, specify the value of the `tstr` or `string`.* 
 
-*EXAMPLE   In case an attestation type of this type must be bound to a PID, the value of the `tstr` or `string` must be set to "eu.europa.ec.eudi.pid.1" or "urn:eudi:pid:1". Note that it does not matter whether the attestation type or the vct value is used.*
+### 4.3 Verification needs
+The etrc provides a proof that the Economic Operator or natural person, registered in the attestation, is the owner of the etrc. It does not prove that the party that presents the attestation also is the owner of the attestation. The etrc attestion can also be issued to an Agent ( Intermediary party including financial institutions or custodians), if they have the right mandate to receive the attestation. However the mandate may be revoked by the owner, but the etrc attestation will (likely) not be revoked. Therefore the attestation itself (even if holderbinding is active) is not proof that the presenter actually holds, or may present the attestation. 
 
-*Finally, in this section information about potential transactional data
-SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
+The relying party SHOULD:
+- Check the status of revocation and expiary date of the attestation.
+- Check the validy period in the attestation.
+
+- Check if the Economic Operator in the Attestation is:
+   - equal to the owner of the EBW (via EBWOID, PID, or other means) OR
+   - has a mandate with the right scope and actors
+      -    the mandate is not revoked
+      -    the mandate is currenty valid     
+
+If the relying party does not perform all verification aspects, he MUST accept the risks involved. 
+
+The attestation SHALL be non-device-bound. The relying party SHOULD check the ownership of the etrc using the method described above. Device binding might create a false sence of trustworthyness. Because the etrc can be issued to an itermediary organisation, using a mandate, presenting the etrc is no proof of owenership. The etrc attestation will not be revoked by the issuer, when the mandate is revoked. 
 
 ## 5 Trust anchors
 
@@ -501,33 +513,11 @@ and the QTSP may use an intermediate signing certificate. All other things
 being equal, the verification of a PuB-EAA will therefore involve one or more
 extra certificates, compared to the verification of a PID or QEAA.
 
-*For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
-how the attributes or metadata representing the location at which a machine-readable
-version of the trust anchor to be used for verifying the attestation can be found,
-specified in section 2, are used. This includes a detailed description about how
-a Relying Party can obtain the trust anchors, as well as a detailed description about
-how this trust anchor can be used for verifying that the provider is authorized
-to issue the attestation. Additionally, for non-qualified EAA Providers this section
-MAY include a description of mechanisms that can be used by a Wallet Unit for
-verifying that the provider is authorized to issue this type of attestation (see
-ISSU_34 in [Topic 10])*
 
 ## 6 Revocation
+The etrc Attestation SHOULD preferably be issued as a longlived attestation. In order to make sure the attestation reflects the current situation, the issuer MUST have revocation in place. An issuer must revoke the attestation following an event that would render any part of the content invalid.
 
-(Refer to [Topic 7] of the ARF for a list of High-Level Requirements related to Revocation)
-
-*In this section information about the revocation mechanism used SHALL be defined.*
-
-*For PID, QEAA, or PuB-EAA it SHALL  be defined whether  only short-lived attestations
-will be used, having a validity period of 24 hours or less, such that revocation
-will never be necessary, or that the attestations are revocable.*
-
-*For revocable attestations it SHALL be defined which of the following methods must be implemented:*
-
-* Use an Attestation Status List mechanism included in a Technical Specification
-that will be specified by the Commission.
-* Use an Attestation Revocation List mechanism included in a Technical Specification
-that will be specified by the Commission.
+When the attestation is issued by a QTSP outside the Authentic Source it should receive information from the authentic source in case attributes of the attestation change at the source. If the QTSP cannot receive this information, the attestation MUST be shortlived. 
 
 ## 7 Compliance
 
@@ -550,8 +540,13 @@ general EUDI framework, ARF, and relevant regulations*
 | [RFC 8943] | RFC 8943  - Concise Binary Object Representation (CBOR) Tags for Date, M. Jones et al., November 2020 |
 | [RFC 8949] | RFC 8949 - Concise Binary Object Representation (CBOR), C. Bormann et al., December 2020 |
 | [SD-JWT VC] |  SD-JWT-based Verifiable Credentials (SD-JWT VC). Available: <https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/>, version draft-ietf-oauth-sd-jwt-vc-09  |
-| [Topic 7] | ARF Annex 2 - Topic 7 - Attestation revocation and revocation checking Available: <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a235-topic-7---attestation-revocation-and-revocation-checking>|
-| [Topic 10] | ARF Annex 2 - Topic 10 - Issuing a PID or attestation to a Wallet Unit: <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a237-topic-10---issuing-a-pid-or-attestation-to-a-wallet-unit>|
-| [Topic 12] | ARF Annex 2 - Topic 12 - Attestation Rulebooks, Available: <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a239-topic-12---attestation-rulebooks>|
-| [Topic 20] | ARF Annex 2 - Strong User authentication for electronic payments, Available: <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2313-topic-20---strong-user-authentication-for-electronic-payments>|
+| [Topic 7] | ARF Annex 2 - Topic 7 - Attestation revocation and revocation checking Available: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a237-topic-7-attestation-revocation-and-revocation-checking>|
+| [Topic 10] | ARF Annex 2 - Topic 10 - Issuing a PID or attestation to a Wallet Unit: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2310-topic-10-issuing-a-pid-or-attestation-to-a-wallet-unit>|
+| [Topic 12] | ARF Annex 2 - Topic 12 - Attestation Rulebooks, Available: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks>|
+| [Topic 20] | ARF Annex 2 - Strong User authentication for electronic payments, Available: <https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments>|
 | [W3C VCDM v2.0] | Sporny, M. *et al,* Verifiable Credentials Data Model v2.0, W3C Recommendation.  |
+
+
+
+
+ |
