@@ -230,6 +230,16 @@ avoid natural-language ambiguities.*
 | tax_identification_number_type                | type of identifier                          | class type | string       | legalIdentifier |
 
 
+### 2.4 Validity Period
+#### 2.4.1 Mandatory attributes
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| validity_period.start_date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
+| validity_period.end_date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-01-24|
+| validity_period_type               | covered period                | fiscal or calendar year | String | fiscal year          |
+| remark            |                  |  Legal remark           | Legal remark           | ...  |
+
+
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |------------------------|--------------------------|--------------|--------------|--------------|
 | *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
