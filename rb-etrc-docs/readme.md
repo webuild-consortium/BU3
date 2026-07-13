@@ -4,7 +4,7 @@
 | 1.0 | 02-04-2026 | Added WE BUILD v1 author guidance in Sections 1.1 and 2.1 and introduced Sections 2.8 Code lists and 2.9 Integrity rules. |
 | 1.1 | 08-04-2026 | Added a Semantic Reference column to Chapter 2 attribute and metadata tables. |
 
-# WE BUILD Attestation Rulebook Template for attestations of type *ADD THE ATTESTATION TYPE HERE*
+# WE BUILD Attestation Rulebook Template for attestations of type *etrc electronic tax residence certificate*
 
 *This WE BUILD v1 template is derived from the EUDI attestation rulebook template and keeps its
 main chapter structure while adding practical author guidance and reusable placeholders.*
@@ -221,6 +221,15 @@ avoid natural-language ambiguities.*
 
 ### 2.2 Mandatory attributes
 
+### 2.2 Entity
+#### 2.2.1 Mandatory attributes
+| data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| name  | legalName             | Name of the entity     | String           | Siemens AG        |
+| tax_identification_number       | identifyer             | tax identification number    | String           | 012345678-9        |
+| tax_identification_number_type                | type of identifier                          | class type | string       | legalIdentifier |
+
+
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |------------------------|--------------------------|--------------|--------------|--------------|
 | *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
@@ -236,24 +245,70 @@ avoid natural-language ambiguities.*
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |------------------------|--------------------------|--------------|--------------|--------------|
 | *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+### 2.5 Address
+#### 2.5.1 Mandatory attributes
+No mandatory attributes
+#### 2.5.2 Optional attributes
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| address.po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
+| address.thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
+| address.location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
+| address.post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | tstr | 12345 |
+| address.post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
+| address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
+| address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
+
+
+
 
 ### 2.5 Mandatory metadata
+### 2.7 Metadata
+#### 2.7.1 Mandatory metadata 
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| issuer.authentic_source_country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | date | 05 |
+| issuer.etrc_authenticsource | authenticSource | Name of the administrative authority that issued the etrc. This is the authentic source for the etrc, which may differ from the issuer of the attestation| tstr |  |
+| issuer.country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | tstr |  |
+| issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the etrc attestation, in a specific language using  BCP 47 | tstr |  |
+| issuer.attestation_legal_category | issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
+| issuer.attestation_issuing_date | iat | The date the attestation was issued | Number (Unix timestamp) | |
+| issuer.attestation_expiry_date | exp | The date the attestation was issued | Number (Unix timestamp) | |
 
-### 2.6 Optional metadata
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+#### 2.7.2 Optional metadata
 
-### 2.7 Conditional metadata
+| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| issuer.location_status      | locationStatus| The location of validity status information on the VAT ID used for revocation/suspension checks.|tstr||
+| trust_anchor         | trustAnchor| This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the etrc can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |tstr||
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+
+
+### 2.8 Display
+#### 2.8.1 Mandatory Display items 
+
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| display.title | title | etrc of the card as shown in the wallet with the label in a specific language using  BCP 47 | String | en-EN: etrc: 123456789 |
+| display.organisation_name| organisation_name | Name of the administrative organisation,SHOULD be the same as economic_operator.organisation_name| tstr |  |
+| display.issuing_authority | issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | fi-FI: Verohallinto |
+
+
+#### 2.8.2 Optional display items
+
+| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| display.subtitle | subtitle | Additional reference to a part of the organisation if the organisation has multiple administrative units | tstr |  |
+| display.issuer_logo | issuer_logo | Logo of the issuer base64 encoded SVG, PNG or JPG | tstr |  |
+| background_color | background_color | Hex-colour voor de background. **formally not part of the Display object** | tstr | |
+| text_color | text_color |Hex-colour voor de text **formally not part of the Display object**  | tstr | |
+
+
+
+
+
 
 ### 2.8 Code lists
 
