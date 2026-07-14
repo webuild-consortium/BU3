@@ -204,20 +204,8 @@ etrc
 
 
 
-*In the following subsections 2.2 - 2.7 define in an encoding independent manner all
-mandatory, optional, and conditional attributes and metadata. In each subsection
-provide a table of the following form. When applicable, use Sections 2.8 and 2.9 to document
-code lists and integrity rules that are needed to interpret these attributes consistently:*
 
-*Where available, authors SHOULD include a stable semantic term reference (for example a URI,
-IRI, or controlled identifier from an agreed semantics catalogue) for each attribute or metadata item.*
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a unique attribute identifier* | *Provide a stable semantics term reference* | *Briefly describe the semantic of this attribute* | *Provide a type, e.g., integer, string, boolean, date.* | *Give an example value* |
-
-*NOTE Data identifiers should be unambiguous, machine-readable where possible, and
-avoid natural-language ambiguities.*
 
 ### 2.2 Mandatory attributes
 
@@ -240,21 +228,28 @@ avoid natural-language ambiguities.*
 | remark            |                  |  Legal remark           | Legal remark           | ...  |
 
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+### 2.2 Relevant Double Tax Treaty 
+#### 2.2.1 Mandatory attributes
+| data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
+|--------|----------|--------------------------------------------------------------------------|------------|--------------|
+| tax_treaty_name                        | relevantDoubleTaxTreaty                  | Double Tax Treaty    | String        | Netherlands and Finland       |
+| tax_treaty_reference      | additionalInformation             | for which purposes is requested    | String           | article 10 dividends      |
+| applicable_member_state       |   theAuthoritiesOf                        | States where treaty is apllied  | String       | Netherlands and Finland |
+| remark          |        | legal remark | string        | ..|
 
-### 2.3 Optional attributes
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+#### 2.3 Person
 
-### 2.4 Conditional attributes
+| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|--------|----------|---------------------------------------------------------------|------------|--------------|
+| family_name | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
+| person.given_name | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
+| person.birth_date | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 1968-04-27 |
+| economic_operator.birth_place | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
+| person.tin | tin | tax reference number | tstr |  |
+| tax_identification_number_type. | type if number | tax identification number | tstr | 123456782 |
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|------------------------|--------------------------|--------------|--------------|--------------|
-| *Provide a value* | *Provide a value or N/A* | *Provide succinct text* | *Provide a value* | *Provide a value* |
+
 ### 2.5 Address
 #### 2.5.1 Mandatory attributes
 No mandatory attributes
