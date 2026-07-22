@@ -441,73 +441,84 @@ Finally, illustrative examples SHALL be included.
 
 ### 3.2 SD-JWT VC-based encoding
 
-*If the attestation type supports the format specified in "SD-JWT-based Verifiable
-Credentials (SD-JWT VC)", then in this section the SD-JWT VC-compliant encoding
-of attributes and metadata SHALL be defined. It SHALL be ensured that the attestations
-comply with the 'SD-JWT VCs' profile specified in [HAIP] (see ARB_01b in [Topic 12]).*
+| **Data Identifier**                | **Attribute identifier**             | **Encoding format**    |**Reference/Notes** |**Disclosable**|
+|--------#### 3.2.1 Attribute Encoding Table
+--------------------------- |--------------------------------------|------------------------|--------------------|---------------|
+| entity.name              |legal.name | name of an entity    | String                 |                    | MUST NOT|
+| entity.tax_identification_number           |tax_identification_number              | String                 |                    | MUST NOT|
+| validity_period                    |validity_period                       | Array [validity period]|                    | MUST NOT|
+| entity                  | economic_operator                    | Object                 | ..                 | MUST NOT|
+| issuer                             | issuer                               | Object                 | ..                 | MUST NOT|
+| treaty           | tax treaty             | Object                 | ...                | MUST NOT   |
+| person        | natural person          | Object                 | ...                | MUST NOT|
+| address| address         | Object | ..                 | MUST |
+| entity.legal_identifier | entity.legal_identifier   | String                 | ..                 | MUST NOT |
+| entity.legal_name       | entity.legal_name         | String                 | ..|  MUST NOT |
+| person.family_name      | person.family_name        | String                 | .. | MUST NOT|
+| person.given_name       | person.given_name         | String                 | .. |MUST NOT|
+| person.birth_date       | person.birth_date         | String (ISO 8601 YYYY-MM-DD)| ..| MUST NOT|
+| treaty.tax_treaty_name      | relevantDoubleTaxTreaty        | String                 | .. | MUST NOT|
+| treaty.tax_treaty_reference              | additionalInformation                | String                 | .. |MUST NOT|
+| person.tax_identification_number                         | person.tin |String | .. |MUST|
+| validity_period.start_date         | validity_period.start_date        | String (ISO 8601 YYYY-MM-DD)| .. |MUST NOT| 
+| validity_period.end_date           | validity_period.end_date          | String (ISO 8601 YYYY-MM-DD)| .. |MUST NOT| 
+| address.po_box                     | address.po_box                       | String                 | .. |MUST|
+| address.thoroughfare               | address.thoroughfare                 | String                 | .. |MUST|
+| address.location_designator        | address.location_designator          | String                 | .. |MUST|
+| address.post_code                  | address.post_code                    | String                 | .. |MUST|
+| address.post_name                  | address.post_name                    | String                 | .. |MUST|
+| address.admin_unit_L1              | address.admin_unit_L1                | String                 | .. |MUST|
+| address.admin_unit_L2              | address.admin_unit_L2                | String                 | .. |MUST|
+| issuer.authentic_source_country    | issuer.authentic_source_country      |String (iso 3166-2)|..| MUST NOT 
+| issuer.etrc_authenticsource      | issuer.etrc_authenticsource        | String | ..| MUST NOT|
+| issuer.country                     | issuer.country                       |String | ..| MUST NOT| 
+| issuer.issuing_authority           | issuer.issuing_authority             | String | ..| MUST NOT|
+| issuer.attestation_legal_category  | issuer.attestation_legal_category    |String | ..| MUST NOT| 
+| issuer.location_status             | issuer.location_status               |String (URI)|..|MUST NOT|
+| trust_anchor                       | trustAnchor                          | String (URI) |..|MUST NOT|
+| issuer.issuance_date               | `iat`                                | Number (Unix timestamp)      | The date and time when the attestation was issued (ISO 8601); RFC 7519 / Section 2.5  | MUST NOT        |
+| issuer.expiry_date                   | `exp`                                | Number (Unix timestamp)      | The date and time when the attestation expires (ISO 8601); RFC 7519 / Section 2.5    | MUST NOT        |
 
-*It is noted that a Schema Provider MAY specify in the Attestation
-Rulebook that that type of attestation must be issued in the [SD-JWT VC]-compliant
-format, provided the [SD-JWT VC] specification has been approved by an EU standardisation
-body or by the European Digital Identity Cooperation Group established pursuant to
-Article 46e(1) of the [European Digital Identity Regulation] (see ARB_03 in [Topic 12]).*
+**Notes:**
 
-*In this section, a Verifiable Credential Type (`vct`) SHALL be defined,
-which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).*
+- **MUST**: The claim SHALL be selectively disclosable — the holder MAY choose to disclose or
+  withhold this claim when presenting the credential to a Relying Party.
+- **MUST NOT**: The claim SHALL NOT be selectively disclosable — it is always present in plain
+  text in the JWT header/payload and cannot be withheld by the holder, as it is required for
+  credential verification and trust establishment.
+- `iat` and `exp` follow RFC 7519 standard JWT claim naming conventions.
 
-[RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
+#### 3.2.2 Status Claim
 
-*Additionally, when specifying new attributes, existing conventions
-for attribute identifier values and attribute syntaxes SHOULD
-be considered (see ARB_07 in [Topic 12]).*
+For SD-JWT VC-compliant Ownership attestations, the attestation MUST include a `status`
+claim if the technical validity period is greater than 24 hours. This claim enables Relying
+Parties to determine if a credential has been revoked via a status list mechanism, as specified
+in SD-JWT VC.
 
-*Rulebook authors SHALL ensure that each claim name is either
+The `status` claim SHALL be a JSON object with the following members:
 
-* included in the IANA registry for JWT claims,
-* is a Public Name as defined in [RFC 7519], or
-* or is a Private Name specific to the attestation type. (see ARB_06b in [Topic 12]).*
+- `type` (string): SHALL be `"status-list"`.
+- `status_list_credential` (string, URI): The URI of the Status List Credential document that
+  contains the status bitstring.
+- `status_list_index` (integer, >= 0): The zero-based index into the status list bitstring that
+  corresponds to this credential.
+- `status_purpose` (string): SHALL be `"revocation"` for this attestation.
 
-*For all claims (i.e., all top-level properties, all nested properties, and all array entries),
-the Rulebook SHALL specify whether an Attestation Provider MUST, MAY, or MUST NOT make that
-claim selectively disclosable (see ARB_30 in [Topic 12]).*
+Example:
 
-*Rulebook authors SHOULD consider defining a Type Metadata Document for the attestation type
-specified in the Rulebook, as defined in Chapter 6 of [SD-JWT VC]. If such a document is defined,
-it SHOULD contain the Claim Selective Disclosure Metadata (defined in Section 9.3 of [SD-JWT VC])
-for each of the claims, in order to specify if that claim is selectively disclosable (see ARB_31
-in [Topic 12]).*
+```json
+{
+  "status": {
+ "type": "status-list",
+ "status_list_credential": "https://issuer.example.com/status/ownership/2025",
+ "status_list_index": 456,
+ "status_purpose": "revocation"
+  }
+}
+```
 
-*IANA-registered claims should be presented in table that
-includes their data identifier, attribute identifier,
-encoding format, and reference or note. For example,*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
-|-------------------- |--------------------------|---------------------|--------------------|---------------|
-| family_name | family_name | string | Section 5.1 of [OIDC] | MUST |
 
-*A similar table should be used for Public Names and for Private Names specific
-to the attestation type defined in this document. For
-example:*
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
-|---------------------|--------------------------|---------------------|-----------|---------------|
-| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
-
-*The corresponding entry for the "attestation_legal_category" attribute defined
-in Section 2.1 SHALL be:*
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
-|---------------------|--------------------------|---------------------|-----------|---------------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
-
-Finally, illustrative examples SHALL be included.
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE JWT CLAIM SET USED BY THE PROVIDER]
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE ISSUED SD-JWT (IN base64 ENCODING)]
-
-[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF A HUMAN READABLE VERSION OF THE SD-JWT PAYLOAD
-AND A DESCRIPTION OF THE DISCLOSURES INCLUDED IN THE EXAMPLE]
 
 ### 3.3 W3C Verifiable Credentials Data Model-based encoding
 
