@@ -347,14 +347,8 @@ using namespace std::chrono;   const auto today = floor<days>(system_clock::now(
     const year_month_day ymd{today};
     const year_month_day start_prev_year{
         (ymd.year() - years{1}) / January / 1
-    }; | Validity periods can start from the 1st day of the previous calendar or tax year||
+    }; | Validity periods can start from the 1st day of the previous calendar or tax year|
 
-*Use this section to define integrity or consistency rules that are not fully captured by the
-encoding format or schema alone, such as cross-field dependencies, temporal consistency checks,
-mutual exclusivity, or conditional combinations of values.*
-
-*Integrity rules may be copied and refined from an attestation description, logical model, or
-business-rule specification where available.*
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
