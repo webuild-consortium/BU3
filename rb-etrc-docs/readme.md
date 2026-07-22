@@ -35,15 +35,14 @@ providing feedback, e.g.:*
   - [1.3 Key words](#13-key-words)
   - [1.4 Terminology](#14-terminology)
 - [2 Attestation attributes and metadata](#2-attestation-attributes-and-metadata)
-  - [Chapter overview and requirements](#chapter-overview-and-requirements)
-  - [2.1 Introduction](#21-introduction)
-  - [2.2 Administrative Unit](#22-administrative-unit)
-  - [2.3 Economic Operator](#23-economic-operator)
-  - [2.4 Validity Period](#24-validity-period)
-  - [2.5 Address](#25-address)
-  - [2.6 Economic Activity Type attributes](#26-economic-activity-type-attributes)
-  - [2.7 Metadata](#27-metadata)
-  - [2.8 Display](#28-display)
+  - [Chapter overview and requirements](#chapter-overview-and-requirement]
+  - [2.1 Entity](#21-entity)
+  - [2.2 Validity period](#22-validity_period)
+  - [2.3 Relevant tax treaty](#23 relevantDoubleTaxTreaty)
+  - [2.4 person](#24-Person)
+  - [2.3 Address](#23-Address)
+  - [2.6 Metadata](#27-metadata)
+  - [2.7 Display](#28-display)
   - [2.9 Code lists](#29-code-lists)
   - [2.10 Integrity rules](#210-integrity-rules)
 - [3 Attestation encoding](#3-attestation-encoding)
@@ -207,10 +206,10 @@ etrc
 
 
 
-### 2.2 Mandatory attributes
+### 2. Attributes
 
-### 2.2 Entity
-#### 2.2.1 Mandatory attributes
+### 2.1 Entity
+
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | name  | legalName             | Name of the entity     | String           | Siemens AG        |
@@ -218,8 +217,8 @@ etrc
 | tax_identification_number_type                | type of identifier                          | class type | string       | legalIdentifier |
 
 
-### 2.4 Validity Period
-#### 2.4.1 Mandatory attributes
+### 2.2 Validity Period
+
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | validity_period.start_date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
@@ -228,8 +227,8 @@ etrc
 | remark            |                  |  Legal remark           | Legal remark           | ...  |
 
 
-### 2.2 Relevant Double Tax Treaty 
-#### 2.2.1 Mandatory attributes
+### 2.3 Relevant Double Tax Treaty 
+
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | tax_treaty_name                        | relevantDoubleTaxTreaty                  | Double Tax Treaty    | String        | Netherlands and Finland       |
@@ -238,7 +237,7 @@ etrc
 | remark          |        | legal remark | string        | ..|
 
 
-#### 2.3 Person
+#### 2.4 Person
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|---------------------------------------------------------------|------------|--------------|
@@ -250,10 +249,8 @@ etrc
 | tax_identification_number_type. | type if number | tax identification number | tstr | 123456782 |
 
 
-### 2.5 Address
-#### 2.5.1 Mandatory attributes
-No mandatory attributes
-#### 2.5.2 Optional attributes
+### 2.5 Address optional
+
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
 | address.po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
@@ -264,12 +261,8 @@ No mandatory attributes
 | address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
 | address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
 
-
-
-
-### 2.5 Mandatory metadata
-### 2.7 Metadata
-#### 2.7.1 Mandatory metadata 
+### 2.6 Mandatory metadata
+#### 2.6.1 Mandatory metadata 
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -282,7 +275,7 @@ No mandatory attributes
 | issuer.attestation_expiry_date | exp | The date the attestation was issued | Number (Unix timestamp) | |
 
 
-#### 2.7.2 Optional metadata
+#### 2.6.2 Optional metadata
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -291,8 +284,8 @@ No mandatory attributes
 
 
 
-### 2.8 Display
-#### 2.8.1 Mandatory Display items 
+### 2.7 Display
+#### 2.7.1 Mandatory Display items 
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -301,7 +294,7 @@ No mandatory attributes
 | display.issuing_authority | issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | fi-FI: Verohallinto |
 
 
-#### 2.8.2 Optional display items
+#### 2.7.2 Optional display items
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
