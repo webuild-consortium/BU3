@@ -336,6 +336,19 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 
 ### 2.9 Integrity rules
 
+
+| **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
+|-------------|--------------------|-------------------|--------------------|-------------------------------------------|
+| EO1 | If 'economic_Operator.legal_identifier' is present, only 'economic_Operator.legal_name', all other variables SHALL be NULL. If 'economic_Operator.legal_identifier' is NULL, 'Tin' OR 'personal_Administrative_Number' OR "Personal Identifiers that can be linked to the PID" SHALL be filled. | There may only be one reference to the holder of the Wallet. If there is more than one, there could be an inconsistancy  | *Issuer, verifier, schema validation, or business process* | *Describe rejection, warning, or remediation behavior* |
+| VP1 | validity_Period.end_Date' <= 'issuer.issuance_date' | Validity period ends at issuance date | The etrc may not be given for the future|
+| VP2 | 'validity_period.start_date' >= previous year's first date || == tax year's start date ; 
+
+using namespace std::chrono;   const auto today = floor<days>(system_clock::now());
+    const year_month_day ymd{today};
+    const year_month_day start_prev_year{
+        (ymd.year() - years{1}) / January / 1
+    }; | Validity periods can start from the 1st day of the previous calendar or tax year||
+
 *Use this section to define integrity or consistency rules that are not fully captured by the
 encoding format or schema alone, such as cross-field dependencies, temporal consistency checks,
 mutual exclusivity, or conditional combinations of values.*
