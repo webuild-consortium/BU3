@@ -440,11 +440,10 @@ Finally, illustrative examples SHALL be included.
 [RULEBOOK AUTHOR TO PROVIDE THE ATTRIBUTES AND THEIR VALUES INCLUDED IN THE EXAMPLE]
 
 ### 3.2 SD-JWT VC-based encoding
-
+#### 3.2.1 Attribute Encoding Table
 | **Data Identifier**                | **Attribute identifier**             | **Encoding format**    |**Reference/Notes** |**Disclosable**|
-|--------#### 3.2.1 Attribute Encoding Table
---------------------------- |--------------------------------------|------------------------|--------------------|---------------|
-| entity.name              |legal.name | name of an entity    | String                 |                    | MUST NOT|
+|----------------------------------- |--------------------------------------|------------------------|--------------------|---------------|
+| entity.name              |legal.name |  String            |   name of an entity                   | MUST NOT|
 | entity.tax_identification_number           |tax_identification_number              | String                 |                    | MUST NOT|
 | validity_period                    |validity_period                       | Array [validity period]|                    | MUST NOT|
 | entity                  | economic_operator                    | Object                 | ..                 | MUST NOT|
