@@ -159,11 +159,11 @@ the value "QEAA" or "PuB-EAA".*
 ````
 etrc
 ├─ reference number                        [1]       (Number of the document)
-├─ entity                                  [1]       (entity that owns the etrc)
+├─ entity                                  [0]       (entity that owns the etrc)
 │   ├─ name                                [1]    
 │   ├─ tax_identification_number           [1]       (tax identification number)
 │   └─ tax_identification_number_type      [1]       
-├─ natural person                          [1]       (person that owns the etrc)
+├─ natural person                          [0]       (person that owns the etrc)
 │   ├─ family_name                         [1]       
 │   ├─ given_name                          [1]       
 │   ├─ date_of_birth                       [1]       
@@ -179,12 +179,12 @@ etrc
 │   ├─ issuing_organisation                [1]        (tax authority)
 │   ├─ issuing_date                        [1]        (date on which the attestation is issued)
 │   └─ attestation_issuing_organisation    [1]
-├─ treaty                                  [1]          
+├─ treaty                                  [1..n]          
 │   ├─ tax_treaty_name                     [1]        (tax treaty name)
 │   ├─ tax_treaty_reference                [1]        (article of the treaty)
 │   ├─ applicable_member_state             [1]        (jurisdiction of the RP)
 │   └─ remark                              [1]
-├─ address                                 [0]          
+├─ address                                 [1]          
 │   ├─ po_box                              [0]        
 │   ├─ thoroughfare                        [0]        
 │   ├─ location_designator                 [0]       
