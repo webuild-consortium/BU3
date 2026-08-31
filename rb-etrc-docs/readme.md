@@ -159,11 +159,11 @@ the value "QEAA" or "PuB-EAA".*
 ````
 etrc
 ├─ reference number                        [1]       (Number of the document)
-├─ entity                                  [0]       (entity that owns the etrc)
+├─ legal_person                            [0]       (entity that owns the etrc)
 │   ├─ name                                [1]    
 │   ├─ tax_identification_number           [1]       (tax identification number)
 │   └─ tax_identification_number_type      [1]       
-├─ natural person                          [0]       (person that owns the etrc)
+├─ natural_person                          [0]       (person that owns the etrc)
 │   ├─ family_name                         [1]       
 │   ├─ given_name                          [1]       
 │   ├─ date_of_birth                       [1]       
@@ -208,7 +208,7 @@ etrc
 
 ### 2. Attributes
 
-### 2.1 Entity
+### 2.1 Legal Person
 
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
@@ -237,7 +237,7 @@ etrc
 | remark          |        | legal remark | string        | ..|
 
 
-#### 2.4 Person
+#### 2.4 Natural person
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|---------------------------------------------------------------|------------|--------------|
