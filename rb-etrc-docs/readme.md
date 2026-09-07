@@ -241,25 +241,25 @@ etrc
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|---------------------------------------------------------------|------------|--------------|
-| family_name | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
-| person.given_name | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
-| person.birth_date | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 1968-04-27 |
-| economic_operator.birth_place | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
-| person.tin | tin | tax reference number | tstr |  |
-| tax_identification_number_type. | type if number | tax identification number | tstr | 123456782 |
+| family_name | [familyName](https://w3id.org/ebwv#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
+| person.given_name | [givenName](https://w3id.org/ebwv#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
+| person.birth_date | [dateOfBirth](https://w3id.org/ebwv#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 1968-04-27 |
+| economic_operator.birth_place | [placeOfBirth](https://w3id.org/ebwv#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
+| person.tin | [identifier](https://w3id.org/ebwv#identifier) | tax reference number | tstr |  |
+| tax_identification_number_type. | No solution yet in EBWV <br> type if number | tax identification number | tstr | 123456782 |
 
 
 ### 2.5 Address optional
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| address.po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
-| address.thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
-| address.location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
-| address.post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | tstr | 12345 |
-| address.post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
-| address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
-| address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
+| address.po_box | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[poBox](https://w3id.org/ebwv#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
+| address.thoroughfare | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[thoroughfare](https://w3id.org/ebwv#thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
+| address.location_designator | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[locatorDesignator](https://w3id.org/ebwv#locatorDesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
+| address.post_code | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[postCode](https://w3id.org/ebwv#postCode) | Postal or ZIP code; optional | tstr | 12345 |
+| address.post_name | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[postName](https://w3id.org/ebwv#postName) | Town or locality name; optional | tstr | Amsterdam |
+| address.admin_unit_L1 | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[adminUnitL1](https://w3id.org/ebwv#adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
+| address.admin_unit_L2 | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[adminUnitL2](https://w3id.org/ebwv#adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
 
 ### 2.6 Mandatory metadata
 #### 2.6.1 Mandatory metadata 
