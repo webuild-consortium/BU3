@@ -212,28 +212,28 @@ etrc
 
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| name  | legalName             | Name of the entity     | String           | Siemens AG        |
-| tax_identification_number       | identifyer             | tax identification number    | String           | 012345678-9        |
-| tax_identification_number_type                | type of identifier                          | class type | string       | legalIdentifier |
+| name  | [legalName](https://w3id.org/ebwv#legalName) | Name of the entity     | String           | Siemens AG        |
+| tax_identification_number       | [identifier](https://w3id.org/ebwv#identifier)   | tax identification number    | String           | 012345678-9        |
+| tax_identification_number_type                | Semantics: Needs property in separate "Identifier" class, but unclear if this is going to be introduced <br> type of identifier                          | class type | string       | legalIdentifier |
 
 
 ### 2.2 Validity Period
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| validity_period.start_date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
-| validity_period.end_date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-01-24|
-| validity_period_type               | covered period                | fiscal or calendar year | String | fiscal year          |
-| remark            |                  |  Legal remark           | Legal remark           | ...  |
+| validity_period.start_date| [coveragePeriod](http://w3id.org/ebwv#coveragePeriod).[PeriodOfTime](http://w3id.org/ebwv#PeriodOfTime).[startDate](https://w3id.org/ebwv#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
+| validity_period.end_date | [coveragePeriod](http://w3id.org/ebwv#coveragePeriod).[PeriodOfTime](http://w3id.org/ebwv#PeriodOfTime).[endDate](https://w3id.org/ebwv#endDate) | The end date after which VAT-ID registration ended. | date | 2021-01-24|
+| validity_period_type               | Additional property needed in "PeriodOfTime" class? <br> covered period                | fiscal or calendar year | String | fiscal year          |
+| remark            | Either reuse of [qualificationNote](http://w3id.org/ebwv#qualificationNote) <br> or a separate "remark" property? |  Legal remark           | Legal remark           | ...  |
 
 
 ### 2.3 Relevant Double Tax Treaty 
 
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| tax_treaty_name                        | relevantDoubleTaxTreaty                  | Double Tax Treaty    | String        | Netherlands and Finland       |
-| tax_treaty_reference      | additionalInformation             | for which purposes is requested    | String           | article 10 dividends      |
-| applicable_member_state       |   theAuthoritiesOf                        | States where treaty is apllied  | String       | Netherlands and Finland |
+| tax_treaty_name                        | [legalInstrument](https://w3id.org/ebwv#legalInstrument).[dct:title](http://purl.org/dc/terms/title)<br>The tax treaty is the "instrument", and this string is its title > see https://verdragenbank.overheid.nl/en/Treaty/Details/006833 <br> relevantDoubleTaxTreaty                  | Double Tax Treaty    | String        | Netherlands and Finland       |
+| tax_treaty_reference      | [legalProvision](https://w3id.org/ebwv#legalProvision).[dct:identifier](http://purl.org/dc/terms/identifier) <br>Assumes an article/paragraph reference as in the example; purpose of request is a different fact. <br> additionalInformation             | for which purposes is requested    | String           | article 10 dividends      |
+| applicable_member_state       |  [LegalContext](https://w3id.org/ebwv#LegalContext).[applicableJurisdiction](https://w3id.org/ebwv#applicableJurisdiction) <br> Demands the introduction of a separate "LegalContext" class<br>theAuthoritiesOf                        | States where treaty is apllied  | String       | Netherlands and Finland |
 | remark          |        | legal remark | string        | ..|
 
 
@@ -241,46 +241,46 @@ etrc
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|---------------------------------------------------------------|------------|--------------|
-| family_name | [familyName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
-| person.given_name | [givenName](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
-| person.birth_date | [dateOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 1968-04-27 |
-| economic_operator.birth_place | [placeOfBirth](https://ebw-vocabulary.spherity.dev/ebw/v0.1/vocabulary#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
-| person.tin | tin | tax reference number | tstr |  |
-| tax_identification_number_type. | type if number | tax identification number | tstr | 123456782 |
+| family_name | [familyName](https://w3id.org/ebwv#familyName) | Current last name(s) or surname(s) of the user to whom the person identification data relates. | tstr | Doe |
+| person.given_name | [givenName](https://w3id.org/ebwv#givenName) | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | tstr | John |
+| person.birth_date | [dateOfBirth](https://w3id.org/ebwv#dateOfBirth) | Day, month, and year on which the user to whom the person identification data relates was born. | Date | 1968-04-27 |
+| economic_operator.birth_place | [placeOfBirth](https://w3id.org/ebwv#placeOfBirth) | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | tstr | Amsterdam |
+| person.tin | [identifier](https://w3id.org/ebwv#identifier) OR <br> [hasIdentifier].[Identifier] if we introduce a adms:Identifier type of class in EBWV | tax reference number | tstr |  |
+| tax_identification_number_type. | No solution yet in EBWV, but Identifier class could solve this <br> type if number | tax identification number | tstr | 123456782 |
 
 
 ### 2.5 Address optional
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| address.po_box | [registeredAddress.poBox](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
-| address.thoroughfare | [registeredAddress.thoroughfare](https://sanastot.suomi.fi/en/terminology/webuild/concept/thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
-| address.location_designator | [registeredAddress.locationDesignator](https://iri.suomi.fi/terminology/webuild/locatordesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
-| address.post_code | [registeredAddress.postCode](https://iri.suomi.fi/terminology/webuild/postcode) | Postal or ZIP code; optional | tstr | 12345 |
-| address.post_name | [registeredAddress.postName](https://iri.suomi.fi/terminology/webuild/postname) | Town or locality name; optional | tstr | Amsterdam |
-| address.admin_unit_L1 | [registeredAddress.adminUnitL1](https://iri.suomi.fi/terminology/webuild/adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
-| address.admin_unit_L2 | [registeredAddress.adminUnitL2](https://iri.suomi.fi/terminology/webuild/adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
+| address.po_box | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[poBox](https://w3id.org/ebwv#poBox) | P.O. box number or identifier within the address; optional | tstr | PO Box 123 |
+| address.thoroughfare | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[thoroughfare](https://w3id.org/ebwv#thoroughfare) | Street name and house number or other thoroughfare designation; optional | tstr | Main Street 10 |
+| address.location_designator | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[locatorDesignator](https://w3id.org/ebwv#locatorDesignator) | Internal location designation within a building (e.g., floor, unit); optional | tstr | Floor 3, Unit B |
+| address.post_code | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[postCode](https://w3id.org/ebwv#postCode) | Postal or ZIP code; optional | tstr | 12345 |
+| address.post_name | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[postName](https://w3id.org/ebwv#postName) | Town or locality name; optional | tstr | Amsterdam |
+| address.admin_unit_L1 | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[adminUnitL1](https://w3id.org/ebwv#adminUnitL1) | First-level administrative division (e.g., province, state); optional | tstr | North Holland |
+| address.admin_unit_L2 | [registeredAddress](https://w3id.org/ebwv#registeredAddress).[adminUnitL2](https://w3id.org/ebwv#adminUnitL2) | Second-level administrative division (e.g., district, municipality); optional | tstr | Amsterdam Municipality
 
 ### 2.6 Mandatory metadata
 #### 2.6.1 Mandatory metadata 
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| issuer.authentic_source_country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | date | 05 |
-| issuer.etrc_authenticsource | authenticSource | Name of the administrative authority that issued the etrc. This is the authentic source for the etrc, which may differ from the issuer of the attestation| tstr |  |
-| issuer.country | issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | tstr |  |
-| issuer.issuing_authority | issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the etrc attestation, in a specific language using  BCP 47 | tstr |  |
-| issuer.attestation_legal_category | issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
-| issuer.attestation_issuing_date | iat | The date the attestation was issued | Number (Unix timestamp) | |
-| issuer.attestation_expiry_date | exp | The date the attestation was issued | Number (Unix timestamp) | |
+| issuer.authentic_source_country | No solution for this yet in Semantics <br>issuing_country | Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | date | 05 |
+| issuer.etrc_authenticsource | No solution for this yet in Semantics <br> authenticSource | Name of the administrative authority that issued the etrc. This is the authentic source for the etrc, which may differ from the issuer of the attestation| tstr |  |
+| issuer.country | issuing_country | No solution for this yet in Semantics <br> Alpha‑2 country code, as specified in ISO 3166‑2, of the country or territory of the provider of the etrc. | tstr |  |
+| issuer.issuing_authority | [cred:issuer] <br> issuerAuthority | Name of the administrative authority or qualified trust service provider that issued the etrc attestation, in a specific language using  BCP 47 | tstr |  |
+| issuer.attestation_legal_category | [attestationLegalCategory](https://w3id.org/ebwv#attestationLegalCategory) <br> issuerLegalCategory | The type of attestation category. (Pub-EAA/QEAA) | tstr | PUB-EAA |
+| issuer.attestation_issuing_date | [cred:validFrom] <br> iat | The date the attestation was issued | Number (Unix timestamp) | |
+| issuer.attestation_expiry_date | [cred:validUntil] <br> exp | The date the attestation was issued | Number (Unix timestamp) | |
 
 
 #### 2.6.2 Optional metadata
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| issuer.location_status      | locationStatus| The location of validity status information on the VAT ID used for revocation/suspension checks.|tstr||
-| trust_anchor         | trustAnchor| This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the etrc can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |tstr||
+| issuer.location_status      | No solution for this yet in Semantics <br>locationStatus| The location of validity status information on the VAT ID used for revocation/suspension checks.|tstr||
+| trust_anchor         | [cred:termsOfUse] <br> trustAnchor| This meta-data attribute indicates at least the URL at which a machine‑readable version of the trust anchor to be used for verifying the etrc can be found or looked up. This corresponds to Annex V/VII point h) of the [European Digital Identity Regulation] and EBW Article 8 issuance as EAA/QEAA.  |tstr||
 
 
 
@@ -289,19 +289,19 @@ etrc
 
 | **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| display.title | title | etrc of the card as shown in the wallet with the label in a specific language using  BCP 47 | String | en-EN: etrc: 123456789 |
-| display.organisation_name| organisation_name | Name of the administrative organisation,SHOULD be the same as economic_operator.organisation_name| tstr |  |
-| display.issuing_authority | issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | fi-FI: Verohallinto |
+| display.title | N/A <br> title | etrc of the card as shown in the wallet with the label in a specific language using  BCP 47 | String | en-EN: etrc: 123456789 |
+| display.organisation_name| N/A <br> organisation_name | Name of the administrative organisation,SHOULD be the same as economic_operator.organisation_name| tstr |  |
+| display.issuing_authority | N/A <br>  issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | fi-FI: Verohallinto |
 
 
 #### 2.7.2 Optional display items
 
 | **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| display.subtitle | subtitle | Additional reference to a part of the organisation if the organisation has multiple administrative units | tstr |  |
-| display.issuer_logo | issuer_logo | Logo of the issuer base64 encoded SVG, PNG or JPG | tstr |  |
-| background_color | background_color | Hex-colour voor de background. **formally not part of the Display object** | tstr | |
-| text_color | text_color |Hex-colour voor de text **formally not part of the Display object**  | tstr | |
+| display.subtitle | N/A <br> subtitle | Additional reference to a part of the organisation if the organisation has multiple administrative units | tstr |  |
+| display.issuer_logo | N/A <br> issuer_logo | Logo of the issuer base64 encoded SVG, PNG or JPG | tstr |  |
+| background_color | N/A <br> background_color | Hex-colour voor de background. **formally not part of the Display object** | tstr | |
+| text_color | N/A <br> text_color |Hex-colour voor de text **formally not part of the Display object**  | tstr | |
 
 
 
