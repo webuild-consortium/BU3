@@ -212,19 +212,19 @@ etrc
 
 | data identifier                | Semantic Reference                          | Definition                              | Data Type       | Example Value      |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| name  | legalName             | Name of the entity     | String           | Siemens AG        |
-| tax_identification_number       | identifyer             | tax identification number    | String           | 012345678-9        |
-| tax_identification_number_type                | type of identifier                          | class type | string       | legalIdentifier |
+| name  | [legalName](https://w3id.org/ebwv#legalName) | Name of the entity     | String           | Siemens AG        |
+| tax_identification_number       | [identifier](https://w3id.org/ebwv#identifier)   | tax identification number    | String           | 012345678-9        |
+| tax_identification_number_type                | Semantics: Needs property in separate "Identifier" class, but unclear if this is going to be introduced <br> type of identifier                          | class type | string       | legalIdentifier |
 
 
 ### 2.2 Validity Period
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| validity_period.start_date| [PeriodOfTime.startDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
-| validity_period.end_date | [PeriodOfTime.endDate](https://webuild-consortium.github.io/wp4-semantics-group/ebwv/vocabulary.html#endDate) | The end date after which VAT-ID registration ended. | date | 2021-01-24|
-| validity_period_type               | covered period                | fiscal or calendar year | String | fiscal year          |
-| remark            |                  |  Legal remark           | Legal remark           | ...  |
+| validity_period.start_date| [startDate](https://w3id.org/ebwv#startDate) | Date of registration of the VAT-ID. | date |2011-12-24 | 
+| validity_period.end_date | [endDate](https://w3id.org/ebwv#endDate) | The end date after which VAT-ID registration ended. | date | 2021-01-24|
+| validity_period_type               | Additional property needed in "PeriodOfTime" class? <br> covered period                | fiscal or calendar year | String | fiscal year          |
+| remark            |   N/A               |  Legal remark           | Legal remark           | ...  |
 
 
 ### 2.3 Relevant Double Tax Treaty 
