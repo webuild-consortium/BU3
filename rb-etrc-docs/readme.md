@@ -42,9 +42,8 @@ providing feedback, e.g.:*
   - [2.4 person](#24-Person)
   - [2.3 Address](#23-Address)
   - [2.6 Metadata](#27-metadata)
-  - [2.7 Display](#28-display)
-  - [2.9 Code lists](#29-code-lists)
-  - [2.10 Integrity rules](#210-integrity-rules)
+  - [2.7 Code lists](#27-code-lists)
+  - [2.8 Integrity rules](#28-integrity-rules)
 - [3 Attestation encoding](#3-attestation-encoding)
   - [3.1 ISO/IEC 18013-5-compliant encoding](#31-isoiec-18013-5-compliant-encoding)
   - [3.2 SD-JWT VC-based encoding](#32-sd-jwt-vc-based-encoding)
@@ -184,21 +183,15 @@ etrc
 │   ├─ tax_treaty_reference                [1]        (article of the treaty)
 │   ├─ applicable_member_state             [1]        (jurisdiction of the RP)
 │   └─ remark                              [1]
-├─ address                                 [0]          
-│   ├─ po_box                              [0]        
-│   ├─ thoroughfare                        [0]        
-│   ├─ location_designator                 [0]       
-│   ├─ post_code                           [0]       
-│   ├─ post_name                           [0]       
-│   ├─ admin_unit_L1                       [0]              
-│   └─ admin_unit_L2                       [0]       
-└─ display                                 [1]       Items to be displayd on the card in the wallet
-    ├─ title                               [1]       Name of the card displayed in wallet (etrc)
-    ├─ name                                [1]             
-    ├─ issuer_logo                         [0]       
-    ├─ isuer_name                          [1]       issuing_organisation
-    ├─ background_color                    [0]       
-    └─ text_color                          [0]       
+└─ address                                 [0]          
+    ├─ po_box                              [0]        
+    ├─ thoroughfare                        [0]        
+    ├─ location_designator                 [0]       
+    ├─ post_code                           [0]       
+    ├─ post_name                           [0]       
+    ├─ admin_unit_L1                       [0]              
+    └─ admin_unit_L2                       [0]       
+
 ````
 
 
@@ -284,31 +277,7 @@ etrc
 
 
 
-### 2.7 Display
-#### 2.7.1 Mandatory Display items 
-
-| **data identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| display.title | N/A <br> title | etrc of the card as shown in the wallet with the label in a specific language using  BCP 47 | String | en-EN: etrc: 123456789 |
-| display.organisation_name| N/A <br> organisation_name | Name of the administrative organisation,SHOULD be the same as economic_operator.organisation_name| tstr |  |
-| display.issuing_authority | N/A <br>  issuing_authority | The name of the issuing party in a specific language using  BCP 47, should be the same as issuer.issuing_authority | tstr | fi-FI: Verohallinto |
-
-
-#### 2.7.2 Optional display items
-
-| **Data Identifier** |**Semantic Reference** | **Definition** | **Data type** | **Example value** | 
-|--------|----------|--------------------------------------------------------------------------|------------|--------------|
-| display.subtitle | N/A <br> subtitle | Additional reference to a part of the organisation if the organisation has multiple administrative units | tstr |  |
-| display.issuer_logo | N/A <br> issuer_logo | Logo of the issuer base64 encoded SVG, PNG or JPG | tstr |  |
-| background_color | N/A <br> background_color | Hex-colour voor de background. **formally not part of the Display object** | tstr | |
-| text_color | N/A <br> text_color |Hex-colour voor de text **formally not part of the Display object**  | tstr | |
-
-
-
-
-
-
-### 2.8 Code lists
+### 2.7 Code lists
 
 *Use this section for controlled vocabularies, enumerations, value sets, or external catalogues
 that are necessary to interpret one or more attributes or metadata items. Definitions may be reused
@@ -327,7 +296,7 @@ meaning, the source vocabulary or reference, and any extensibility rule or gover
 > |----------------|--------------------|-------------|--------------------------|---------------------------|
 > | `signatory_rule` | `sole`, `joint` | Indicates whether the representative may bind the organisation alone or only together with one or more additional representatives | EUCC attestation description / WE BUILD company representation model | Additional values SHOULD only be introduced if they are defined consistently across issuer and verifier implementations |
 
-### 2.9 Integrity rules
+### 2.8 Integrity rules
 
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
